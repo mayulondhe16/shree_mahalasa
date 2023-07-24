@@ -59,7 +59,7 @@
                   <div class="form-group">
                     <label class="form-label">Shop Name</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="title">
+                          <input type="text" class="form-control" name="name">
                         </div>
                   </div>
                 </div>
@@ -69,7 +69,7 @@
                   <div class="form-group">
                     <label class="form-label">Shop Address</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="title">
+                          <input type="text" class="form-control" name="address">
                         </div>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                   <div class="form-group">
                     <label class="form-label">Latitude</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="title">
+                          <input type="text" class="form-control" name="lat">
                         </div>
                   </div>
                 </div>
@@ -89,7 +89,7 @@
                   <div class="form-group">
                     <label class="form-label">Longitude</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="title">
+                          <input type="text" class="form-control" name="long">
                         </div>
                   </div>
                 </div>
@@ -99,8 +99,13 @@
                   <div class="form-group">
                     <label class="form-label">City</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="title">
-                        </div>
+                          <select class="form-control" id="city" name="city" required="true">
+                            <option value="">Select City</option>
+                            @foreach($city as $val)
+                            <option value="{{$val->id}}">{{$val->city_name}}</option>
+                            @endforeach
+                          </select>
+                      </div>
                   </div>
                 </div>
               </div>

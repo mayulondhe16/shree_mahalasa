@@ -28,80 +28,106 @@
               </div>
             </div>
             <div class="card-body">
-              <form action="{{ url('/')}}/view_{{$url_slug}}/{{$data['id']}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
-                {!! csrf_field() !!}    
-                <?php
-                
-                  $category = \DB::table('category')->where(['id'=>$data['category_id']])->first();
-                  $brand = \DB::table('brands')->where(['id'=>$data['brand_id']])->first();
-                  $product_images = \DB::table('product_images')->where(['product_id'=>$data['id']])->get();
-                  
-                ?>
-                <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="oldpassword">Product Images</label>
-                                @foreach($product_images as $image)   
-                                <p>
-                                  <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$image->image}}" />
-                                </p>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label class="form-label">Product Name</label>
-                                <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" readonly name="title"  value="{{$data['name']}}">
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label class="form-label">Category</label>
-                                <div class="input-group input-group-outline mb-3">
-                                  <input type="text" class="form-control" readonly name="title"  value="{{$category->title}}">  
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-8">
-                          <div class="form-group">
-                              <label class="form-label">Brand</label>
-                              <div class="input-group input-group-outline mb-3">
-                                <input type="text" class="form-control" readonly name="title"  value="{{$brand->title}}">  
-                                </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label class="form-label">Description</label>
-                            <div class="input-group input-group-outline mb-3">
-                                <textarea  class="form-control" readonly name="description">{{$data['description']}}</textarea>
-                              </div>
-                        </div>
+              <form action="{{ url('/')}}/update_{{$url_slug}}/{{ $data['id'] }}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
+                {!! csrf_field() !!} 
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="oldpassword">Shop Thumbnail Image<span style="color:red;" >*</span></label>
+                           <p>
+                            <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$data['thumbnail_image']}}" />
+                           </p>
+                            {{-- <div class="input-group input-group-outline mb-3">
+                            <input type="file"  name="thumbnail_image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                        </div> --}}
                     </div>
                 </div>
-                  
-                    
-                    {{-- <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
-                    </div> --}}
-                    
-                    <div class="box-footer">
-                        <a href="{{url('/')}}/manage_products" type="submit" class="btn btn-primary pull-right">Back</a>
+              </div>
+              <div class="row">
+                @foreach($shop_images as $key=> $image)
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="oldpassword">Shop Image {{ $key+1 }}<span style="color:red;" >*</span></label>
+                            <p>
+                            <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$image->images}}" />
+                            </p>
+                            {{-- <div class="input-group input-group-outline mb-3">
+                            <input type="file"  name="images[]" accept="image/*" onchange="preview_image(event,1)" required="true" multiple>
+                        </div> --}}
                     </div>
-                  </form>
+                </div>
+                @endforeach
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">Shop Name</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="name" value="{{ $data['name'] }}" readonly>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">Shop Address</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="address" value="{{ $data['address'] }}" readonly>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">Latitude</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="lat" value={{ $data['lat'] }} readonly>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">Longitude</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="long"  value={{ $data['long'] }} readonly>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="form-label">City</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <select class="form-control" id="city" name="city" required="true" @readonly(true)>
+                            <option value="">Select City</option>
+                            @foreach($city as $val)
+                            <option value="{{$val->id}}" @if($data['city']==$val->id) selected="" @endif>{{$val->city_name}}</option>
+                            @endforeach
+                          </select>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                      <label class="form-label">Shop Description</label>
+                        <div class="input-group input-group-outline mb-3">
+                            <textarea  class="form-control" name="description" readonly>{{ $data['description'] }}</textarea>
+                          </div>
+                    </div>
+                </div>
+              </div>
+              <div class="box-footer">
+                    <a href="{{url('/')}}/manage_shops" type="submit" class="btn btn-primary pull-right">Back</a>
+              </div>
+                </form>
             </div>
           </div>
         </div>

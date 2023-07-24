@@ -57,11 +57,12 @@
                         <td>
                           {{$key+1}}
                         </td>
-                        <td>
-                          {{$value->thumbnail_image}}
-                        </td>
+                       
                         <td>
                           {{$value->name}}
+                        </td>
+                        <td>
+                          <img src="{{url('/')}}{{$value->thumbnail_image}}" height="50px" width="60px">
                         </td>
                         <td>
                           <a href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
