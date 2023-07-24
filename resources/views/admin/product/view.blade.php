@@ -35,19 +35,25 @@
                   $category = \DB::table('category')->where(['id'=>$data['category_id']])->first();
                   $brand = \DB::table('brands')->where(['id'=>$data['brand_id']])->first();
                   $product_images = \DB::table('product_images')->where(['product_id'=>$data['id']])->get();
-                  
+                 
                 ?>
                 <div class="row">
-                        <div class="col-md-8">
+                  @foreach($product_images as $key => $image)  
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="oldpassword">Product Images</label>
-                                @foreach($product_images as $image)   
+                              <div class="row">
+                                <div class="col-md-10">
+                                <label for="oldpassword">Product Image {{ $key+1 }} </label></div>
+                                <div class="col-md-2"><p><a href="{{url('/')}}/delete_product_image/{{ $image->id }}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
+                                  <i class="fa fa-trash"></i>
+                                  </a></p></div>
+                                </div>
                                 <p>
                                   <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$image->image}}" />
                                 </p>
-                                @endforeach
                             </div>
                         </div>
+                    @endforeach
                     </div>
                     <div class="row">
                         <div class="col-md-8">

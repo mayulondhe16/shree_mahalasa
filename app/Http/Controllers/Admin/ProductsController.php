@@ -59,33 +59,36 @@ class ProductsController extends Controller
         $status = $product->save();
         if (!empty($status))
         {
-            $product_images =  new ProductImages();
-            $image = $_FILES["image"]["name"];
-            // dd($_FILES['image']['name']);
+            $images = $request->file('image');
             $temp = [];
-            for ($i=0; $i <count($_FILES['image']['name']); $i++) 
-            { 
-                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $charactersLength = strlen($characters);
-                $randomString = '';
-                for ($i_ = 0; $i_ < 20; $i_++) {
-                    $randomString .= $characters[rand(0, $charactersLength - 1)];
+            if ($images) {
+                foreach ($images as $image)
+                {
+                    $product_images =  new ProductImages();
+
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $charactersLength = strlen($characters);
+                    $randomString = '';
+                    for ($i_ = 0; $i_ < 20; $i_++) {
+                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+
+                    $imageName = $image->getClientOriginalName();
+                    $ext = $image->getClientOriginalExtension();
+                    $random_file_name                  = $randomString.'.'.$ext;
+                    $latest_image                      = '/products/'.$random_file_name;
+                    $filename                          = basename($imageName,'.'.$ext);
+                    $newFileName                       = $filename.time().".".$ext; 
+                   
+                    
+                    if($image->move(public_path('products'), $random_file_name)){
+                        array_push($temp, $random_file_name);
+                        $product_images->product_id = $product->id;
+                        $product_images->image = $latest_image;
+                        $productstatus = $product_images->save();
+                    }
+                 
                 }
-    
-                $file_name                         = $_FILES["image"]["name"][$i];
-                $file_tmp                          = $_FILES["image"]["tmp_name"][$i];
-                $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
-    
-                $random_file_name                  = $randomString.'.'.$ext;
-                $latest_image                      = '/products/'.$random_file_name;
-                $filename                          = basename($file_name,$ext);
-                $newFileName                       = $filename.time().".".$ext; 
-              
-                if(move_uploaded_file($file_tmp,str_replace('\\', '/',public_path()).$latest_image))
-                array_push($temp, $random_file_name);  
-                    $product_images->product_id = $product->id;
-                    $product_images->image = $latest_image;
-                    $productstatus = $product_images->save();
             }
             Session::flash('success', 'Success! Record added successfully.');
             return \Redirect::to('manage_products');
@@ -116,6 +119,15 @@ class ProductsController extends Controller
         $product->delete();
 
         $product_images = ProductImages::where('product_id','=',$id);
+        $product_images->delete();
+        return \Redirect::to('manage_products');
+    }
+
+    public function delete_product_image($id)
+    {
+        $all_data=[];
+       
+        $product_images = ProductImages::where('id','=',$id);
         $product_images->delete();
         return \Redirect::to('manage_products');
     }
