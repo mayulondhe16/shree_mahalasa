@@ -41,6 +41,7 @@
                       <th>Brand Logo</th>
                       <th>Title </th>
                       <th>Description</th>
+                      <th>Top Seller</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -51,13 +52,20 @@
                           {{$key+1}}
                         </td>
                         <td>
-                          <img src="{{url('/')}}{{$value->image}}" height="50px" width="60px">
+                          <img src="{{ asset('storage/all_project_data'.$value->image) }}" height="50px" width="60px">
                         </td>
                         <td>
                           {{$value->title}}
                         </td>
                         <td>
                           {{$value->description}}
+                        </td>
+                        <td>
+                          @if($value['top_seller']=='1')
+                          <a class="btn btn-success btn-sm" href="{{url('/')}}/change_brand_status/{{$value->id}}">Yes</a>
+                          @else($value['top_seller']=='0')
+                            <a class="btn btn-danger btn-sm" href="{{url('/')}}/change_brand_status/{{$value->id}}">No</a>
+                          @endif
                         </td>
                         <td>
                           <a href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">

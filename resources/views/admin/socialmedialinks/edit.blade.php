@@ -36,7 +36,7 @@
                             <div class="form-group">
                               <label class="form-label">Link</label>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="link"  value="{{$data['link']}}">
+                                    <input type="text" class="form-control" name="link"  value="{{$data['link']}}" required>
                                   </div>
                             </div>
                         </div>

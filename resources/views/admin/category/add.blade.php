@@ -46,45 +46,25 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
+                              <label class="form-label">Title</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Title</label>
-                                    <input type="text" class="form-control" name="title">
+                                    <input type="text" class="form-control" name="title"  data-parsley-error-message="Please enter valid category  name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Description</label>
+                              <label class="form-label">Description</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" name="description"></textarea>
+                                    <textarea  class="form-control" name="description"  data-parsley-error-message="Please enter valid category description." data-parsley-pattern="^[a-z A-Z .]+$" required="true"></textarea>
                                   </div>
                             </div>
                         </div>
                     </div>
                   
-                    
-                    {{-- <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
-                    </div> --}}
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
                       </div>

@@ -33,9 +33,9 @@
                 <div class="row">
                       <div class="col-md-8">
                         <div class="form-group">
+                          <label class="form-label">Shade Name</label><span style="color:red;" >*</span>
                             <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Shade Name</label>
-                                <input type="text" class="form-control" name="shade_name">
+                                <input type="text" class="form-control" name="shade_name"  data-parsley-error-message="Please enter valid shade name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                               </div>
                         </div>
                     </div>

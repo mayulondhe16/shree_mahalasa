@@ -49,7 +49,7 @@
                                   </a></p></div>
                                 </div>
                                 <p>
-                                  <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$image->image}}" />
+                                  <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$image->image) }}" />
                                 </p>
                             </div>
                         </div>

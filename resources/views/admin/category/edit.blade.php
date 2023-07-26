@@ -35,10 +35,11 @@
                             <div class="form-group">
                                 <label for="oldpassword">Image<span style="color:red;" >*</span></label>
                                    <p>
-                                    <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$data['image']}}" />
+                                    <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$data['image']) }}" />
                                    </p>
                                     <div class="input-group input-group-outline mb-3">
-                                    <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                                    <input type="file"  name="image" id="image" accept="image/*" onchange="preview_image(event,1)" @if(empty($data['image'])) required="true" @endif
+                                    >
                                 </div>
                             </div>
                         </div>
@@ -46,45 +47,24 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                               <label class="form-label">Title</label>
+                               <label class="form-label">Title</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}">
+                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}"  data-parsley-error-message="Please enter valid category name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                            <label class="form-label">Description</label>
+                            <label class="form-label">Description</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" name="description">{{$data['description']}}</textarea>
+                                    <textarea  class="form-control" name="description"  data-parsley-error-message="Please enter valid category description." data-parsley-pattern="^[a-z A-Z .]+$" required="true">{{$data['description']}}</textarea>
                                   </div>
                             </div>
                         </div>
                     </div>
-                  
-                    
-                    {{-- <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
-                    </div> --}}
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Update</button>
                       </div>

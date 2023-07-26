@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use  App\Models\Shops;
 use  App\Models\City;
 use  App\Models\ShopImages;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Session;
 
@@ -65,48 +67,58 @@ class ShopController extends Controller
             $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
             $random_file_name                  = $randomString.'.'.$ext;
             $latest_image                   = '/shop_thumbnail_images/'.$random_file_name;
-            if(move_uploaded_file($file_tmp,str_replace('\\', '/',public_path()).$latest_image))
+            if(Storage::put('all_project_data'.$latest_image, File::get($request->thumbnail_image)))
             {
                 $shops->thumbnail_image = $latest_image;
             }
         }   
         $shops->name =  $request->name;
         $shops->address =  $request->address;
+        $shops->telephone_no =  $request->telephone_no;
+        $shops->mobile_no =  $request->mobile_no;
+        $shops->contact_person =  $request->contact_person;
+        $shops->map_link =  $request->map_link;
         $shops->lat =  $request->lat;
         $shops->long =  $request->long;
         $shops->city =  $request->city;
         $shops->description =  $request->description;
         $shopstatus = $shops->save();
 
+        $images = $request->file('images');
         $temp = [];
-        for ($i=0; $i <count($_FILES['images']['name']); $i++) 
-        { 
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i_ = 0; $i_ < 20; $i_++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
+        if ($images) {
+            foreach ($images as $image)
+            {
+                $shopImages = new ShopImages();
 
-            $file_name                         = $_FILES["images"]["name"][$i];
-            $file_tmp                          = $_FILES["images"]["tmp_name"][$i];
-            $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $charactersLength = strlen($characters);
+                $randomString = '';
+                for ($i_ = 0; $i_ < 20; $i_++) {
+                    $randomString .= $characters[rand(0, $charactersLength - 1)];
+                }
 
-            $random_file_name                  = $randomString.'.'.$ext;
-            $latest_image                      = '/shop_images/'.$random_file_name;
-            $filename                          = basename($file_name,$ext);
-            $newFileName                       = $filename.time().".".$ext; 
-          
-            if(move_uploaded_file($file_tmp,str_replace('\\', '/',public_path()).$latest_image))
-            array_push($temp, $random_file_name);  
+                $imageName = $image->getClientOriginalName();
+                $ext = $image->getClientOriginalExtension();
+                $random_file_name                  = $randomString.'.'.$ext;
+                $latest_image                      = '/shop_images/'.$random_file_name;
+                $filename                          = basename($imageName,'.'.$ext);
+                $newFileName                       = $filename.time().".".$ext; 
                
-                $shopImages->shop_id = $shops->id;
-                $shopImages->images = $latest_image;
-                $status = $shopImages->save();
+                
+                if(Storage::put('all_project_data'.$latest_image, File::get($image)))
+                {
+                    array_push($temp, $random_file_name);
+                    $shopImages->shop_id = $shops->id;
+                    $shopImages->images = $latest_image;
+                    $shopsaved = $shopImages->save();
+                }
+             
+            }
         }
 
 
-        if (!empty($status))
+        if (!empty($shopsaved))
         {
             Session::flash('success', 'Success! Record added successfully.');
             return \Redirect::to('manage_shops');
@@ -170,6 +182,10 @@ class ShopController extends Controller
         $shops->long =  $request->long;
         $shops->city =  $request->city;
         $shops->description =  $request->description;
+        $shops->telephone_no =  $request->telephone_no;
+        $shops->mobile_no =  $request->mobile_no;
+        $shops->contact_person =  $request->contact_person;
+        $shops->map_link =  $request->map_link;
         $shopstatus = $shops->update();
 
         // $temp = [];
@@ -218,6 +234,13 @@ class ShopController extends Controller
         $all_data=[];
         $certificate = Shops::find($id);
         $certificate->delete();
+        $img = ShopImages::find($id);
+        $img->delete();
+        return \Redirect::to('manage_shops');
+    }
+
+    public function delete_shop_image($id)
+    {
         $img = ShopImages::find($id);
         $img->delete();
         return \Redirect::to('manage_shops');

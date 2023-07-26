@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\Brands;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Session;
 
@@ -62,7 +64,7 @@ class BrandController extends Controller
             $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
             $random_file_name                  = $randomString.'.'.$ext;
             $latest_image                   = '/brands/'.$random_file_name;
-            if(move_uploaded_file($file_tmp,str_replace('\\', '/',public_path()).$latest_image))
+            if(Storage::put('all_project_data'.$latest_image, File::get($request->image)))
             {
                 $brands->image = $latest_image;
             }
@@ -127,7 +129,7 @@ class BrandController extends Controller
             $random_file_name                  = $randomString.'.'.$ext;
             $latest_image                   = '/brands/'.$random_file_name;
 
-            if(move_uploaded_file($file_tmp,str_replace('\\', '/',public_path()).$latest_image))
+            if(Storage::put('all_project_data'.$latest_image, File::get($request->image)))
             {
                 $brands->image = $latest_image;
             }
@@ -169,5 +171,23 @@ class BrandController extends Controller
         return view($this->folder_path.'view',$data);
     }
 
+    public function change_active_status($id)
+    {
+        // dd($id);
+        $data =  \DB::table('brands')->where(['id'=>$id])->first();
+        //dd($data->is_active);
+        if($data->top_seller=='1')
+        {
+            $category = \DB::table('brands')->where(['id'=>$id])->update(['top_seller'=>'0']);
+            Session::flash('success', 'Success! Record deactivated successfully.');
+            
+        }
+        else
+        {
+            $category = \DB::table('brands')->where(['id'=>$id])->update(['top_seller'=>'1']);
+            Session::flash('success', 'Success! Record activated successfully.');
+        }
+        return \Redirect::back();
+    }
    
 }

@@ -10,7 +10,6 @@
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">{{ $title }}</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Add {{ $title }}</li>
           </ol>
-          {{-- <h6 class="font-weight-bolder mb-0">Tables</h6> --}}
         </nav>
       </div>
     </nav>
@@ -22,9 +21,6 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3" style="width:90%;float:left">Add {{ $title }}</h6>
-                {{-- <a href="{{url('/')}}/add_{{ $url_slug }}" class="btn btn-s text-white text-capitalize" style="float: right;">Add {{ $title }}</a> --}}
-
-
               </div>
             </div>
             <div class="card-body">
@@ -38,7 +34,7 @@
                                     <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
                                    </p>
                                     <div class="input-group input-group-outline mb-3">
-                                    <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                                    <input type="file"  name="image" id="image" accept="image/*" onchange="preview_image(event,1)" required="true">
                                 </div>
                             </div>
                         </div>
@@ -46,36 +42,20 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
+                              <label class="form-label">Brand Title</label><span class="parsley-required">*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Brand Title</label>
-                                    <input type="text" class="form-control" name="title">
+                                    <input type="text" class="form-control" name="title" data-parsley-error-message="Please enter valid brand name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
+                              <label class="form-label">Brand Description</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Brand Description</label>
-                                    <textarea  class="form-control" name="description"></textarea>
+                                    <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid description." required="true" required></textarea>
                                   </div>
                             </div>
                         </div>

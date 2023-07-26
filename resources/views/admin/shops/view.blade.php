@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label for="oldpassword">Shop Thumbnail Image<span style="color:red;" >*</span></label>
                            <p>
-                            <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$data['thumbnail_image']}}" />
+                            <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$data['thumbnail_image']) }}" />
                            </p>
                             {{-- <div class="input-group input-group-outline mb-3">
                             <input type="file"  name="thumbnail_image" accept="image/*" onchange="preview_image(event,1)" required="true">
@@ -47,19 +47,25 @@
                 @foreach($shop_images as $key=> $image)
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="oldpassword">Shop Image {{ $key+1 }}<span style="color:red;" >*</span></label>
-                            <p>
-                            <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$image->images}}" />
+                      <div class="row">
+                          <div class="col-md-10">
+                              <label for="oldpassword">Shop Image {{ $key+1 }}<span style="color:red;" >*</span></label>
+                          </div>
+                          <div class="col-md-2">
+                            <p><a href="{{url('/')}}/delete_shop_image/{{ $image->id }}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
+                               <i class="fa fa-trash"></i></a>
                             </p>
-                            {{-- <div class="input-group input-group-outline mb-3">
-                            <input type="file"  name="images[]" accept="image/*" onchange="preview_image(event,1)" required="true" multiple>
-                        </div> --}}
+                          </div>
+                      </div>
+                            <p>
+                              <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$image->images) }}" />
+                            </p>
                     </div>
                 </div>
                 @endforeach
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Shop Name</label>
                       <div class="input-group input-group-outline mb-3">
@@ -67,9 +73,7 @@
                         </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Shop Address</label>
                       <div class="input-group input-group-outline mb-3">
@@ -77,9 +81,7 @@
                         </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Latitude</label>
                       <div class="input-group input-group-outline mb-3">
@@ -89,7 +91,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Longitude</label>
                       <div class="input-group input-group-outline mb-3">
@@ -97,9 +99,7 @@
                         </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">City</label>
                       <div class="input-group input-group-outline mb-3">
@@ -112,16 +112,49 @@
                       </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="form-group">
                       <label class="form-label">Shop Description</label>
                         <div class="input-group input-group-outline mb-3">
                             <textarea  class="form-control" name="description" readonly>{{ $data['description'] }}</textarea>
                           </div>
                     </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Telephone Number</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="telephone_no" readonly value={{ $data['telephone_no'] }}>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="mobile_no" readonly value={{ $data['mobile_no'] }}>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Contact Person</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="contact_person" readonly value={{ $data['contact_person'] }}>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Map Link</label>
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="text" class="form-control" name="map_link" readonly value={{ $data['map_link'] }}>
+                      </div>
+                  </div>
                 </div>
               </div>
               <div class="box-footer">

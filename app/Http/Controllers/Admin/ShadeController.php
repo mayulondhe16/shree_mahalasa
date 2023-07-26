@@ -40,8 +40,6 @@ class ShadeController extends Controller
         $validator = Validator::make($request->all(), [
             // 'link'         => 'required',
             'shade_name' => 'required',
-            'state_name' => 'required',
-            'country_name' => 'required',
         ]);
 
         if ($validator->fails()) 
@@ -51,8 +49,6 @@ class ShadeController extends Controller
         $Shade = new Shade();
         $arr_data               = [];
         $Shade->shade_name = $request->shade_name;
-        $Shade->state_name = $request->state_name;
-        $Shade->country_name = $request->country_name;
         $status = $Shade->save();
         if (!empty($status))
         {
@@ -80,23 +76,10 @@ class ShadeController extends Controller
 
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $description = $request->description;
-        /*$validator = Validator::make($request->all(), [
-                'banner_image'     => 'required',
-            ]);
-
-        if ($validator->fails()) 
-        {
-            return $validator->errors()->all();
-        }*/
-
+      
         $arr_data               = [];
         $Shade = Shade::find($id);
-        $existingRecord = Shade::orderBy('id','DESC')->first();
         $Shade->shade_name = $request->shade_name;
-        $Shade->state_name = $request->state_name;
-        $Shade->country_name = $request->country_name;      
         $status = $Shade->update();   
         if (!empty($status))
         {

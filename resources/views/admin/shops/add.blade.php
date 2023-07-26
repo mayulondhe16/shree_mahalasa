@@ -22,9 +22,6 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3" style="width:90%;float:left">Add {{ $title }}</h6>
-                {{-- <a href="{{url('/')}}/add_{{ $url_slug }}" class="btn btn-s text-white text-capitalize" style="float: right;">Add {{ $title }}</a> --}}
-
-
               </div>
             </div>
             <div class="card-body">
@@ -38,7 +35,7 @@
                             <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
                            </p>
                             <div class="input-group input-group-outline mb-3">
-                            <input type="file"  name="thumbnail_image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                            <input type="file"  name="thumbnail_image" id="thumbnail_image" accept="image/*" onchange="preview_image(event,1)" required="true">
                         </div>
                     </div>
                 </div>
@@ -49,57 +46,54 @@
                             <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
                             </p>
                             <div class="input-group input-group-outline mb-3">
-                            <input type="file"  name="images[]" accept="image/*" onchange="preview_image(event,1)" required="true" multiple>
+                            <input type="file"  name="images[]" accept="image/*" required="true" multiple>
                         </div>
                     </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-label">Shop Name</label>
+                    <label class="form-label">Shop Name</label><span style="color:red;" >*</span>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="name">
+                          <input type="text" class="form-control" name="name"  data-parsley-error-message="Please enter valid shop name." required="true">
                         </div>
+                  </div>
+                </div>
+             
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Shop Address</label><span style="color:red;" >*</span>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="address"  data-parsley-error-message="Please enter valid address." required="true">
+                        </div>
+                  </div>
+                </div>
+              
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Latitude</label><span style="color:red;" >*</span>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="lat"  data-parsley-error-message="Please enter valid latitude." data-parsley-pattern="^[0-9 .]+$" required="true">
+                      </div>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-label">Shop Address</label>
+                    <label class="form-label">Longitude</label><span style="color:red;" >*</span>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="address">
+                          <input type="text" class="form-control" name="long" data-parsley-error-message="Please enter valid longitude." data-parsley-pattern="^[0-9 .]+$" required="true">
                         </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+             
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-label">Latitude</label>
+                    <label class="form-label">City</label><span style="color:red;" >*</span>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="lat">
-                        </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <label class="form-label">Longitude</label>
-                      <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="long">
-                        </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <label class="form-label">City</label>
-                      <div class="input-group input-group-outline mb-3">
-                          <select class="form-control" id="city" name="city" required="true">
+                          <select class="form-control" id="city" name="city" required="true" data-parsley-error-message="Please select city." required="true">
                             <option value="">Select City</option>
                             @foreach($city as $val)
                             <option value="{{$val->id}}">{{$val->city_name}}</option>
@@ -108,16 +102,49 @@
                       </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="form-group">
-                      <label class="form-label">Shop Description</label>
+                      <label class="form-label">Shop Description</label><span style="color:red;" >*</span>
                         <div class="input-group input-group-outline mb-3">
-                            <textarea  class="form-control" name="description"></textarea>
-                          </div>
+                            <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid desciption." required="true"></textarea>
+                        </div>
                     </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Telephone Number</label><span style="color:red;" >*</span>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="telephone_no" data-parsley-error-message="Please enter valid telephone number." data-parsley-pattern="^[0-9 .]+$" required="true">
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Mobile Number</label><span style="color:red;" >*</span>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="mobile_no" data-parsley-error-message="Please enter valid mobile number." data-parsley-pattern="^[0-9 .]+$" required="true">
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Contact Person</label><span style="color:red;" >*</span>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="contact_person" data-parsley-error-message="Please enter valid name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Map Link</label><span style="color:red;" >*</span>
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="text" class="form-control" name="map_link" data-parsley-error-message="Please enter valid link." required="true">
+                      </div>
+                  </div>
                 </div>
               </div>
               <div class="box-footer">

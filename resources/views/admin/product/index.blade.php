@@ -39,7 +39,8 @@
                     <tr>
                       <th>Sr No</th>
                       <th>Product Name</th>
-                      <th>Category </th>
+                      <th>Main-Category </th>
+                      <th>Sub-Category </th>
                       <th>Brand</th>
                       <th>Action</th>
                     </tr>
@@ -50,6 +51,7 @@
                     // dd($value);
                     $image_details = \DB::table('product_images')->where(['product_id'=>$value->id])->first();
                     $category = \DB::table('category')->where(['id'=>$value->category_id])->first();
+                    $main_category = \DB::table('main_category')->where(['id'=>$value->main_category])->first();
                     $brand = \DB::table('brands')->where(['id'=>$value->brand_id])->first();
 
                     // $image_details =  isset($image_details->image?$image_details->image:'')
@@ -62,10 +64,13 @@
                           {{$value->name}}
                         </td>
                         <td>
-                          {{$category->title}}
+                          {{ (isset($main_category->title))? $main_category->title: '-'; }}
                         </td>
                         <td>
-                          {{$brand->title}}
+                          {{ (isset($category->title))? $category->title: '-'; }}
+                        </td>
+                        <td>
+                          {{ (isset($brand->title))? $brand->title: '-'; }}
                         </td>
                         <td>
                           {{-- <a href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">

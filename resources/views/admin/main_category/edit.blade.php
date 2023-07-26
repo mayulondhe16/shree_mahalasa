@@ -30,13 +30,25 @@
             <div class="card-body">
               <form action="{{ url('/')}}/update_{{$url_slug}}/{{$data['id']}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}    
-                    
+                <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="oldpassword">Image<span style="color:red;" >*</span></label>
+                                   <p>
+                                    <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$data['image']) }}" />
+                                   </p>
+                                    <div class="input-group input-group-outline mb-3">
+                                    <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" @if(empty($data['image'])) required="true" @endif>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Phone Number</label><span style="color:red;" >*</span>
+                               <label class="form-label">Title</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="phone_no"  value="{{$data['phone_no']}}" maxlength="10" data-parsley-error-message="Please enter valid phone no." data-parsley-pattern="^[0-9 .]+$" required="true">
+                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}"  data-parsley-error-message="Please enter valid category name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
                             </div>
                         </div>
@@ -45,13 +57,14 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Address</label><span style="color:red;" >*</span>
+                            <label class="form-label">Description</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" name="address"  data-parsley-error-message="Please enter valid address." required="true">{{$data['address']}}</textarea>
+                                    <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid category description." data-parsley-pattern="^[a-z A-Z .]+$" required="true">{{$data['description']}}</textarea>
                                   </div>
                             </div>
                         </div>
                     </div>
+                  
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Update</button>
                       </div>

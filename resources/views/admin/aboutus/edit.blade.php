@@ -34,9 +34,9 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Title</label>
+                              <label class="form-label">Title</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}">
+                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}" data-parsley-error-message="Please enter valid title." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
                             </div>
                         </div>
@@ -45,9 +45,9 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Short Description</label>
+                              <label class="form-label">Short Description</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" name="short_description">{{$data['short_description']}}</textarea>
+                                    <textarea  class="form-control" name="short_description" data-parsley-error-message="Please enter valid description." required="true">{{$data['short_description']}}</textarea>
                                   </div>
                             </div>
                         </div>
@@ -55,9 +55,9 @@
                     <div class="row">
                       <div class="col-md-8">
                           <div class="form-group">
-                            <label class="form-label">Long Description</label>
+                            <label class="form-label">Long Description</label><span style="color:red;" >*</span>
                               <div class="input-group input-group-outline mb-3">
-                                  <textarea  class="form-control" name="long_description">{{$data['long_description']}}</textarea>
+                                  <textarea  class="form-control" name="long_description" data-parsley-error-message="Please enter valid description." required="true">{{$data['long_description']}}</textarea>
                                 </div>
                           </div>
                       </div>

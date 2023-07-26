@@ -30,16 +30,7 @@
             <div class="card-body">
               <form action="{{ url('/')}}/store_{{$url_slug}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}  
-                <div class="row">
-                  <div class="col-md-8">
-                      <div class="form-group">
-                        <label class="form-label">Name</label>
-                          <div class="input-group input-group-outline mb-3">
-                            <input type="text"  class="form-control" name="name">
-                          </div>
-                      </div>
-                  </div>
-              </div>  
+               
                 <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
@@ -54,11 +45,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="form-label">Name</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                <input type="text"  class="form-control" name="name"  data-parsley-error-message="Please enter valid product name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
+                              </div>
+                          </div>
+                      </div>
+                  
+                        <div class="col-md-4">
                             <div class="form-group">
-                              <label class="form-label">Brand</label>
+                              <label class="form-label">Brand</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <select class="form-control" id="brand_id" name="brand_id" required="true">
+                                    <select class="form-control" id="brand_id" name="brand_id" data-parsley-error-message="Please select brand." required="true">
                                       <option value="">Select Brand</option>
                                       @foreach($brand as $val)
                                       <option value="{{$val->id}}">{{$val->title}}</option>
@@ -67,15 +67,27 @@
                                   </div>
                             </div>
                         </div>
-                    </div>
-
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="form-label">Main Category</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                  <select class="form-control" id="main_category" name="main_category" data-parsley-error-message="Please select main category." required="true">
+                                    <option value="">Select Main Category</option>
+                                    @foreach($main_category as $value)
+                                    <option value="{{$value->id}}">{{$value->title}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                          </div>
+                      </div>
+                  </div> 
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             <div class="form-group">
-                              <label class="form-label">Category</label>
+                              <label class="form-label">Sub Category</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <select class="form-control" id="category_id" name="category_id" required="true">
-                                      <option value="">Select category</option>
+                                    <select class="form-control" id="category_id" name="category_id"data-parsley-error-message="Please select sub category." required="true">
+                                      <option value="">Select Sub Category</option>
                                       @foreach($category as $value)
                                       <option value="{{$value->id}}">{{$value->title}}</option>
                                       @endforeach
@@ -83,14 +95,11 @@
                                   </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-8">
+                      <div class="col-md-4">
                           <div class="form-group">
-                            <label class="form-label">Product Description</label>
+                            <label class="form-label">Product Description</label><span style="color:red;" >*</span>
                               <div class="input-group input-group-outline mb-3">
-                                  <textarea  class="form-control" name="description"></textarea>
+                                  <textarea  class="form-control" name="description" required="true"></textarea>
                                 </div>
                           </div>
                       </div>

@@ -33,9 +33,9 @@
                 <div class="row">
                       <div class="col-md-8">
                         <div class="form-group">
-                          <label class="form-label">City Name</label>
+                          <label class="form-label">City Name</label><span style="color:red;" >*</span>
                             <div class="input-group input-group-outline mb-3">
-                                <input type="text" class="form-control" name="city_name" value={{ $data['city_name'] }}>
+                                <input type="text" class="form-control" name="city_name" value={{ $data['city_name'] }}  data-parsley-error-message="Please enter valid city name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                               </div>
                         </div>
                     </div>
@@ -43,9 +43,9 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">State Name</label>
+                              <label class="form-label">State Name</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="state_name" value={{ $data['state_name'] }}>
+                                    <input type="text" class="form-control" name="state_name" value={{ $data['state_name'] }}  data-parsley-error-message="Please enter valid state name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
                             </div>
                         </div>
@@ -54,9 +54,9 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">County Name</label>
+                              <label class="form-label">County Name</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="country_name" value={{ $data['country_name'] }}>
+                                    <input type="text" class="form-control" name="country_name" value={{ $data['country_name'] }}  data-parsley-error-message="Please enter valid country name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
                             </div>
                         </div>

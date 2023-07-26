@@ -59,7 +59,7 @@
                 @endforeach
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Shop Name</label>
                       <div class="input-group input-group-outline mb-3">
@@ -67,9 +67,7 @@
                         </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Shop Address</label>
                       <div class="input-group input-group-outline mb-3">
@@ -77,9 +75,7 @@
                         </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Latitude</label>
                       <div class="input-group input-group-outline mb-3">
@@ -89,7 +85,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Longitude</label>
                       <div class="input-group input-group-outline mb-3">
@@ -97,9 +93,7 @@
                         </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">City</label>
                       <div class="input-group input-group-outline mb-3">
@@ -112,16 +106,49 @@
                       </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="form-group">
                       <label class="form-label">Shop Description</label>
                         <div class="input-group input-group-outline mb-3">
                             <textarea  class="form-control" name="description">{{ $data['description'] }}</textarea>
                           </div>
                     </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Telephone Number</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="telephone_no" value={{ $data['telephone_no'] }}>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Mobile Number</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="mobile_no" value={{ $data['mobile_no'] }}>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Contact Person</label>
+                      <div class="input-group input-group-outline mb-3">
+                          <input type="text" class="form-control" name="contact_person" value={{ $data['contact_person'] }}>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">Map Link</label>
+                      <div class="input-group input-group-outline mb-3">
+                        <input type="text" class="form-control" name="map_link" value={{ $data['map_link'] }}>
+                      </div>
+                  </div>
                 </div>
               </div>
               <div class="box-footer">

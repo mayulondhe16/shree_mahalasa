@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\Product;
 use  App\Models\Brands;
 use  App\Models\Category;
+use  App\Models\MainCategory;
+
 use App\Models\ProductImages;
+
 use Validator;
 use Session;
 
@@ -34,6 +39,7 @@ class ProductsController extends Controller
     public function add()
     {
         $data['category'] = Category::orderBy('title','desc')->groupBy('title')->get();
+        $data['main_category'] = MainCategory::orderBy('title','desc')->groupBy('title')->get();
         $data['brand'] = Brands::orderBy('title','desc')->groupBy('title')->get();
         $data['page_name'] = "Add";
         $data['title']     = $this->title;
@@ -54,6 +60,7 @@ class ProductsController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->category_id = $request->category_id;
+        $product->main_category = $request->main_category;
         $product->brand_id = $request->brand_id;
         $product->description = $request->description;
         $status = $product->save();
@@ -81,7 +88,8 @@ class ProductsController extends Controller
                     $newFileName                       = $filename.time().".".$ext; 
                    
                     
-                    if($image->move(public_path('products'), $random_file_name)){
+                    if(Storage::put('all_project_data'.$latest_image, File::get($image)))
+                    {
                         array_push($temp, $random_file_name);
                         $product_images->product_id = $product->id;
                         $product_images->image = $latest_image;
@@ -146,5 +154,69 @@ class ProductsController extends Controller
         return view($this->folder_path.'view',$data);
     }
 
-   
+    public function manage_top_selling(Request $request)
+    {
+        $Product = Product::get();
+
+        $data['data']      = $Product;
+        $data['page_name'] = "Manage";
+        $data['url_slug']  = $this->url_slug;
+        $data['title']     = 'Top Products';
+        return view($this->folder_path.'manage_top_selling',$data);
+    }
+
+    public function change_topselling_status($id)
+    {
+        $data =  \DB::table('products')->where(['id'=>$id])->first();
+        if($data->topSelling=='1')
+        {
+            $category = \DB::table('products')->where(['id'=>$id])->update(['topSelling'=>'0']);
+            Session::flash('success', 'Success! Record deactivated successfully.');
+            
+        }
+        else
+        {
+            $category = \DB::table('products')->where(['id'=>$id])->update(['topSelling'=>'1']);
+            Session::flash('success', 'Success! Record activated successfully.');
+        }
+        return \Redirect::back();
+    }
+
+    public function change_toptrending_status($id)
+    {
+        // dd($id);
+        $data =  \DB::table('products')->where(['id'=>$id])->first();
+        //dd($data->is_active);
+        if($data->topTrending=='1')
+        {
+            $category = \DB::table('products')->where(['id'=>$id])->update(['topTrending'=>'0']);
+            Session::flash('success', 'Success! Record deactivated successfully.');
+            
+        }
+        else
+        {
+            $category = \DB::table('products')->where(['id'=>$id])->update(['topTrending'=>'1']);
+            Session::flash('success', 'Success! Record activated successfully.');
+        }
+        return \Redirect::back();
+    }
+
+    public function change_general_status($id)
+    {
+        // dd($id);
+        $data =  \DB::table('products')->where(['id'=>$id])->first();
+        //dd($data->is_active);
+        if($data->general=='1')
+        {
+            $category = \DB::table('products')->where(['id'=>$id])->update(['general'=>'0']);
+            Session::flash('success', 'Success! Record deactivated successfully.');
+            
+        }
+        else
+        {
+            $category = \DB::table('products')->where(['id'=>$id])->update(['general'=>'1']);
+            Session::flash('success', 'Success! Record activated successfully.');
+        }
+        return \Redirect::back();
+    }
 }

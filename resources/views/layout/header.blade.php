@@ -21,7 +21,12 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
   <link id="pagestyle" href="{{asset('assets/css/jquery.dataTables.min.css')}}" rel="stylesheet" />
-
+  
+<style>
+  .parsley-required, .parsley-custom-error-message{
+    color: red;
+  }
+</style>
   
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->

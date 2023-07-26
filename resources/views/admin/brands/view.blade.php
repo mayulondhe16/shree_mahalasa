@@ -33,9 +33,9 @@
                 <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="oldpassword">Brand Logo<span style="color:red;" >*</span></label>
+                                <label for="oldpassword">Brand Logo</label>
                                    <p>
-                                    <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$data['image']}}" />
+                                    <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$data['image']) }}" />
                                    </p>
                             </div>
                         </div>

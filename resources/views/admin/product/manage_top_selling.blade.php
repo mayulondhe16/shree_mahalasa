@@ -13,9 +13,9 @@
           </ol>
           {{-- <h6 class="font-weight-bolder mb-0">Tables</h6> --}}
         </nav>
-        <div class="box-header">
+        {{-- <div class="box-header">
           <a href="{{url('/')}}/add_{{ $url_slug }}" class="btn btn-primary btn-xs" style="float: right;">Add {{ $title }}</a>
-        </div>
+        </div> --}}
       </div>
     </nav>
     <!-- End Navbar -->
@@ -38,11 +38,13 @@
                   <thead>
                     <tr>
                       <th>Sr No</th>
-                      <th>Shop Name</th>
-                      <th>Contact Number</th>
-                      <th>Contact Person</th>
-                      <th>City</th>
-                      <th>Action</th>
+                      <th>Product Name</th>
+                      <th>Main-Category </th>
+                      <th>Sub-Category </th>
+                      <th>Brand</th>
+                      <th>Top Seller</th>
+                      <th>Top Trending</th>
+                      <th>General</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -50,7 +52,8 @@
                     <?php 
                     // dd($value);
                     $image_details = \DB::table('product_images')->where(['product_id'=>$value->id])->first();
-                    $city = \DB::table('city')->where(['id'=>$value->city])->first();
+                    $category = \DB::table('category')->where(['id'=>$value->category_id])->first();
+                    $main_category = \DB::table('main_category')->where(['id'=>$value->main_category])->first();
                     $brand = \DB::table('brands')->where(['id'=>$value->brand_id])->first();
 
                     // $image_details =  isset($image_details->image?$image_details->image:'')
@@ -59,30 +62,39 @@
                         <td>
                           {{$key+1}}
                         </td>
-                       
                         <td>
                           {{$value->name}}
                         </td>
                         <td>
-                          {{$value->mobile_no}}
+                          {{ (isset($main_category->title))? $main_category->title: '-'; }}
                         </td>
                         <td>
-                          {{$value->contact_person}}
+                          {{ (isset($category->title))? $category->title: '-'; }}
                         </td>
                         <td>
-                          {{ (isset($city->city_name))? $city->city_name: '-'; }}
+                          {{ (isset($brand->title))? $brand->title: '-'; }}
                         </td>
                         <td>
-                          {{-- <a href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
-                            <i class="fa fa-edit"></i>
-                          </a> --}}
-                          <a href="{{url('/')}}/view_{{$url_slug}}/{{base64_encode($value->id)}}" title="View">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                          <a href="{{url('/')}}/delete_{{$url_slug}}/{{base64_encode($value->id)}}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
-                            <i class="fa fa-trash"></i>
-                          </a>
-                        </td>
+                            @if($value['topSelling']=='1')
+                            <a class="btn btn-success btn-sm" href="{{url('/')}}/change_topselling_status/{{$value->id}}">Yes</a>
+                            @else($value['topSelling']=='0')
+                              <a class="btn btn-danger btn-sm" href="{{url('/')}}/change_topselling_status/{{$value->id}}">No</a>
+                            @endif
+                          </td>
+                          <td>
+                            @if($value['topTrending']=='1')
+                            <a class="btn btn-success btn-sm" href="{{url('/')}}/change_toptrending_status/{{$value->id}}">Yes</a>
+                            @else($value['topTrending']=='0')
+                              <a class="btn btn-danger btn-sm" href="{{url('/')}}/change_toptrending_status/{{$value->id}}">No</a>
+                            @endif
+                          </td>
+                          <td>
+                            @if($value['general']=='1')
+                            <a class="btn btn-success btn-sm" href="{{url('/')}}/change_general_status/{{$value->id}}">Yes</a>
+                            @else($value['general']=='0')
+                              <a class="btn btn-danger btn-sm" href="{{url('/')}}/change_general_status/{{$value->id}}">No</a>
+                            @endif
+                          </td>
                       </tr>
                     @endforeach
                   </tbody>
