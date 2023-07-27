@@ -171,7 +171,7 @@ class BrandController extends Controller
         return view($this->folder_path.'view',$data);
     }
 
-    public function change_active_status($id)
+    public function change_brand_status($id)
     {
         // dd($id);
         $data =  \DB::table('brands')->where(['id'=>$id])->first();
