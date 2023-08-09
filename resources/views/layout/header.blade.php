@@ -23,9 +23,31 @@
   <link id="pagestyle" href="{{asset('assets/css/jquery.dataTables.min.css')}}" rel="stylesheet" />
   
 <style>
-  .parsley-required, .parsley-custom-error-message{
+  .parsley-required, .parsley-custom-error-message, .parsley-pattern, .danger{
     color: red;
   }
+ .success{
+  color: green;
+ }
+ .primary{
+  color: blue;
+ }
+ #section {
+  /* width: 500px;
+  height: 400px; */
+  word-wrap: break-word;
+}
+
+
+.moretext {
+ 
+  display: none;
+  overflow-wrap: break-word;
+}
+.article{
+  overflow-wrap: break-word;
+}
+
 </style>
   
   <!-- Nepcha Analytics (nepcha.com) -->

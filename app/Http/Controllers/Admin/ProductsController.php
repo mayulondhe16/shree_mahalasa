@@ -28,7 +28,7 @@ class ProductsController extends Controller
     }
     public function index(Request $request)
     {
-        $Product = Product::get();
+        $Product = Product::orderBy('id','DESC')->get();
 
         $data['data']      = $Product;
         $data['page_name'] = "Manage";
@@ -112,12 +112,78 @@ class ProductsController extends Controller
     {
         $id = base64_decode($id);
         $arr_data = [];
-        $data1     = Category::find($id);
+        $data['category'] = Category::orderBy('title','desc')->groupBy('title')->get();
+        $data['main_category'] = MainCategory::orderBy('title','desc')->groupBy('title')->get();
+        $data['brand'] = Brands::orderBy('title','desc')->groupBy('title')->get();
+        $data1     = Product::find($id);
         $data['data']      = $data1;
         $data['page_name'] = "Edit";
         $data['url_slug']  = $this->url_slug;
         $data['title']     = $this->title;
         return view($this->folder_path.'edit',$data);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            // 'link'         => 'required',
+            'image' => 'required',
+        ]);
+
+        if ($validator->fails()) 
+        {
+            return $validator->errors()->all();
+        }
+        $product = Product::find($id);;
+        $product->name = $request->name;
+        $product->category_id = $request->category_id;
+        $product->main_category = $request->main_category;
+        $product->brand_id = $request->brand_id;
+        $product->description = $request->description;
+        $status = $product->update();
+        if (!empty($status))
+        {
+            $images = $request->file('image');
+            $temp = [];
+            if ($images)
+            {
+                foreach ($images as $image)
+                {
+                    $product_images =  new ProductImages();
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $charactersLength = strlen($characters);
+                    $randomString = '';
+                    for ($i_ = 0; $i_ < 20; $i_++)
+                    {
+                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+
+                    $imageName = $image->getClientOriginalName();
+                    $ext = $image->getClientOriginalExtension();
+                    $random_file_name                  = $randomString.'.'.$ext;
+                    $latest_image                      = '/products/'.$random_file_name;
+                    $filename                          = basename($imageName,'.'.$ext);
+                    $newFileName                       = $filename.time().".".$ext; 
+                   
+                    
+                    if(Storage::put('all_project_data'.$latest_image, File::get($image)))
+                    {
+                        array_push($temp, $random_file_name);
+                        $product_images->product_id = $id;
+                        $product_images->image = $latest_image;
+                        $productstatus = $product_images->save();
+                    }
+                 
+                }
+            }
+            Session::flash('success', 'Success! Record updated successfully.');
+            return \Redirect::to('manage_products');
+        }
+        else
+        {
+            Session::flash('error', "Error! Oop's something went wrong.");
+            return \Redirect::back();
+        }
     }
     public function delete($id)
     {
@@ -128,6 +194,7 @@ class ProductsController extends Controller
 
         $product_images = ProductImages::where('product_id','=',$id);
         $product_images->delete();
+        Session::flash('danger', 'Record deleted successfully.');
         return \Redirect::to('manage_products');
     }
 
@@ -137,7 +204,8 @@ class ProductsController extends Controller
        
         $product_images = ProductImages::where('id','=',$id);
         $product_images->delete();
-        return \Redirect::to('manage_products');
+        Session::flash('danger', 'Record deleted successfully.');
+        return \Redirect::back();
     }
 
     public function view($id)

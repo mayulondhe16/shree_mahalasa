@@ -22,7 +22,7 @@ class CategoryController extends Controller
     }
     public function index(Request $request)
     {
-        $Category = Category::get();
+        $Category = Category::orderBy('id','DESC')->get();
 
         $data['data']      = $Category;
         $data['page_name'] = "Manage";
@@ -149,6 +149,7 @@ class CategoryController extends Controller
         $all_data=[];
         $certificate = Category::find($id);
         $certificate->delete();
+        Session::flash('error', 'Record deleted successfully.');
         return \Redirect::to('manage_category');
     }
 

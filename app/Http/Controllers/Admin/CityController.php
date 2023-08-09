@@ -20,7 +20,7 @@ class CityController extends Controller
     }
     public function index(Request $request)
     {
-        $city = City::get();
+        $city = City::orderBy('id','DESC')->get();
 
         $data['data']      = $city;
         $data['page_name'] = "Manage";
@@ -116,6 +116,7 @@ class CityController extends Controller
         $all_data=[];
         $certificate = City::find($id);
         $certificate->delete();
+        Session::flash('error', 'Record deleted successfully.');
         return \Redirect::to('manage_city');
     }
 

@@ -35,8 +35,9 @@
                             <div class="form-group">
                               <label class="form-label">Link</label>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="link" required>
-                                  </div>
+                                    <input type="text" class="form-control" name="link" required data-parsley-pattern="^((http|https):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$">
+                                </div>
+                                <span style="color: red">Link should start with http or https://www</span>
                             </div>
                         </div>
                     </div>

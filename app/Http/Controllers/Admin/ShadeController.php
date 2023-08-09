@@ -20,7 +20,7 @@ class ShadeController extends Controller
     }
     public function index(Request $request)
     {
-        $Shade = Shade::get();
+        $Shade = Shade::orderBy('id','DESC')->get();
 
         $data['data']      = $Shade;
         $data['page_name'] = "Manage";
@@ -99,6 +99,7 @@ class ShadeController extends Controller
         $all_data=[];
         $certificate = Shade::find($id);
         $certificate->delete();
+        Session::flash('error', 'Record deleted successfully.');
         return \Redirect::to('manage_shade');
     }
 

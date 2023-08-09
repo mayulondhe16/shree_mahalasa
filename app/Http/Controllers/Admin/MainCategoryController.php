@@ -22,7 +22,7 @@ class MainCategoryController extends Controller
     }
     public function index(Request $request)
     {
-        $mainCategory = MainCategory::get();
+        $mainCategory = MainCategory::orderBy('id','DESC')->get();
 
         $data['data']      = $mainCategory;
         $data['page_name'] = "Manage";
@@ -160,6 +160,7 @@ class MainCategoryController extends Controller
         $all_data=[];
         $certificate = MainCategory::find($id);
         $certificate->delete();
+        Session::flash('error', 'Record deleted successfully.');
         return \Redirect::to('manage_main_category');
     }
 

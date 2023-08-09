@@ -25,8 +25,17 @@
  <script src="{{asset('assets/js/jquery.js')}}"></script>
  <script src="{{asset('assets/js/parsley-2.9.2.min.js')}}"></script>
  <script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
-
+ 
  <script>
+  $('.moreless-button').click(function() {
+  $('.moretext').slideToggle();
+  if ($('.moreless-button').text() == "Read more") {
+    $(this).text("Read less")
+  } else {
+    $(this).text("Read more")
+  }
+});
+
   new DataTable('#example');
   //  var ctx = document.getElementById("chart-bars").getContext("2d");
 

@@ -20,6 +20,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      @include('admin.flash-message')
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
@@ -47,10 +48,10 @@
                           {{$value->short_description}}
                         </td>
                         <td>
-                          <a href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
+                          <a class="success" href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
                             <i class="fa fa-edit"></i>
                           </a>
-                          <a href="{{url('/')}}/view_{{$url_slug}}/{{base64_encode($value->id)}}" title="View">
+                          <a class="primary" href="{{url('/')}}/view_{{$url_slug}}/{{base64_encode($value->id)}}" title="View">
                             <i class="fa fa-eye"></i>
                           </a>
                         </td>

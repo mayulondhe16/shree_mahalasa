@@ -35,9 +35,9 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="oldpassword">Product Images<span style="color:red;" >*</span></label>
-                                   <p>
+                                   {{-- <p>
                                     <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
-                                   </p>
+                                   </p> --}}
                                     <div class="input-group input-group-outline mb-3">
                                     <input type="file"  name="image[]" accept="image/*" onchange="preview_image(event,1)" required="true" multiple>
                                 </div>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                           <div class="form-group">
                             <label class="form-label">Name</label><span style="color:red;" >*</span>
                               <div class="input-group input-group-outline mb-3">
@@ -53,8 +53,9 @@
                               </div>
                           </div>
                       </div>
-                  
-                        <div class="col-md-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
                               <label class="form-label">Brand</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
@@ -67,7 +68,9 @@
                                   </div>
                             </div>
                         </div>
-                      <div class="col-md-4">
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
                           <div class="form-group">
                             <label class="form-label">Main Category</label><span style="color:red;" >*</span>
                               <div class="input-group input-group-outline mb-3">
@@ -82,7 +85,7 @@
                       </div>
                   </div> 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                               <label class="form-label">Sub Category</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
@@ -95,7 +98,9 @@
                                   </div>
                             </div>
                         </div>
-                      <div class="col-md-4">
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
                           <div class="form-group">
                             <label class="form-label">Product Description</label><span style="color:red;" >*</span>
                               <div class="input-group input-group-outline mb-3">

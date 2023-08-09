@@ -20,7 +20,7 @@ class SocialmedialinksController extends Controller
     }
     public function index(Request $request)
     {
-        $socialmedialinks = Socialmedialinks::get();
+        $socialmedialinks = Socialmedialinks::orderBy('id','DESC')->get();
 
         $data['data']      = $socialmedialinks;
         $data['page_name'] = "Manage";

@@ -20,7 +20,7 @@ class QuicklinksController extends Controller
     }
     public function index(Request $request)
     {
-        $quicklinks = Quicklinks::get();
+        $quicklinks = Quicklinks::orderBy('id','DESC')->get();
 
         $data['data']      = $quicklinks;
         $data['page_name'] = "Manage";

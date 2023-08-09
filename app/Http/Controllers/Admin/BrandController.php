@@ -22,7 +22,7 @@ class BrandController extends Controller
     }
     public function index(Request $request)
     {
-        $brands = Brands::get();
+        $brands = Brands::orderBy('id','DESC')->get();
 
         $data['data']      = $brands;
         $data['page_name'] = "Manage";
@@ -40,7 +40,6 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'link'         => 'required',
             'image' => 'required',
         ]);
 
@@ -156,6 +155,7 @@ class BrandController extends Controller
         $all_data=[];
         $certificate = Brands::find($id);
         $certificate->delete();
+        Session::flash('error', 'Record deleted successfully.');
         return \Redirect::to('manage_brands');
     }
 

@@ -1,5 +1,5 @@
 <?php
-
+/** @var \Laravel\Lumen\Routing\Router $router */
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BrandController;
@@ -122,11 +122,6 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/change_toptrending_status/{id}',	[ProductsController::class, 'change_toptrending_status']);
 	Route::get('/change_general_status/{id}',	 	[ProductsController::class, 'change_general_status']);
 
-	
-	
-	
-
-
 	Route::get('/manage_shops',		 			[ShopController::class, 'index']);
 	Route::get('/add_shops',		 				[ShopController::class, 'add']);
 	Route::post('/store_shops',		 			[ShopController::class, 'store']);
@@ -145,3 +140,4 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/delete_main_category/{id}',		 		[MainCategoryController::class, 'delete']);
 	
 });
+

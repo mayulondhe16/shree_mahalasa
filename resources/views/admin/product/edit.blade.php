@@ -16,6 +16,7 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      @include('admin.flash-message')
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
@@ -29,66 +30,107 @@
             </div>
             <div class="card-body">
               <form action="{{ url('/')}}/update_{{$url_slug}}/{{$data['id']}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
-                {!! csrf_field() !!}    
+                {!! csrf_field() !!}  
+                <?php 
+                    $product_images = \DB::table('product_images')->where('product_id',$data->id)->get();                
+                ?>
+               
                 <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="oldpassword">Brand Logo<span style="color:red;" >*</span></label>
-                                   <p>
-                                    <img id="output_image1" height="200px" width="300px" src="{{url('/')}}{{$data['image']}}" />
-                                   </p>
-                                    <div class="input-group input-group-outline mb-3">
-                                    <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" required="true">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="oldpassword">Product Images<span style="color:red;" >*</span></label>
+                            <div class="row">
+                              @if ($product_images)
+                              @foreach ($product_images as $image)
+                              <div class="col-md-4">
+                                <p>
+                                <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$image->image) }}" />
+                                </p>
+                                <p><a href="{{url('/')}}/delete_product_image/{{ $image->id }}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
+                                    <i class="fa fa-trash"></i></a>
+                              </div>
+                              
+                              @endforeach
+                              @endif
+                            </div>   
                     </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                  <div class="input-group input-group-outline mb-3">
+                    <input type="file"  name="image[]" accept="image/*" onchange="preview_image(event,1)" required="true" multiple>
+                </div>
+                  </div>
+                </div>
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    {{-- <label class="form-label">Brand Title</label> --}}
-                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}">
-                                  </div>
-                            </div>
-                        </div>
-                        {{-- <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                            </div>
-                        </div> --}}
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    {{-- <label class="form-label">Brand Description</label> --}}
-                                    <textarea  class="form-control" name="description">{{$data['description']}}</textarea>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                  
-                    
-                    {{-- <div class="text-center">
-                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
-                    </div> --}}
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary" style="float: right">Update</button>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Name</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                <input type="text"  class="form-control" name="name"  data-parsley-error-message="Please enter valid product name." data-parsley-pattern="^[a-z A-Z .]+$" required="true" value="{{$data->name}}">
+                              </div>
+                          </div>
                       </div>
-                  </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="form-label">Brand</label><span style="color:red;" >*</span>
+                                <div class="input-group input-group-outline mb-3">
+                                    <select class="form-control" id="brand_id" name="brand_id"  data-parsley-error-message="Please select brand." required="true">
+                                      <option value="">Select Brand</option>
+                                      @foreach($brand as $val)
+                                      <option value="{{$val->id}}" @if($data->brand_id==$val->id) selected @endif>{{$val->title}}</option>
+                                      @endforeach
+                                    </select>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Main Category</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                  <select class="form-control" id="main_category" name="main_category" data-parsley-error-message="Please select main category." required="true">
+                                    <option value="">Select Main Category</option>
+                                    @foreach($main_category as $value)
+                                    <option value="{{$value->id}}" @if($data->main_category==$value->id) selected @endif>{{$value->title}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                          </div>
+                      </div>
+                  </div> 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="form-label">Sub Category</label><span style="color:red;" >*</span>
+                                <div class="input-group input-group-outline mb-3">
+                                    <select class="form-control" id="category_id" name="category_id"data-parsley-error-message="Please select sub category." required="true">
+                                      <option value="">Select Sub Category</option>
+                                      @foreach($category as $value)
+                                      <option value="{{$value->id}}" @if($data->category_id==$value->id) selected @endif>{{$value->title}}</option>
+                                      @endforeach
+                                    </select>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Product Description</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                  <textarea  class="form-control" name="description" required="true">{{$data->description}}</textarea>
+                                </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="box-footer">
+                        <button type="submit" class="btn btn-primary" style="float: right">Update</button>
+                  </div>
+                </form>
             </div>
           </div>
         </div>
