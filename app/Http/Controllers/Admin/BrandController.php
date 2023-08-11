@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use Session;
+use Config;
 
 class BrandController extends Controller
 {
@@ -48,32 +49,30 @@ class BrandController extends Controller
             return $validator->errors()->all();
         }
         $brands = new Brands();
-        $arr_data               = [];
-        if(isset($_FILES["image"]["name"]) && !empty($_FILES["image"]["name"]))
-        {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < 18; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
-    
-            $file_name                         = $_FILES["image"]["name"];
-            $file_tmp                          = $_FILES["image"]["tmp_name"];
-            $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
-            $random_file_name                  = $randomString.'.'.$ext;
-            $latest_image                   = '/brands/'.$random_file_name;
-            if(Storage::put('all_project_data'.$latest_image, File::get($request->image)))
-            {
-                $brands->image = $latest_image;
-            }
-        }   
-
-
         $brands->title = $request->title;
         $brands->description = $request->description;
-        $status = $brands->save();
-        if (!empty($status))
+        $return_data = $brands->save();
+        $last_id = $brands->id;
+        $path = Config::get('DocumentConstant.BRAND_ADD');
+
+        if ($request->hasFile('image')) {
+
+            if ($brands->image) {
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.BRAND_DELETE') . $brands->image);
+                if(file_exists($delete_file_eng)){
+                    unlink($delete_file_eng);
+                }
+
+            }
+
+            $fileName = $last_id.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+           
+            $brand = Brands::find($last_id);
+            $brand->image = $fileName;
+            $brand->save();
+        }
+        if (!empty($brand))
         {
             Session::flash('success', 'Success! Record added successfully.');
             return \Redirect::to('manage_brands');
@@ -99,44 +98,27 @@ class BrandController extends Controller
 
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $description = $request->description;
-        /*$validator = Validator::make($request->all(), [
-                'banner_image'     => 'required',
-            ]);
-
-        if ($validator->fails()) 
-        {
-            return $validator->errors()->all();
-        }*/
-
-        $arr_data               = [];
         $brands = Brands::find($id);
-        $existingRecord = Brands::orderBy('id','DESC')->first();
-        if(isset($_FILES["image"]["name"]) && !empty($_FILES["image"]["name"]))
+        $path = Config::get('DocumentConstant.BRAND_ADD');
+        if ($request->hasFile('image'))
         {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < 18; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
-      
-            $file_name                         = $_FILES["image"]["name"];
-            $file_tmp                          = $_FILES["image"]["tmp_name"];
-            $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
-            $random_file_name                  = $randomString.'.'.$ext;
-            $latest_image                   = '/brands/'.$random_file_name;
-
-            if(Storage::put('all_project_data'.$latest_image, File::get($request->image)))
+            if ($brands->image)
             {
-                $brands->image = $latest_image;
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.BRAND_DELETE') . $brands->image);
+                if(file_exists($delete_file_eng))
+                {
+                    unlink($delete_file_eng);
+                }
+
             }
-            $brands->title = $title;
-            $brands->description = $description;
-            
-        } 
-        $status = $brands->update();        
+
+            $fileName = $id.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+            $brands->title = $request->title;
+            $brands->description = $request->description;
+            $brands->image = $fileName;
+            $status = $brands->save();
+        }
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record updated successfully.');
@@ -152,11 +134,22 @@ class BrandController extends Controller
     public function delete($id)
     {
         $id = base64_decode($id);
-        $all_data=[];
-        $certificate = Brands::find($id);
-        $certificate->delete();
-        Session::flash('error', 'Record deleted successfully.');
-        return \Redirect::to('manage_brands');
+        try {
+            $brands = Brands::find($id);
+            if ($brands) {
+                if (file_exists(storage_path(Config::get('DocumentConstant.BRAND_DELETE') . $brands->image))) {
+                    unlink(storage_path(Config::get('DocumentConstant.BRAND_DELETE') . $brands->image));
+                }
+               
+                $brands->delete();           
+                    Session::flash('error', 'Record deleted successfully.');
+                    return \Redirect::to('manage_brands');
+            } else {
+                return null;
+            }
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 
     public function view($id)

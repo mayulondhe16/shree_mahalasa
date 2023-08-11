@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label for="oldpassword">Image<span style="color:red;" >*</span></label>
                                    <p>
-                                    <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$data['image']) }}"  />
+                                    <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.CATEGORY_VIEW') }}{{ $data['image'] }}"  />
                                    </p>
                             </div>
                         </div>

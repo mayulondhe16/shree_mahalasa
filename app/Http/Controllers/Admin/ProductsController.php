@@ -16,6 +16,7 @@ use App\Models\ProductImages;
 
 use Validator;
 use Session;
+use Config;
 
 class ProductsController extends Controller
 {
@@ -49,7 +50,6 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'link'         => 'required',
             'image' => 'required',
         ]);
 
@@ -63,39 +63,34 @@ class ProductsController extends Controller
         $product->main_category = $request->main_category;
         $product->brand_id = $request->brand_id;
         $product->description = $request->description;
-        $status = $product->save();
-        if (!empty($status))
+        $product->save();
+        if(!empty($product))
         {
+           
             $images = $request->file('image');
-            $temp = [];
-            if ($images) {
+            if($images)
+            {
+               
                 foreach ($images as $image)
                 {
+                    $producId = $product->id;
                     $product_images =  new ProductImages();
+                    $last_id = $product_images->id?$product_images->id:'1';
+                    $path = Config::get('DocumentConstant.PRODUCT_ADD');
 
-                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $charactersLength = strlen($characters);
-                    $randomString = '';
-                    for ($i_ = 0; $i_ < 20; $i_++) {
-                        $randomString .= $characters[rand(0, $charactersLength - 1)];
-                    }
-
-                    $imageName = $image->getClientOriginalName();
-                    $ext = $image->getClientOriginalExtension();
-                    $random_file_name                  = $randomString.'.'.$ext;
-                    $latest_image                      = '/products/'.$random_file_name;
-                    $filename                          = basename($imageName,'.'.$ext);
-                    $newFileName                       = $filename.time().".".$ext; 
-                   
-                    
-                    if(Storage::put('all_project_data'.$latest_image, File::get($image)))
-                    {
-                        array_push($temp, $random_file_name);
-                        $product_images->product_id = $product->id;
-                        $product_images->image = $latest_image;
-                        $productstatus = $product_images->save();
-                    }
-                 
+                  
+                        $fileName = $last_id.".". $image->extension();
+                        uploadMultiImage($image, 'image', $path, $fileName);
+                       
+                        if($last_id=='1'){
+                            $product_images = new ProductImages();
+                        }else{
+                            $product_images = ProductImages::find($last_id);
+                        }
+                      
+                        $product_images->product_id =$producId;
+                        $product_images->image = $fileName;
+                        $status = $product_images->save();                 
                 }
             }
             Session::flash('success', 'Success! Record added successfully.');

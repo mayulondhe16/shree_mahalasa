@@ -53,7 +53,7 @@
                           {{$key+1}}
                         </td>
                         <td>
-                          <img src="{{ asset('storage/all_project_data'.$value->image) }}" height="50px" width="60px">
+                          <img src="{{ Config::get('DocumentConstant.BRAND_VIEW') }}{{ $value->image }}" height="50px" width="60px">
                         </td>
                         <td>
                           {{$value->title}}

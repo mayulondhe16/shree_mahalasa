@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use Session;
+use Config;
 
 class MainCategoryController extends Controller
 {
@@ -40,7 +41,6 @@ class MainCategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'link'         => 'required',
             'image' => 'required',
         ]);
 
@@ -49,33 +49,29 @@ class MainCategoryController extends Controller
             return $validator->errors()->all();
         }
         $mainCategory = new MainCategory();
-        $arr_data               = [];
-        if(isset($_FILES["image"]["name"]) && !empty($_FILES["image"]["name"]))
-        {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < 18; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
-    
-            $file_name                         = $_FILES["image"]["name"];
-            $file_tmp                          = $_FILES["image"]["tmp_name"];
-            $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
-            $random_file_name                  = $randomString.'.'.$ext;
-            $latest_image                   = '/main_category/'.$random_file_name;
-            if(Storage::put('all_project_data'.$latest_image, File::get($request->image)))
-            {
-                $mainCategory->image = $latest_image;
-            }
-            
-        }   
-
-
         $mainCategory->title = $request->title;
         $mainCategory->description = $request->description;
         $status = $mainCategory->save();
-        if (!empty($status))
+        $last_id = $mainCategory->id;
+        $path = Config::get('DocumentConstant.MAIN_CATEGORY_ADD');
+        if ($request->hasFile('image')) {
+
+            if ($mainCategory->image) {
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.MAIN_CATEGORY_DELETE') . $mainCategory->image);
+                if(file_exists($delete_file_eng)){
+                    unlink($delete_file_eng);
+                }
+
+            }
+
+            $fileName = $last_id.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+           
+            $mainCategory = MainCategory::find($last_id);
+            $mainCategory->image = $fileName;
+            $mainCategory->save();
+        }
+        if (!empty($mainCategory))
         {
             Session::flash('success', 'Success! Record added successfully.');
             return \Redirect::to('manage_main_category');
@@ -100,48 +96,29 @@ class MainCategoryController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        $title = $request->title;
-        $description = $request->description;
-       
-        /*$validator = Validator::make($request->all(), [
-                'banner_image'     => 'required',
-            ]);
-
-        if ($validator->fails()) 
-        {
-            return $validator->errors()->all();
-        }*/
-
-        $arr_data               = [];
-        $mainCategory = MainCategory::find($id);
-        $existingRecord = MainCategory::orderBy('id','DESC')->first();
-        if(isset($_FILES["image"]["name"]) && !empty($_FILES["image"]["name"]))
-        {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $charactersLength = strlen($characters);
-            $randomString = '';
-            for ($i = 0; $i < 18; $i++) {
-                $randomString .= $characters[rand(0, $charactersLength - 1)];
-            }
+    {    
+        $mainCategory = MainCategory::find($id);       
       
-            $file_name                         = $_FILES["image"]["name"];
-            $file_tmp                          = $_FILES["image"]["tmp_name"];
-            $ext                               = pathinfo($file_name,PATHINFO_EXTENSION);
-            $random_file_name                  = $randomString.'.'.$ext;
-            $latest_image                   = '/main_category/'.$random_file_name;
-
-            if(Storage::put('all_project_data'.$latest_image, File::get($request->image)))
+        $path = Config::get('DocumentConstant.MAIN_CATEGORY_ADD');
+        if ($request->hasFile('image'))
+        {
+            if ($mainCategory->image)
             {
-                $mainCategory->image = $latest_image;
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.MAIN_CATEGORY_DELETE') . $mainCategory->image);
+                if(file_exists($delete_file_eng))
+                {
+                    unlink($delete_file_eng);
+                }
+
             }
-            
-            
-        } 
-        $mainCategory->title = $title;
-        $mainCategory->description = $description;
-        // dd($mainCategory);
-        $status = $mainCategory->update();        
+
+            $fileName = $id.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+            $mainCategory->title = $request->title;
+            $mainCategory->description = $request->description;
+            $mainCategory->image = $fileName;
+            $status = $mainCategory->save();
+        }
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record updated successfully.');
@@ -157,11 +134,22 @@ class MainCategoryController extends Controller
     public function delete($id)
     {
         $id = base64_decode($id);
-        $all_data=[];
-        $certificate = MainCategory::find($id);
-        $certificate->delete();
-        Session::flash('error', 'Record deleted successfully.');
-        return \Redirect::to('manage_main_category');
+        try {
+            $main_category = MainCategory::find($id);
+            if ($main_category) {
+                if (file_exists(storage_path(Config::get('DocumentConstant.MAIN_CATEGORY_DELETE') . $main_category->image))) {
+                    unlink(storage_path(Config::get('DocumentConstant.MAIN_CATEGORY_DELETE') . $main_category->image));
+                }
+               
+                $main_category->delete();           
+                    Session::flash('error', 'Record deleted successfully.');
+                    return \Redirect::to('manage_main_category');
+            } else {
+                return null;
+            }
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 
     public function view($id)
