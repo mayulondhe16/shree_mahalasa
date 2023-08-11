@@ -71,7 +71,7 @@ class ProductsController extends Controller
             if($images)
             {
                
-                foreach ($images as $image)
+                foreach ($images as $key => $image)
                 {
                     $producId = $product->id;
                     $product_images =  new ProductImages();
@@ -79,15 +79,11 @@ class ProductsController extends Controller
                     $path = Config::get('DocumentConstant.PRODUCT_ADD');
 
                   
-                        $fileName = $last_id.".". $image->extension();
+                        $fileName = $producId."_".$key.".". $image->extension();
                         uploadMultiImage($image, 'image', $path, $fileName);
                        
-                        if($last_id=='1'){
-                            $product_images = new ProductImages();
-                        }else{
-                            $product_images = ProductImages::find($last_id);
-                        }
-                      
+                        $product_images = new ProductImages();
+                       
                         $product_images->product_id =$producId;
                         $product_images->image = $fileName;
                         $status = $product_images->save();                 
@@ -121,7 +117,6 @@ class ProductsController extends Controller
     public function update(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
-            // 'link'         => 'required',
             'image' => 'required',
         ]);
 
@@ -183,24 +178,55 @@ class ProductsController extends Controller
     public function delete($id)
     {
         $id = base64_decode($id);
-        $all_data=[];
-        $product = Product::find($id);
-        $product->delete();
-
-        $product_images = ProductImages::where('product_id','=',$id);
-        $product_images->delete();
-        Session::flash('danger', 'Record deleted successfully.');
-        return \Redirect::to('manage_products');
+        try {
+            $product_images = ProductImages::where('product_id','=',$id)->get();
+          
+            if ($product_images)
+            {
+                foreach($product_images as $images)
+                {
+                    $prd_img = ProductImages::find($images->id);
+                    if (file_exists(storage_path(Config::get('DocumentConstant.PRODUCT_DELETE') . $images->image)))
+                    {
+                        unlink(storage_path(Config::get('DocumentConstant.PRODUCT_DELETE') . $images->image));
+                    }
+               
+                $prd_img->delete();    
+                }
+                $product = Product::find($id);
+                $product->delete();
+                Session::flash('error', 'Record deleted successfully.');
+                return \Redirect::to('manage_products');
+            } else {
+                return null;
+            }
+        } catch (\Exception $e) {
+            return $e;
+        }
+       
     }
 
     public function delete_product_image($id)
     {
-        $all_data=[];
-       
-        $product_images = ProductImages::where('id','=',$id);
-        $product_images->delete();
-        Session::flash('danger', 'Record deleted successfully.');
-        return \Redirect::back();
+        // dd($id);
+        try {
+            $product_images = ProductImages::find($id);
+            if ($product_images)
+            {
+                if (file_exists(storage_path(Config::get('DocumentConstant.PRODUCT_DELETE') . $product_images->image)))
+                {
+                    unlink(storage_path(Config::get('DocumentConstant.PRODUCT_DELETE') . $product_images->image));
+                }
+               
+                $product_images->delete();           
+                    Session::flash('error', 'Record deleted successfully.');
+                    return \Redirect::to('manage_products');
+            } else {
+                return null;
+            }
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 
     public function view($id)
