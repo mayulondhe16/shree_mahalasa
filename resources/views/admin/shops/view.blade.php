@@ -35,11 +35,8 @@
                     <div class="form-group">
                         <label for="oldpassword">Shop Thumbnail Image<span style="color:red;" >*</span></label>
                            <p>
-                            <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$data['thumbnail_image']) }}" />
-                           </p>
-                            {{-- <div class="input-group input-group-outline mb-3">
-                            <input type="file"  name="thumbnail_image" accept="image/*" onchange="preview_image(event,1)" required="true">
-                        </div> --}}
+                            <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.SHOPTHUMB_VIEW') }}{{ $data['thumbnail_image'] }}" />
+                          </p>
                     </div>
                 </div>
               </div>
@@ -58,7 +55,7 @@
                           </div>
                       </div>
                             <p>
-                              <img id="output_image1" height="200px" width="300px" src="{{ asset('storage/all_project_data'.$image->images) }}" />
+                              <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.SHOP_VIEW') }}{{ $image->images }}" />
                             </p>
                     </div>
                 </div>

@@ -101,6 +101,7 @@ class SocialmedialinksController extends Controller
         $all_data=[];
         $certificate = Socialmedialinks::find($id);
         $certificate->delete();
+        Session::flash('success', 'Success! Record deleted successfully.');
         return \Redirect::to('manage_socialmedialinks');
     }
 

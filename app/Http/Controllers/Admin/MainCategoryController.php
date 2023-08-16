@@ -97,6 +97,7 @@ class MainCategoryController extends Controller
 
     public function update(Request $request, $id)
     {    
+       
         $mainCategory = MainCategory::find($id);       
       
         $path = Config::get('DocumentConstant.MAIN_CATEGORY_ADD');
@@ -114,11 +115,12 @@ class MainCategoryController extends Controller
 
             $fileName = $id.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
-            $mainCategory->title = $request->title;
-            $mainCategory->description = $request->description;
             $mainCategory->image = $fileName;
-            $status = $mainCategory->save();
+           
         }
+        $mainCategory->title = $request->title;
+        $mainCategory->description = $request->description;
+        $status = $mainCategory->save();
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record updated successfully.');

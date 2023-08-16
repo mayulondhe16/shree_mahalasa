@@ -97,16 +97,20 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
+        
         $category = Category::find($id); 
 
         $path = Config::get('DocumentConstant.CATEGORY_ADD');
         if ($request->hasFile('image'))
         {
+           
             if ($category->image)
             {
+             
                 $delete_file_eng= storage_path(Config::get('DocumentConstant.CATEGORY_DELETE') . $category->image);
                 if(file_exists($delete_file_eng))
                 {
+                 
                     unlink($delete_file_eng);
                 }
 
@@ -114,11 +118,13 @@ class CategoryController extends Controller
 
             $fileName = $id.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
-            $category->title = $request->title;
-            $category->description = $request->description;
             $category->image = $fileName;
-            $status = $category->save();
+
+           
         } 
+        $category->title = $request->title;
+        $category->description = $request->description;
+        $status = $category->save();
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record updated successfully.');

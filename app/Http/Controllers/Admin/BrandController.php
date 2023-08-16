@@ -119,7 +119,7 @@ class BrandController extends Controller
             $brands->image = $fileName;
             $status = $brands->save();
         }
-        if (!empty($status))
+        if (!empty($brands))
         {
             Session::flash('success', 'Success! Record updated successfully.');
             return \Redirect::to('manage_brands');

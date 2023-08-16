@@ -43,6 +43,7 @@
                       <th>Main-Category </th>
                       <th>Sub-Category </th>
                       <th>Brand</th>
+                      <th>Description</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -72,6 +73,9 @@
                         </td>
                         <td>
                           {{ (isset($brand->title))? $brand->title: '-'; }}
+                        </td>
+                        <td>
+                          <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid category description." required="true">{{$value->description}}</textarea>
                         </td>
                         <td>
                           <a class="success" href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
