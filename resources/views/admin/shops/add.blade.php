@@ -140,7 +140,7 @@
                   <div class="form-group">
                     <label class="form-label">Map Link</label><span style="color:red;" >*</span>
                       <div class="input-group input-group-outline mb-3">
-                        <input type="text" class="form-control" name="map_link" data-parsley-error-message="Please enter valid link." required="true" data-parsley-pattern="^((http|https):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$">
+                        <input type="text" class="form-control" name="map_link" data-parsley-error-message="Please enter valid link." required="true" data-parsley-pattern="^((http|https):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,600}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$">
                       </div>
                   </div>
                 </div>
