@@ -123,16 +123,19 @@
                   {!! csrf_field() !!}
                   <label class="form-label">Email</label>
                   <div class="input-group input-group-outline my-3">
-                    <input type="email" name="email" class="form-control" {{-- data-parsley-type="email" --}} required="true">
+                    <input type="email" name="email" class="form-control" data-parsley-errors-container="#element1" {{-- data-parsley-type="email" --}} required="true">
 
                   </div>
+                  <span id="element1"></span>
                   <label class="form-label">Password</label>
                   <div class="input-group input-group-outline mb-3">
-                    <input type="password" name="password" class="form-control" id="passwordInput" {{-- data-parsley-minlength="6" --}} required="true">
+                    <input type="password" name="password" class="form-control" id="passwordInput" data-parsley-errors-container="#element2" required="true">
                     <span style="border:1px solid #ddd;padding:0 2px;">
                       <i id="eyeChangeId" class="fa fa-eye" onclick="eyeEnableOrDisable()"></i>
                     </span>
                   </div>
+                  <span id="element2"></span>
+
                   
                   {{-- <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe" checked>

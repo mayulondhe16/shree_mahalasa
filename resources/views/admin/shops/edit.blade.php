@@ -120,7 +120,7 @@
                   <div class="form-group">
                     <label class="form-label">Telephone Number</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="telephone_no" value={{ $data['telephone_no'] }}>
+                          <input type="text" class="form-control" name="telephone_no" maxlength="10" value={{ $data['telephone_no'] }}>
                       </div>
                   </div>
                 </div>
@@ -128,7 +128,7 @@
                   <div class="form-group">
                     <label class="form-label">Mobile Number</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="mobile_no" value={{ $data['mobile_no'] }}>
+                          <input type="text" class="form-control" name="mobile_no" maxlength="10" value={{ $data['mobile_no'] }}>
                       </div>
                   </div>
                 </div>
@@ -146,7 +146,7 @@
                   <div class="form-group">
                     <label class="form-label">Map Link</label>
                       <div class="input-group input-group-outline mb-3">
-                        <input type="text" class="form-control" name="map_link" value={{ $data['map_link'] }}>
+                        <input type="text" class="form-control" name="map_link" value={{ $data['map_link'] }} data-parsley-pattern="^((http|https):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$">
                       </div>
                   </div>
                 </div>

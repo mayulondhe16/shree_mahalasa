@@ -114,11 +114,11 @@ class BrandController extends Controller
 
             $fileName = $id.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
-            $brands->title = $request->title;
-            $brands->description = $request->description;
-            $brands->image = $fileName;
-            $status = $brands->save();
         }
+        $brands->title = $request->title;
+        $brands->description = $request->description;
+        $brands->image = $fileName;
+        $status = $brands->save();
         if (!empty($brands))
         {
             Session::flash('success', 'Success! Record updated successfully.');

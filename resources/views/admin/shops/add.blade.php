@@ -42,9 +42,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="oldpassword">Shop Images<span style="color:red;" >*</span></label>
-                            <p>
-                            <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
-                            </p>
+                           
                             <div class="input-group input-group-outline mb-3">
                             <input type="file"  name="images[]" accept="image/*" required="true" multiple>
                         </div>
@@ -116,7 +114,7 @@
                   <div class="form-group">
                     <label class="form-label">Telephone Number</label><span style="color:red;" >*</span>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="telephone_no" data-parsley-error-message="Please enter valid telephone number." data-parsley-pattern="^[0-9 .]+$" required="true">
+                          <input type="text" class="form-control" name="telephone_no" maxlength="10" data-parsley-error-message="Please enter valid telephone number." data-parsley-pattern="^[0-9 .]+$" required="true">
                       </div>
                   </div>
                 </div>
@@ -124,7 +122,7 @@
                   <div class="form-group">
                     <label class="form-label">Mobile Number</label><span style="color:red;" >*</span>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="mobile_no" data-parsley-error-message="Please enter valid mobile number." data-parsley-pattern="^[0-9 .]+$" required="true">
+                          <input type="text" class="form-control" name="mobile_no" maxlength="10" data-parsley-error-message="Please enter valid mobile number." data-parsley-pattern="^[0-9 .]+$" required="true">
                       </div>
                   </div>
                 </div>
@@ -142,7 +140,7 @@
                   <div class="form-group">
                     <label class="form-label">Map Link</label><span style="color:red;" >*</span>
                       <div class="input-group input-group-outline mb-3">
-                        <input type="text" class="form-control" name="map_link" data-parsley-error-message="Please enter valid link." required="true">
+                        <input type="text" class="form-control" name="map_link" data-parsley-error-message="Please enter valid link." required="true" data-parsley-pattern="^((http|https):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$">
                       </div>
                   </div>
                 </div>
