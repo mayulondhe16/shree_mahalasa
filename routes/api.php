@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,9 @@ use App\Http\Controllers\Api\CategoryController;
 |
 */
 
-Route::post('all_category', [CategoryController::class, 'allCategory']);
+Route::post('all-category', [CategoryController::class, 'allCategory']);
+Route::post('all-brands', [BrandController::class, 'allBrands']);
+Route::post('all-shops', [BrandController::class, 'allShops']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
