@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\ApiController;
 |
 */
 
+<<<<<<< HEAD
 Route::get('get_maincategory', [ApiController::class, 'get_maincategory']);
 Route::get('get_products', [ApiController::class, 'get_products']);
 Route::get('get_trending_products', [ApiController::class, 'get_trending_products']);
@@ -31,6 +32,11 @@ Route::get('get_company_details', [ApiController::class, 'get_company_details'])
 Route::post('add_newsletter', [ApiController::class, 'add_newsletter']);
 
 
+=======
+Route::post('all-category', [CategoryController::class, 'allCategory']);
+Route::post('all-brands', [BrandController::class, 'allBrands']);
+Route::post('all-shops', [BrandController::class, 'allShops']);
+>>>>>>> ed9623c7e835d4f1357c1fe2790bc59bc8d68da4
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
