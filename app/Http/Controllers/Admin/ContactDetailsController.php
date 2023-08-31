@@ -49,6 +49,7 @@ class ContactDetailsController extends Controller
         }
         $contactdetails = new ContactDetails();
         $contactdetails->phone_no = $request->phone_no;
+        $contactdetails->email = $request->email;
         $contactdetails->address = $request->address;
         $status = $contactdetails->save();
         if (!empty($status))
@@ -84,6 +85,7 @@ class ContactDetailsController extends Controller
         $contactdetails = ContactDetails::find($id);
         $existingRecord = ContactDetails::orderBy('id','DESC')->first();
         $contactdetails->phone_no = $request->phone_no;
+        $contactdetails->email = $request->email;
         $contactdetails->address = $request->address;
         $status = $contactdetails->update();        
         if (!empty($status))

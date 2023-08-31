@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ShadeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AboutusController;
-use App\Http\Controllers\Admin\ContactdetailsController;
+use App\Http\Controllers\Admin\ContactDetailsController;
 use App\Http\Controllers\Admin\QuicklinksController;
 use App\Http\Controllers\Admin\SocialmedialinksController;
 use App\Http\Controllers\Admin\NewsletterController;
@@ -88,13 +88,13 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::post('/update_aboutus/{id}',		 		[AboutusController::class, 'update']);
 	Route::get('/delete_aboutus/{id}',		 		[AboutusController::class, 'delete']);
 
-	Route::get('/manage_contactdetails',		 			[ContactdetailsController::class, 'index']);
-	Route::get('/add_contactdetails',		 				[ContactdetailsController::class, 'add']);
-	Route::post('/store_contactdetails',		 			[ContactdetailsController::class, 'store']);
-	Route::get('/view_contactdetails/{id}',	 				[ContactdetailsController::class, 'view']);
-	Route::get('/edit_contactdetails/{id}',		 			[ContactdetailsController::class, 'edit']);
-	Route::post('/update_contactdetails/{id}',		 		[ContactdetailsController::class, 'update']);
-	Route::get('/delete_contactdetails/{id}',		 		[ContactdetailsController::class, 'delete']);
+	Route::get('/manage_contactdetails',		 			[ContactDetailsController::class, 'index']);
+	Route::get('/add_contactdetails',		 				[ContactDetailsController::class, 'add']);
+	Route::post('/store_contactdetails',		 			[ContactDetailsController::class, 'store']);
+	Route::get('/view_contactdetails/{id}',	 				[ContactDetailsController::class, 'view']);
+	Route::get('/edit_contactdetails/{id}',		 			[ContactDetailsController::class, 'edit']);
+	Route::post('/update_contactdetails/{id}',		 		[ContactDetailsController::class, 'update']);
+	Route::get('/delete_contactdetails/{id}',		 		[ContactDetailsController::class, 'delete']);
 
 	Route::get('/manage_quicklinks',		 			[QuicklinksController::class, 'index']);
 	Route::get('/add_quicklinks',		 				[QuicklinksController::class, 'add']);
