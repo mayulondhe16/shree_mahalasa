@@ -13,13 +13,16 @@
           </ol>
           {{-- <h6 class="font-weight-bolder mb-0">Tables</h6> --}}
         </nav>
-        {{-- <div class="box-header">
+        @if(count($data)<0)
+        <div class="box-header">
           <a href="{{url('/')}}/add_{{ $url_slug }}" class="btn btn-primary btn-xs" style="float: right;">Add {{ $title }}</a>
-        </div> --}}
+        </div>
+        @endif
       </div>
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      @include('admin.flash-message')
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
@@ -38,8 +41,7 @@
                   <thead>
                     <tr>
                       <th>Sr No</th>
-                      <th>Phone No </th>
-                      <th>Address</th>
+                      <th>Logo</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -50,21 +52,14 @@
                           {{$key+1}}
                         </td>
                         <td>
-                          {{$value->phone_no}}
+                          <img src="{{ Config::get('DocumentConstant.LOGO_VIEW') }}{{ $value->image }}" height="50px" width="60px">
                         </td>
-                        <td>
-                          {{$value->address}}
-                        </td>
+                        
                         <td>
                           <a class="success" href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
                             <i class="fa fa-edit"></i>
                           </a>
-                          <a class="primary" href="{{url('/')}}/view_{{$url_slug}}/{{base64_encode($value->id)}}" title="View">
-                            <i class="fa fa-eye"></i>
-                          </a>
-                          {{-- <a href="{{url('/')}}/delete_{{$url_slug}}/{{base64_encode($value->id)}}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
-                            <i class="fa fa-trash"></i>
-                          </a> --}}
+                          
                         </td>
                       </tr>
                     @endforeach

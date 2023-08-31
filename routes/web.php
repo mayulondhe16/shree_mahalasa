@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\LogoController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ShadeController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -49,7 +50,11 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/delete_brand/{id}',		 		[BrandController::class, 'delete']);
 	Route::get('/change_brand_status/{id}',	 	    [BrandController::class, 'change_brand_status']);
 
-	
+	Route::get('/manage_logo',		 			[LogoController::class, 'index']);
+	Route::get('/add_logo',		 				[LogoController::class, 'add']);
+	Route::post('/store_logo',		 				[LogoController::class, 'store']);
+	Route::get('/edit_logo/{id}',		 			[LogoController::class, 'edit']);
+	Route::post('/update_logo/{id}',		 		[LogoController::class, 'update']);
 
 	Route::get('/manage_city',		 			    [CityController::class, 'index']);
 	Route::get('/add_city',		 					[CityController::class, 'add']);

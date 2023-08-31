@@ -18,6 +18,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_logo' || Request::segment(1)=='add_logo' || Request::segment(1)=='edit_logo' || Request::segment(1)=='view_logo') active @endif" href="{{url('/')}}/manage_logo">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Logo</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_brands' || Request::segment(1)=='add_brand' || Request::segment(1)=='edit_brand' || Request::segment(1)=='view_brand') active @endif" href="{{url('/')}}/manage_brands">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>

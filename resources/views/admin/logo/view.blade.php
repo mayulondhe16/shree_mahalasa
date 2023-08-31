@@ -28,55 +28,64 @@
               </div>
             </div>
             <div class="card-body">
-              <form action="{{ url('/')}}/update_{{$url_slug}}/{{$data['id']}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
+              <form action="{{ url('/')}}/view_{{$url_slug}}/{{$data['id']}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}    
                 <div class="row">
-                  <div class="col-md-8">
-                      <div class="form-group">
-                          <label for="oldpassword">Image<span style="color:red;" >*</span></label>
-                             <p>
-                              <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.ABOUTUS_VIEW') }}{{ $data['image'] }}" />
-                             </p>
-                              <div class="input-group input-group-outline mb-3">
-                              {{-- <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)"  @if(empty($data['image'])) required="true" @endif> --}}
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="oldpassword">Brand Logo</label>
+                                   <p>
+                                    <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.BRAND_VIEW') }}{{ $data['image'] }}" />
+                                   </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Title</label>
                                 <div class="input-group input-group-outline mb-3">
+                                    {{-- <label class="form-label">Brand Title</label> --}}
                                     <input type="text" class="form-control" readonly name="title"  value="{{$data['title']}}">
                                   </div>
                             </div>
                         </div>
+                        {{-- <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control">
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="input-group input-group-outline mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" class="form-control">
+                                  </div>
+                            </div>
+                        </div> --}}
                     </div>
 
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Short Description</label>
                                 <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" readonly name="short_description">{{$data['short_description']}}</textarea>
+                                    {{-- <label class="form-label">Brand Description</label> --}}
+                                    <textarea  class="form-control" readonly name="description">{{$data['description']}}</textarea>
                                   </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-8">
-                          <div class="form-group">
-                            <label class="form-label">Long Description</label>
-                              <div class="input-group input-group-outline mb-3">
-                                  <textarea  class="form-control" readonly name="long_description">{{$data['long_description']}}</textarea>
-                                </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="box-footer">
-                    <a href="{{url('/')}}/manage_aboutus" type="submit" class="btn btn-primary pull-right">Back</a>
-                </div>
+                  
+                    
+                    {{-- <div class="text-center">
+                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                    </div> --}}
+                    
+                    <div class="box-footer">
+                        <a href="{{url('/')}}/manage_brands" type="submit" class="btn btn-primary pull-right">Back</a>
+                    </div>
                   </form>
             </div>
           </div>

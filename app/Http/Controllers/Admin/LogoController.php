@@ -5,25 +5,27 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use  App\Models\Aboutus;
+use  App\Models\Logo;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 use Session;
 use Config;
 
-class AboutusController extends Controller
+class LogoController extends Controller
 {
-    public function __construct(Aboutus $Aboutus)
+    public function __construct(Logo $Logo)
     {
         $data               = [];
-        $this->title        = "About Us";
-        $this->url_slug     = "aboutus";
-        $this->folder_path  = "admin/aboutus/";
+        $this->title        = "Logo";
+        $this->url_slug     = "logo";
+        $this->folder_path  = "admin/logo/";
     }
     public function index(Request $request)
     {
-        $aboutus = Aboutus::get();
+        $brands = Logo::orderBy('id','DESC')->get();
 
-        $data['data']      = $aboutus;
+        $data['data']      = $brands;
         $data['page_name'] = "Manage";
         $data['url_slug']  = $this->url_slug;
         $data['title']     = $this->title;
@@ -39,39 +41,33 @@ class AboutusController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'link'         => 'required',
-            'title' => 'required',
-            'short_description' => 'required',
-            'long_description' => 'required',
+            'image' => 'required',
         ]);
 
         if ($validator->fails()) 
         {
             return $validator->errors()->all();
         }
-        $aboutus = Aboutus::orderBy('id','DESC')->get();
+        $brands = Logo::orderBy('id','DESC')->get();
         if(isset($brand->id)){
-            $last_id = $aboutus->id;
+            $last_id = $brands->id;
         }else{
             $last_id = '1';
         }
-        $path = Config::get('DocumentConstant.ABOUTUS_ADD');
+        $path = Config::get('DocumentConstant.LOGO_ADD');
 
         if ($request->hasFile('image')) {
             $fileName = $last_id.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
+           
+            $brand = New Logo();
+            $brand->image = $fileName;
+            $brand->save();
         }
-        $aboutus = new Aboutus();
-        $arr_data               = [];
-        $aboutus->title = $request->title;
-        $aboutus->short_description = $request->short_description;
-        $aboutus->long_description = $request->long_description;
-        $aboutus->image = $request->fileName;
-        $status = $aboutus->save();
-        if (!empty($status))
+        if (!empty($brand))
         {
             Session::flash('success', 'Success! Record added successfully.');
-            return \Redirect::to('manage_aboutus');
+            return \Redirect::to('manage_logo');
         }
         else
         {
@@ -84,7 +80,7 @@ class AboutusController extends Controller
     {
         $id = base64_decode($id);
         $arr_data = [];
-        $data1     = Aboutus::find($id);
+        $data1     = Logo::find($id);
         $data['data']      = $data1;
         $data['page_name'] = "Edit";
         $data['url_slug']  = $this->url_slug;
@@ -94,29 +90,29 @@ class AboutusController extends Controller
 
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $short_description = $request->short_description;
-        $long_description = $request->long_description;
-        
-        $arr_data               = [];
-        $aboutus = Aboutus::find($id);
-        $path = Config::get('DocumentConstant.ABOUTUS_ADD');
+        $brands = Logo::find($id);
+        $path = Config::get('DocumentConstant.LOGO_ADD');
+        if ($request->hasFile('image'))
+        {
+            if ($brands->image)
+            {
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.LOGO_DELETE') . $brands->image);
+                if(file_exists($delete_file_eng))
+                {
+                    unlink($delete_file_eng);
+                }
 
-        if ($request->hasFile('image')) {
-            $fileName = $id."_updated.". $request->image->extension();
+            }
+
+            $fileName = $id.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
         }
-        $existingRecord = Aboutus::orderBy('id','DESC')->first();
-        $aboutus->title = $request->title;
-        $aboutus->short_description = $request->short_description;
-        $aboutus->long_description = $request->long_description;
-        $aboutus->image = $fileName;
-
-        $status = $aboutus->update();        
-        if (!empty($status))
+        $brands->image = $fileName;
+        $status = $brands->save();
+        if (!empty($brands))
         {
             Session::flash('success', 'Success! Record updated successfully.');
-            return \Redirect::to('manage_aboutus');
+            return \Redirect::to('manage_logo');
         }
         else
         {
@@ -128,17 +124,29 @@ class AboutusController extends Controller
     public function delete($id)
     {
         $id = base64_decode($id);
-        $all_data=[];
-        $certificate = Aboutus::find($id);
-        $certificate->delete();
-        return \Redirect::to('manage_aboutus');
+        try {
+            $brands = Logo::find($id);
+            if ($brands) {
+                if (file_exists(storage_path(Config::get('DocumentConstant.LOGO_DELETE') . $brands->image))) {
+                    unlink(storage_path(Config::get('DocumentConstant.LOGO_DELETE') . $brands->image));
+                }
+               
+                $brands->delete();           
+                    Session::flash('error', 'Record deleted successfully.');
+                    return \Redirect::to('manage_logo');
+            } else {
+                return null;
+            }
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 
     public function view($id)
     {
         $id = base64_decode($id);
         $arr_data = [];
-        $data1     = Aboutus::find($id);
+        $data1     = Logo::find($id);
         $data['data']      = $data1;
         $data['page_name'] = "View";
         $data['url_slug']  = $this->url_slug;

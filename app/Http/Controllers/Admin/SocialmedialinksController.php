@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use  App\Models\Socialmedialinks;
 use Validator;
 use Session;
+use Config;
 
 class SocialmedialinksController extends Controller
 {
@@ -49,6 +50,26 @@ class SocialmedialinksController extends Controller
         $socialmedialinks = new Socialmedialinks();
         $socialmedialinks->link = $request->link;
         $status = $socialmedialinks->save();
+        $last_id = $socialmedialinks->id;
+        $path = Config::get('DocumentConstant.SOCIALMEDIAICON_ADD');
+
+        if ($request->hasFile('image')) {
+
+            if ($socialmedialinks->image) {
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.SOCIALMEDIAICON_DELETE') . $socialmedialinks->image);
+                if(file_exists($delete_file_eng)){
+                    unlink($delete_file_eng);
+                }
+
+            }
+
+            $fileName = $last_id.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+        }
+           
+            $socialmedialinks = Socialmedialinks::find($last_id);
+            $socialmedialinks->image = $fileName;
+            $socialmedialinks->save();
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record added successfully.');
@@ -77,12 +98,31 @@ class SocialmedialinksController extends Controller
     {
         $link = $request->link;
         $address = $request->address;
-        
         $arr_data               = [];
         $socialmedialinks = Socialmedialinks::find($id);
+        $path = Config::get('DocumentConstant.SOCIALMEDIAICON_ADD');
+        if ($request->hasFile('image'))
+        {
+           
+            if ($socialmedialinks->image)
+            {
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.SOCIALMEDIAICON_DELETE') . $socialmedialinks->image);
+                if(file_exists($delete_file_eng))
+                {
+                    unlink($delete_file_eng);
+                }
+
+            }
+
+            $fileName = $id."_updated.". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+        }
+        
         $existingRecord = Socialmedialinks::orderBy('id','DESC')->first();
         $socialmedialinks->link = $request->link;
-        $status = $socialmedialinks->update();        
+        $socialmedialinks->image = $fileName;
+        $status = $socialmedialinks->update();     
+        // dd($status);   
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record updated successfully.');

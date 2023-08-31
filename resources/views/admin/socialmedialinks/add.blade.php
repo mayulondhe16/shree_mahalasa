@@ -42,6 +42,20 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="oldpassword">Icon<span style="color:red;" >*</span></label>
+                               <p>
+                                <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
+                               </p>
+                                <div class="input-group input-group-outline mb-3">
+                                <input type="file"  name="image" id="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                            </div>
+                        </div>
+                    </div>
+                  </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
                       </div>

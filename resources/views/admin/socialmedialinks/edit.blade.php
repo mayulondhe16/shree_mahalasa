@@ -42,6 +42,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="oldpassword">Icon<span style="color:red;" >*</span></label>
+                               <p>
+                                <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.SOCIALMEDIAICON_VIEW') }}{{ $data['image'] }}" />
+                               </p>
+                                <div class="input-group input-group-outline mb-3">
+                                <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)"  @if(empty($data['image'])) required="true" @endif>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Update</button>
                       </div>

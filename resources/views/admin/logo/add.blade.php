@@ -10,7 +10,6 @@
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">{{ $title }}</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Add {{ $title }}</li>
           </ol>
-          {{-- <h6 class="font-weight-bolder mb-0">Tables</h6> --}}
         </nav>
       </div>
     </nav>
@@ -22,35 +21,32 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 <h6 class="text-white text-capitalize ps-3" style="width:90%;float:left">Add {{ $title }}</h6>
-                {{-- <a href="{{url('/')}}/add_{{ $url_slug }}" class="btn btn-s text-white text-capitalize" style="float: right;">Add {{ $title }}</a> --}}
-
-
               </div>
             </div>
             <div class="card-body">
               <form action="{{ url('/')}}/store_{{$url_slug}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}    
-                    <div class="row">
+                <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Phone Number</label>
-                                <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="phone_no">
-                                  </div>
+                                <label for="oldpassword">Logo<span style="color:red;" >*</span></label>
+                                   <p>
+                                    <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
+                                   </p>
+                                    <div class="input-group input-group-outline mb-3">
+                                    <input type="file"  name="image" id="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                                </div>
                             </div>
                         </div>
                     </div>
+                  
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                              <label class="form-label">Address</label>
-                                <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" name="address"></textarea>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                  
+                    
+                    {{-- <div class="text-center">
+                      <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                    </div> --}}
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
                       </div>
