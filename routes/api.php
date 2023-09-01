@@ -29,6 +29,8 @@ Route::get('get_socialmedia_links', [ApiController::class, 'get_socialmedia_link
 Route::get('get_brands', [ApiController::class, 'get_brands']);
 Route::get('get_company_details', [ApiController::class, 'get_company_details']);
 Route::post('add_newsletter', [ApiController::class, 'add_newsletter']);
+Route::get('get_city', [ApiController::class, 'get_city']);
+
 
 
 

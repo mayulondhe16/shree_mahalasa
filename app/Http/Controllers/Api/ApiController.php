@@ -15,6 +15,7 @@ use  App\Models\ContactDetails;
 use  App\Models\Newsletter;
 use  App\Models\Product;
 use  App\Models\Logo;
+use  App\Models\City;
 
 
 use Illuminate\Support\Facades\File;
@@ -84,6 +85,17 @@ class ApiController extends Controller
                 $value->image =  Config::get('DocumentConstant.LOGO_VIEW').$value['image'];
             }
             return $this->responseApi($logo, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
+    public function get_city(Request $request)
+    {
+        try {
+            $city = City::get();
+            return $this->responseApi($city, 'Data get successfully', 'scuccess',200);
         } catch (\Exception $e) {
            return $this->responseApi(array(), $e->getMessage(), 'error',500);
         }
