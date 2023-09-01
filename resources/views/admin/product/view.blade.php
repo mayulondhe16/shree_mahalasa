@@ -56,6 +56,16 @@
                     @endforeach
                     </div>
                     <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="oldpassword">Thumbnail Image<span style="color:red;" >*</span></label>
+                               <p>
+                                <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.PRODUCTTHUMB_VIEW') }}{{ $data['thumbnail_image'] }}" />
+                              </p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="form-label">Product Name</label>

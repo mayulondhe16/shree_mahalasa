@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Api;
+use App\Models\ProductImages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ use  App\Models\Banner;
 use  App\Models\Contactform;
 use  App\Models\Menu;
 use  App\Models\Size;
+use  App\Models\HomeBanner;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -53,9 +55,19 @@ class ApiController extends Controller
     {
         try {
             $products = Product::get();
-            
+            $new =[];
             foreach ($products as $value) {
-                $value->image =  Config::get('DocumentConstant.PRODUCT_VIEW').$value['image'];
+                $productImages = ProductImages::where('product_id',$value->id)->get();{
+                    foreach($productImages as $pi){
+                        $res =[];
+                        $res['img'] = Config::get('DocumentConstant.PRODUCT_VIEW').$pi['image'];
+                        array_push($new,$res);
+                       
+                    }
+                }
+                $value->product_images = $new;
+                // $value->image =  Config::get('DocumentConstant.PRODUCT_VIEW').$value['image'];
+                $value->thumbnail_image =  Config::get('DocumentConstant.PRODUCTTHUMB_VIEW').$value['thumbnail_image'];
             }
             return $this->responseApi($products, 'All products data get successfully', 'scuccess',200);
         } catch (\Exception $e) {
@@ -69,8 +81,19 @@ class ApiController extends Controller
         try {
             $products = Product::where('topTrending','1')->get();
             
+            $new =[];
             foreach ($products as $value) {
-                $value->image =  Config::get('DocumentConstant.PRODUCT_VIEW').$value['image'];
+                $productImages = ProductImages::where('product_id',$value->id)->get();{
+                    foreach($productImages as $pi){
+                        $res =[];
+                        $res['img'] = Config::get('DocumentConstant.PRODUCT_VIEW').$pi['image'];
+                        array_push($new,$res);
+                       
+                    }
+                }
+                $value->product_images = $new;
+                // $value->image =  Config::get('DocumentConstant.PRODUCT_VIEW').$value['image'];
+                $value->thumbnail_image =  Config::get('DocumentConstant.PRODUCTTHUMB_VIEW').$value['thumbnail_image'];
             }
             return $this->responseApi($products, 'All products data get successfully', 'scuccess',200);
         } catch (\Exception $e) {
@@ -101,6 +124,21 @@ class ApiController extends Controller
             
             foreach ($logo as $value) {
                 $value->image =  Config::get('DocumentConstant.BANNER_VIEW').$value['image'];
+            }
+            return $this->responseApi($logo, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
+    public function get_home_banner(Request $request)
+    {
+        try {
+            $logo = HomeBanner::get();
+            
+            foreach ($logo as $value) {
+                $value->image =  Config::get('DocumentConstant.HOME_BANNER_VIEW').$value['image'];
             }
             return $this->responseApi($logo, 'Data get successfully', 'scuccess',200);
         } catch (\Exception $e) {

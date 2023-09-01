@@ -7,10 +7,18 @@ return [
     'BRAND_DELETE'	     => '/all_web_data/images/brands/',
     'BRAND_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/brands/',
 
-    
+    'PRODUCTTHUMB_ADD'	         => "/all_web_data/images/product_thumbnail/",
+    'PRODUCTTHUMB_DELETE'	     => '/all_web_data/images/product_thumbnail/',
+    'PRODUCTTHUMB_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/product_thumbnail/',
+
     'BANNER_ADD'	         => "/all_web_data/images/banner/",
     'BANNER_DELETE'	     => '/all_web_data/images/banner/',
     'BANNER_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/banner/',
+
+    'HOME_BANNER_ADD'	         => "/all_web_data/images/home_banner/",
+    'HOME_BANNER_DELETE'	     => '/all_web_data/images/home_banner/',
+    'HOME_BANNER_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/home_banner/',
+
 
 
     'LOGO_ADD'	         => "/all_web_data/images/logo/",

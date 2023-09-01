@@ -36,7 +36,7 @@
                 ?>
                
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="oldpassword">Product Images<span style="color:red;" >*</span></label>
                             <div class="row">
@@ -54,6 +54,18 @@
                               @endif
                             </div>   
                     </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="oldpassword">Thumbnail Image<span style="color:red;" >*</span></label>
+                         <p>
+                          <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.PRODUCTTHUMB_VIEW') }}{{ $data['thumbnail_image'] }}" />
+                        </p>
+                          <div class="input-group input-group-outline mb-3">
+                          <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                      </div>
+                  </div>
+              </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">

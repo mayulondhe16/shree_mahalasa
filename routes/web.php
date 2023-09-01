@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\HomeBannerController;
 
 
 
@@ -163,6 +164,14 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/edit_banner/{id}',		 		[BannerController::class, 'edit']);
 	Route::post('/update_banner/{id}',		 	[BannerController::class, 'update']);
 	Route::get('/delete_banner/{id}',		 		[BannerController::class, 'delete']);
+
+	Route::get('/manage_homebanner',		 			[HomeBannerController::class, 'index']);
+	Route::get('/add_homebanner',		 				[HomeBannerController::class, 'add']);
+	Route::post('/store_homebanner',		 			[HomeBannerController::class, 'store']);
+	Route::get('/view_homebanner/{id}',	 			[HomeBannerController::class, 'view']);
+	Route::get('/edit_homebanner/{id}',		 		[HomeBannerController::class, 'edit']);
+	Route::post('/update_homebanner/{id}',		 	[HomeBannerController::class, 'update']);
+	Route::get('/delete_homebanner/{id}',		 		[HomeBannerController::class, 'delete']);
 
 	Route::get('/manage_menu',		 			[MenuController::class, 'index']);
 	Route::get('/add_menu',		 				[MenuController::class, 'add']);

@@ -50,7 +50,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required',
+            'images' => 'required',
         ]);
 
         if ($validator->fails()) 
@@ -64,10 +64,32 @@ class ProductsController extends Controller
         $product->brand_id = $request->brand_id;
         $product->description = $request->description;
         $product->save();
+        $last_id = $product->id;
+        $path = Config::get('DocumentConstant.PRODUCTTHUMB_ADD');
+        $image = $request->file('image');
+        if ($request->hasFile('image')) {
+          
+            if ($product->image){
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.PRODUCTTHUMB_DELETE') . $product->thumbnail_image);
+                if(file_exists($delete_file_eng)){
+                    unlink($delete_file_eng);
+                }
+
+            }
+
+            $fileName = $last_id.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+                $shop = Product::find($last_id);
+                $shop->thumbnail_image = $fileName;
+                $shop->save();
+            
+           
+        }
+       
         if(!empty($product))
         {
            
-            $images = $request->file('image');
+            $images = $request->file('images');
             if($images)
             {
                
