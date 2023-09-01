@@ -49,6 +49,7 @@ class SocialmedialinksController extends Controller
         }
         $socialmedialinks = new Socialmedialinks();
         $socialmedialinks->link = $request->link;
+        $socialmedialinks->title = $request->title;
         $status = $socialmedialinks->save();
         $last_id = $socialmedialinks->id;
         $path = Config::get('DocumentConstant.SOCIALMEDIAICON_ADD');
@@ -116,11 +117,13 @@ class SocialmedialinksController extends Controller
 
             $fileName = $id."_updated.". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
+            $socialmedialinks->image = $fileName;
+
         }
         
         $existingRecord = Socialmedialinks::orderBy('id','DESC')->first();
         $socialmedialinks->link = $request->link;
-        $socialmedialinks->image = $fileName;
+        $socialmedialinks->title = $request->title;
         $status = $socialmedialinks->update();     
         // dd($status);   
         if (!empty($status))

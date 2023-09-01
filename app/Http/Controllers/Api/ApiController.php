@@ -16,6 +16,7 @@ use  App\Models\Newsletter;
 use  App\Models\Product;
 use  App\Models\Logo;
 use  App\Models\City;
+use  App\Models\Shops;
 
 
 use Illuminate\Support\Facades\File;
@@ -96,6 +97,21 @@ class ApiController extends Controller
         try {
             $city = City::get();
             return $this->responseApi($city, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
+
+    public function get_counts(Request $request)
+    {
+        try {
+            $products = Product::count();
+            $shops = Shops::count();
+            $brands = Brands::count();
+            return response()->json(['Total_shops'=>$shops,'Total_products'=>$products,'total_brands'=>$brands,'status' => 'Success', 'message' => 'Fetched All Data Successfully','StatusCode'=>'200']);
+
         } catch (\Exception $e) {
            return $this->responseApi(array(), $e->getMessage(), 'error',500);
         }

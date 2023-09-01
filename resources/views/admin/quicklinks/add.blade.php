@@ -29,7 +29,17 @@
             </div>
             <div class="card-body">
               <form action="{{ url('/')}}/store_{{$url_slug}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
-                {!! csrf_field() !!}    
+                {!! csrf_field() !!} 
+                <div class="row">
+                  <div class="col-md-8">
+                      <div class="form-group">
+                        <label class="form-label">Title</label><span style="color:red;" >*</span>
+                          <div class="input-group input-group-outline mb-3">
+                              <input type="text" class="form-control" name="title"  data-parsley-error-message="Please enter valid title." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
+                            </div>
+                      </div>
+                  </div>
+              </div>   
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">

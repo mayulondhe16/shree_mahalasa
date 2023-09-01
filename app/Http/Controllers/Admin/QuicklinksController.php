@@ -48,6 +48,7 @@ class QuicklinksController extends Controller
         }
         $quicklinks = new Quicklinks();
         $quicklinks->link = $request->link;
+        $quicklinks->title = $request->title;
         $status = $quicklinks->save();
         if (!empty($status))
         {
@@ -82,6 +83,7 @@ class QuicklinksController extends Controller
         $quicklinks = Quicklinks::find($id);
         $existingRecord = Quicklinks::orderBy('id','DESC')->first();
         $quicklinks->link = $request->link;
+        $quicklinks->title = $request->title;
         $status = $quicklinks->update();        
         if (!empty($status))
         {

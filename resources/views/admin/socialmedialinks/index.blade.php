@@ -39,6 +39,7 @@
                   <thead>
                     <tr>
                       <th>Sr No</th>
+                      <th>Title</th>
                       <th>Links</th>
                       <th>Action</th>
                     </tr>
@@ -49,6 +50,7 @@
                         <td>
                           {{$key+1}}
                         </td>
+                        <td>{{ $value->title }}</td>
                         <td>
                           {{$value->link}}
                         </td>
