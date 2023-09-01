@@ -41,6 +41,21 @@
                         </div>
                     </div>
                     <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Main Category</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                  <select class="form-control" id="main_category" name="main_category" data-parsley-error-message="Please select category." required="true">
+                                    <option value="">Select Category</option>
+                                    @foreach($main_category as $val)
+                                    <option value="{{$val->id}}"  @if($data->main_category==$val->id) selected @endif>{{$val->title}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class="form-label">Title</label>

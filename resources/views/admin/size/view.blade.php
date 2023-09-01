@@ -33,15 +33,15 @@
                 <div class="row">
                       <div class="col-md-8">
                         <div class="form-group">
-                          <label class="form-label">Shade Name</label>
+                          <label class="form-label">Name</label>
                             <div class="input-group input-group-outline mb-3">
-                                <input type="text" class="form-control" readonly name="shade_name" value="{{ $data['shade_name'] }}">
+                                <input type="text" class="form-control" readonly name="name" value="{{ $data['name'] }}">
                               </div>
                         </div>
                     </div>
                     </div>
                     <div class="box-footer">
-                      <a href="{{url('/')}}/manage_shade" type="submit" class="btn btn-primary pull-right">Back</a>
+                      <a href="{{url('/')}}/manage_menu" type="submit" class="btn btn-primary pull-right">Back</a>
                   </div>
                   </form>
             </div>

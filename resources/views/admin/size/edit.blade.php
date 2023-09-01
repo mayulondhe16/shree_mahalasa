@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">{{ $title }}</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">View {{ $title }}</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Edit {{ $title }}</li>
           </ol>
           {{-- <h6 class="font-weight-bolder mb-0">Tables</h6> --}}
         </nav>
@@ -21,7 +21,7 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3" style="width:90%;float:left">View {{ $title }}</h6>
+                <h6 class="text-white text-capitalize ps-3" style="width:90%;float:left">Edit {{ $title }}</h6>
                 {{-- <a href="{{url('/')}}/add_{{ $url_slug }}" class="btn btn-s text-white text-capitalize" style="float: right;">Add {{ $title }}</a> --}}
 
 
@@ -33,16 +33,16 @@
                 <div class="row">
                       <div class="col-md-8">
                         <div class="form-group">
-                          <label class="form-label">Shade Name</label>
+                          <label class="form-label">Name</label><span style="color:red;" >*</span>
                             <div class="input-group input-group-outline mb-3">
-                                <input type="text" class="form-control" readonly name="shade_name" value="{{ $data['shade_name'] }}">
+                                <input type="text" class="form-control" name="name" value="{{ $data['name'] }}"  data-parsley-error-message="Please enter valid name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                               </div>
                         </div>
                     </div>
                     </div>
                     <div class="box-footer">
-                      <a href="{{url('/')}}/manage_shade" type="submit" class="btn btn-primary pull-right">Back</a>
-                  </div>
+                        <button type="submit" class="btn btn-primary" style="float: right">Update</button>
+                      </div>
                   </form>
             </div>
           </div>

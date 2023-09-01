@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\MainCategoryController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\SizeController;
 
 
 
@@ -161,6 +163,22 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/edit_banner/{id}',		 		[BannerController::class, 'edit']);
 	Route::post('/update_banner/{id}',		 	[BannerController::class, 'update']);
 	Route::get('/delete_banner/{id}',		 		[BannerController::class, 'delete']);
+
+	Route::get('/manage_menu',		 			[MenuController::class, 'index']);
+	Route::get('/add_menu',		 				[MenuController::class, 'add']);
+	Route::post('/store_menu',		 			[MenuController::class, 'store']);
+	Route::get('/view_menu/{id}',	 			[MenuController::class, 'view']);
+	Route::get('/edit_menu/{id}',		 		[MenuController::class, 'edit']);
+	Route::post('/update_menu/{id}',		 	[MenuController::class, 'update']);
+	Route::get('/delete_menu/{id}',		 		[MenuController::class, 'delete']);
+
+	Route::get('/manage_size',		 			[SizeController::class, 'index']);
+	Route::get('/add_size',		 				[SizeController::class, 'add']);
+	Route::post('/store_size',		 			[SizeController::class, 'store']);
+	Route::get('/view_size/{id}',	 			[SizeController::class, 'view']);
+	Route::get('/edit_size/{id}',		 		[SizeController::class, 'edit']);
+	Route::post('/update_size/{id}',		 	[SizeController::class, 'update']);
+	Route::get('/delete_size/{id}',		 		[SizeController::class, 'delete']);
 	
 });
 

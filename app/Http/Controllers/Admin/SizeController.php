@@ -5,25 +5,24 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use  App\Models\Location;
-use  App\Models\City;
+use  App\Models\Size;
 use Validator;
 use Session;
 
-class LocationController extends Controller
+class SizeController extends Controller
 {
-    public function __construct(Location $Location)
+    public function __construct(Size $Size)
     {
         $data               = [];
-        $this->title        = "Location";
-        $this->url_slug     = "location";
-        $this->folder_path  = "admin/location/";
+        $this->title        = "Size";
+        $this->url_slug     = "size";
+        $this->folder_path  = "admin/size/";
     }
     public function index(Request $request)
     {
-        $contactdetails = Location::orderBy('id','desc')->get();
+        $Size = Size::orderBy('id','DESC')->get();
 
-        $data['data']      = $contactdetails;
+        $data['data']      = $Size;
         $data['page_name'] = "Manage";
         $data['url_slug']  = $this->url_slug;
         $data['title']     = $this->title;
@@ -31,8 +30,6 @@ class LocationController extends Controller
     }
     public function add()
     {
-        $data['city'] = City::orderBy('id','desc')->groupBy('city_name')->get();
-
         $data['page_name'] = "Add";
         $data['title']     = $this->title;
         $data['url_slug']  = $this->url_slug;
@@ -42,28 +39,21 @@ class LocationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             // 'link'         => 'required',
-            'title' => 'required',
-            'city_id' => 'required',
+            'name' => 'required',
         ]);
 
         if ($validator->fails()) 
         {
             return $validator->errors()->all();
         }
-        $contactdetails = new Location();
-        $contactdetails->title = $request->title;
-        $contactdetails->shop_name = $request->shop_name;
-        $contactdetails->city_id = $request->city_id;
-        $contactdetails->mobile_no1 = $request->mobile_no1;
-        $contactdetails->mobile_no2 = $request->mobile_no2;
-        $contactdetails->address = $request->address;
-        $contactdetails->lat = $request->lat;
-        $contactdetails->long = $request->long;
-        $status = $contactdetails->save();
+        $Size = new Size();
+        $arr_data               = [];
+        $Size->name = $request->name;
+        $status = $Size->save();
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record added successfully.');
-            return \Redirect::to('manage_location');
+            return \Redirect::to('manage_size');
         }
         else
         {
@@ -76,8 +66,7 @@ class LocationController extends Controller
     {
         $id = base64_decode($id);
         $arr_data = [];
-        $data1     = Location::find($id);
-        $data['city'] = City::orderBy('id','desc')->groupBy('city_name')->get();
+        $data1     = Size::find($id);
         $data['data']      = $data1;
         $data['page_name'] = "Edit";
         $data['url_slug']  = $this->url_slug;
@@ -87,25 +76,15 @@ class LocationController extends Controller
 
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $city_id = $request->city_id;
-        
+      
         $arr_data               = [];
-        $contactdetails = Location::find($id);
-        $existingRecord = Location::orderBy('id','DESC')->first();
-        $contactdetails->title = $request->title;
-        $contactdetails->shop_name = $request->shop_name;
-        $contactdetails->city_id = $request->city_id;
-        $contactdetails->mobile_no1 = $request->mobile_no1;
-        $contactdetails->mobile_no2 = $request->mobile_no2;
-        $contactdetails->address = $request->address;
-        $contactdetails->lat = $request->lat;
-        $contactdetails->long = $request->long;
-        $status = $contactdetails->update();        
+        $Size = Size::find($id);
+        $Size->name = $request->name;
+        $status = $Size->update();   
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record updated successfully.');
-            return \Redirect::to('manage_location');
+            return \Redirect::to('manage_size');
         }
         else
         {
@@ -118,18 +97,17 @@ class LocationController extends Controller
     {
         $id = base64_decode($id);
         $all_data=[];
-        $certificate = Location::find($id);
+        $certificate = Size::find($id);
         $certificate->delete();
-        return \Redirect::to('manage_location');
+        Session::flash('error', 'Record deleted successfully.');
+        return \Redirect::to('manage_size');
     }
 
     public function view($id)
     {
         $id = base64_decode($id);
         $arr_data = [];
-        $data['city'] = City::orderBy('id','desc')->groupBy('city_name')->get();
-
-        $data1     = Location::find($id);
+        $data1     = Size::find($id);
         $data['data']      = $data1;
         $data['page_name'] = "View";
         $data['url_slug']  = $this->url_slug;

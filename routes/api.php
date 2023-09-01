@@ -22,7 +22,7 @@ Route::get('get_trending_products', [ApiController::class, 'get_trending_product
 Route::get('get_topseller_products', [ApiController::class, 'get_topseller_products']);
 Route::get('get_logo', [ApiController::class, 'get_logo']);
 
-Route::get('get_subcategory', [ApiController::class, 'get_subcategory']);
+Route::get('get_subcategory/{id}', [ApiController::class, 'get_subcategory']);
 Route::get('get_aboutus', [ApiController::class, 'get_aboutus']);
 Route::get('get_quick_links', [ApiController::class, 'get_quick_links']);
 Route::get('get_socialmedia_links', [ApiController::class, 'get_socialmedia_links']);
@@ -31,9 +31,12 @@ Route::get('get_company_details', [ApiController::class, 'get_company_details'])
 Route::post('add_newsletter', [ApiController::class, 'add_newsletter']);
 Route::get('get_city', [ApiController::class, 'get_city']);
 Route::get('get_counts', [ApiController::class, 'get_counts']);
-Route::get('get_location', [ApiController::class, 'get_location']);
+Route::get('get_location/{id}', [ApiController::class, 'get_location']);
 Route::get('get_location_details/{id}', [ApiController::class, 'get_location_details']);
-Route::get('get_banner', [ApiController::class, 'get_banner']);
+Route::get('get_banner/{id}', [ApiController::class, 'get_banner']);
+Route::post('add_contactform', [ApiController::class, 'add_contactform']);
+Route::get('get_menu', [ApiController::class, 'get_menu']);
+Route::get('get_size', [ApiController::class, 'get_size']);
 
 
 

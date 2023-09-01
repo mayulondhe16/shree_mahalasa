@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,14 +17,15 @@ use  App\Models\City;
 use  App\Models\Shops;
 use  App\Models\Location;
 use  App\Models\Banner;
-
-
-
+use  App\Models\Contactform;
+use  App\Models\Menu;
+use  App\Models\Size;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use Session;
 use Config;
+
 
 class ApiController extends Controller
 {
@@ -95,10 +94,10 @@ class ApiController extends Controller
        
     }
 
-    public function get_banner(Request $request)
+    public function get_banner(Request $request,$id)
     {
         try {
-            $logo = Banner::get();
+            $logo = Banner::where('category_id',$id)->get();
             
             foreach ($logo as $value) {
                 $value->image =  Config::get('DocumentConstant.BANNER_VIEW').$value['image'];
@@ -120,11 +119,35 @@ class ApiController extends Controller
         }
        
     }
-
-    public function get_location(Request $request)
+    public function get_menu(Request $request)
     {
         try {
-            $location = Location::get();
+            $menu = Menu::get();
+            return $this->responseApi($menu, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+    public function get_size(Request $request)
+    {
+        try {
+            $size = Size::get();
+            return $this->responseApi($size, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
+    public function get_location(Request $request,$id)
+    {
+        try {
+            $location = Location::where('city_id',$id)->get();
+            foreach ($location as $value) {
+                $city = City::where('id',$value->city_id)->first();
+                $value->city = $city['city_name'];
+            }
             return $this->responseApi($location, 'Data get successfully', 'scuccess',200);
         } catch (\Exception $e) {
            return $this->responseApi(array(), $e->getMessage(), 'error',500);
@@ -173,10 +196,10 @@ class ApiController extends Controller
        
     }
 
-    public function get_subcategory(Request $request)
+    public function get_subcategory(Request $request,$id)
     {
         try {
-            $category = Category::get();
+            $category = Category::where('main_category',$id)->get();
             
             foreach ($category as $value) {
                 $value->image =  Config::get('DocumentConstant.CATEGORY_VIEW').$value['image'];
@@ -283,6 +306,31 @@ class ApiController extends Controller
         $newsletter = new Newsletter();
         $newsletter->email = $request->email;
         $status = $newsletter->save();
+        return $this->responseApi([], 'All data get successfully', 'scuccess',200);
+
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+    }
+
+    public function add_contactform(Request $request)
+    {
+        try {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+        ]);
+
+        if ($validator->fails()) 
+        {
+            return $validator->errors()->all();
+        }
+        $contactform = new Contactform();
+        $contactform->full_name = $request->full_name;
+        $contactform->email = $request->email;
+        $contactform->mobile_no = $request->mobile_no;
+        $contactform->gender = $request->gender;
+        $contactform->message = $request->email;
+        $status = $contactform->save();
         return $this->responseApi([], 'All data get successfully', 'scuccess',200);
 
         } catch (\Exception $e) {

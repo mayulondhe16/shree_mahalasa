@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\Category;
+use  App\Models\MainCategory;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -24,8 +25,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $Category = Category::orderBy('id','DESC')->get();
-
-        $data['data']      = $Category;
+        $data['data'] =$Category;
         $data['page_name'] = "Manage";
         $data['url_slug']  = $this->url_slug;
         $data['title']     = $this->title;
@@ -33,7 +33,9 @@ class CategoryController extends Controller
     }
     public function add()
     {
+        $data['main_category'] = MainCategory::orderBy('title','desc')->groupBy('title')->get();
         $data['page_name'] = "Add";
+        $data['category'] = "Add";
         $data['title']     = $this->title;
         $data['url_slug']  = $this->url_slug;
         return view($this->folder_path.'add',$data);
@@ -51,6 +53,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->title = $request->title;
         $category->description = $request->description;
+        $category->main_category = $request->main_category;
         $status = $category->save();
         $last_id = $category->id;
         $path = Config::get('DocumentConstant.CATEGORY_ADD');
@@ -88,6 +91,7 @@ class CategoryController extends Controller
         $id = base64_decode($id);
         $arr_data = [];
         $data1     = Category::find($id);
+        $data['main_category'] = MainCategory::orderBy('title','desc')->groupBy('title')->get();
         $data['data']      = $data1;
         $data['page_name'] = "Edit";
         $data['url_slug']  = $this->url_slug;
@@ -123,6 +127,7 @@ class CategoryController extends Controller
            
         } 
         $category->title = $request->title;
+        $category->main_category = $request->main_category;
         $category->description = $request->description;
         $status = $category->save();
         if (!empty($status))
@@ -163,6 +168,8 @@ class CategoryController extends Controller
     {
         $id = base64_decode($id);
         $arr_data = [];
+        $data['main_category'] = MainCategory::orderBy('title','desc')->groupBy('title')->get();
+
         $data1     = Category::find($id);
         $data['data']      = $data1;
         $data['page_name'] = "View";

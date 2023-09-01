@@ -90,11 +90,31 @@
                             <div class="form-group">
                               <label class="form-label">Address<span style="color:red;" >*</span></label>
                                 <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" name="address" required></textarea>
+                                  <textarea  class="form-control" name="address" required></textarea>
                                   </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                          <div class="form-group">
+                            <label class="form-label">Latitude<span style="color:red;" >*</span></label>
+                              <div class="input-group input-group-outline mb-3">
+                                <input type="text" required class="form-control" name="long" required data-parsley-error-message="Please enter valid Longitude." data-parsley-pattern="^[0-9 .]+$">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                          <label class="form-label">Longitude<span style="color:red;" >*</span></label>
+                            <div class="input-group input-group-outline mb-3">
+                              <input type="text" required class="form-control" name="lat" required data-parsley-error-message="Please enter valid contact latitude." data-parsley-pattern="^[0-9 .]+$">
+                              </div>
+                        </div>
+                    </div>
+                </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
                       </div>
