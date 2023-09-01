@@ -17,6 +17,9 @@ use  App\Models\Product;
 use  App\Models\Logo;
 use  App\Models\City;
 use  App\Models\Shops;
+use  App\Models\Location;
+use  App\Models\Banner;
+
 
 
 use Illuminate\Support\Facades\File;
@@ -92,11 +95,48 @@ class ApiController extends Controller
        
     }
 
+    public function get_banner(Request $request)
+    {
+        try {
+            $logo = Banner::get();
+            
+            foreach ($logo as $value) {
+                $value->image =  Config::get('DocumentConstant.BANNER_VIEW').$value['image'];
+            }
+            return $this->responseApi($logo, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
     public function get_city(Request $request)
     {
         try {
             $city = City::get();
             return $this->responseApi($city, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
+    public function get_location(Request $request)
+    {
+        try {
+            $location = Location::get();
+            return $this->responseApi($location, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
+    public function get_location_details(Request $request,$id)
+    {
+        try {
+            $location = Location::where('id',$id)->get();
+            return $this->responseApi($location, 'Data get successfully', 'scuccess',200);
         } catch (\Exception $e) {
            return $this->responseApi(array(), $e->getMessage(), 'error',500);
         }

@@ -31,6 +31,10 @@ Route::get('get_company_details', [ApiController::class, 'get_company_details'])
 Route::post('add_newsletter', [ApiController::class, 'add_newsletter']);
 Route::get('get_city', [ApiController::class, 'get_city']);
 Route::get('get_counts', [ApiController::class, 'get_counts']);
+Route::get('get_location', [ApiController::class, 'get_location']);
+Route::get('get_location_details/{id}', [ApiController::class, 'get_location_details']);
+Route::get('get_banner', [ApiController::class, 'get_banner']);
+
 
 
 

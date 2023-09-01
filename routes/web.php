@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\MainCategoryController;
+use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\BannerController;
 
 
 
@@ -143,6 +145,22 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/edit_main_category/{id}',		 		[MainCategoryController::class, 'edit']);
 	Route::post('/update_main_category/{id}',		 	[MainCategoryController::class, 'update']);
 	Route::get('/delete_main_category/{id}',		 		[MainCategoryController::class, 'delete']);
+
+	Route::get('/manage_location',		 			[LocationController::class, 'index']);
+	Route::get('/add_location',		 				[LocationController::class, 'add']);
+	Route::post('/store_location',		 			[LocationController::class, 'store']);
+	Route::get('/view_location/{id}',	 			[LocationController::class, 'view']);
+	Route::get('/edit_location/{id}',		 		[LocationController::class, 'edit']);
+	Route::post('/update_location/{id}',		 	[LocationController::class, 'update']);
+	Route::get('/delete_location/{id}',		 		[LocationController::class, 'delete']);
+
+	Route::get('/manage_banner',		 			[BannerController::class, 'index']);
+	Route::get('/add_banner',		 				[BannerController::class, 'add']);
+	Route::post('/store_banner',		 			[BannerController::class, 'store']);
+	Route::get('/view_banner/{id}',	 			[BannerController::class, 'view']);
+	Route::get('/edit_banner/{id}',		 		[BannerController::class, 'edit']);
+	Route::post('/update_banner/{id}',		 	[BannerController::class, 'update']);
+	Route::get('/delete_banner/{id}',		 		[BannerController::class, 'delete']);
 	
 });
 

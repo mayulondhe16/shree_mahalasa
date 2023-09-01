@@ -25,6 +25,16 @@
             <span class="nav-link-text ms-1">Logo</span>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_banner' || Request::segment(1)=='add_banner' || Request::segment(1)=='edit_banner' || Request::segment(1)=='view_banner') active @endif" href="{{url('/')}}/manage_banner">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Banner</span>
+          </a>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_brands' || Request::segment(1)=='add_brand' || Request::segment(1)=='edit_brand' || Request::segment(1)=='view_brand') active @endif" href="{{url('/')}}/manage_brands">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -40,6 +50,14 @@
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">City</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_location' || Request::segment(1)=='add_location' || Request::segment(1)=='edit_location' || Request::segment(1)=='view_location') active @endif" href="{{url('/')}}/manage_location">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Location</span>
           </a>
         </li>
         <li class="nav-item">

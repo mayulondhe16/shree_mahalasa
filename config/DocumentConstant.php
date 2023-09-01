@@ -7,6 +7,11 @@ return [
     'BRAND_DELETE'	     => '/all_web_data/images/brands/',
     'BRAND_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/brands/',
 
+    
+    'BANNER_ADD'	         => "/all_web_data/images/banner/",
+    'BANNER_DELETE'	     => '/all_web_data/images/banner/',
+    'BANNER_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/banner/',
+
 
     'LOGO_ADD'	         => "/all_web_data/images/logo/",
     'LOGO_DELETE'	     => '/all_web_data/images/logo/',
