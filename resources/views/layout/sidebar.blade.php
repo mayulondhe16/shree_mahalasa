@@ -171,7 +171,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_contactus' || Request::segment(1)=='add_contactus' || Request::segment(1)=='edit_contactus' || Request::segment(1)=='view_contactus') active @endif"  href="{{url('/')}}/contactus">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_contactus' || Request::segment(1)=='add_contactus' || Request::segment(1)=='edit_contactus' || Request::segment(1)=='view_contactus') active @endif"  href="{{url('/')}}/manage_contactus">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
