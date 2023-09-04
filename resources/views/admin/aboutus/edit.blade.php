@@ -38,7 +38,7 @@
                               <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.ABOUTUS_VIEW') }}{{ $data['image'] }}" />
                              </p>
                               <div class="input-group input-group-outline mb-3">
-                              <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)"  @if(empty($data['image'])) required="true" @endif>
+                              <input type="file"  name="image" id="image" accept="image/*" onchange="preview_image(event,1)"  @if(empty($data['image'])) required="true" @endif>
                           </div>
                       </div>
                   </div>

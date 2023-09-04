@@ -284,7 +284,7 @@
   //  });
    function preview_image(event,id) 
     {   
-     
+    
         var input_id = event.target.id
         var fileInput = document.getElementById(input_id);
         //var filePath = event.path[0].files[0].name;

@@ -102,8 +102,17 @@ class AboutusController extends Controller
         $aboutus = Aboutus::find($id);
         $path = Config::get('DocumentConstant.ABOUTUS_ADD');
 
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+    
+        for ($i = 0; $i < 10; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+ 
+
         if ($request->hasFile('image')) {
-            $fileName = $id."_updated.". $request->image->extension();
+            $fileName = $randomString."_updated.". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
         }
         $existingRecord = Aboutus::orderBy('id','DESC')->first();
