@@ -50,13 +50,58 @@ class ApiController extends Controller
         }
        
     }
-
-    public function get_products(Request $request)
+    public function get_products(Request $request, $id)
     {
         try {
-            $products = Product::get();
+            // Retrieve products based on the category_id
+            $products = Product::where('category_id', $id)->get();
+    
+            // Initialize an array to store the results
+            $result = [];
+    
+            foreach ($products as $value) {
+                // Retrieve the category title for each product
+                $category = Category::find($value->category_id);
+                $value->category = $category ? $category->title : '';
+    
+                // Retrieve the brand title for each product
+                $brand = Brands::find($value->brand_id);
+                $value->brands = $brand ? $brand->title : '';
+    
+                // Retrieve product images for each product
+                $productImages = ProductImages::where('product_id', $value->id)->get();
+                $images = [];
+    
+                foreach ($productImages as $pi) {
+                    $images[] = Config::get('DocumentConstant.PRODUCT_VIEW') . $pi->image;
+                }
+    
+                $value->product_images = $images;
+    
+                // Format other fields as needed
+                $value->thumbnail_image = Config::get('DocumentConstant.PRODUCTTHUMB_VIEW') . $value->thumbnail_image;
+    
+                // Add the product to the result array
+                $result[] = $value;
+            }
+    
+            // Return the result array as a JSON response
+            return $this->responseApi($result, 'All products data get successfully', 'success', 200);
+        } catch (\Exception $e) {
+            return $this->responseApi([], $e->getMessage(), 'error', 500);
+        }
+    }
+    
+   public function get_products_details(Request $request, $id)
+    {
+        try {
+            $products = Product::where('id',$id)->get();
             $new =[];
             foreach ($products as $value) {
+                // Retrieve the brand title for each product
+                $brand = Brands::find($value->brand_id);
+                $value->brands = $brand ? $brand->title : '';
+                
                 $productImages = ProductImages::where('product_id',$value->id)->get();{
                     foreach($productImages as $pi){
                         $res =[];
@@ -75,6 +120,30 @@ class ApiController extends Controller
         }
        
     }
+    // public function get_products(Request $request)
+    // {
+    //     try {
+    //         $products = Product::get();
+    //         $new =[];
+    //         foreach ($products as $value) {
+    //             $productImages = ProductImages::where('product_id',$value->id)->get();{
+    //                 foreach($productImages as $pi){
+    //                     $res =[];
+    //                     $res['img'] = Config::get('DocumentConstant.PRODUCT_VIEW').$pi['image'];
+    //                     array_push($new,$res);
+                       
+    //                 }
+    //             }
+    //             $value->product_images = $new;
+    //             // $value->image =  Config::get('DocumentConstant.PRODUCT_VIEW').$value['image'];
+    //             $value->thumbnail_image =  Config::get('DocumentConstant.PRODUCTTHUMB_VIEW').$value['thumbnail_image'];
+    //         }
+    //         return $this->responseApi($products, 'All products data get successfully', 'scuccess',200);
+    //     } catch (\Exception $e) {
+    //        return $this->responseApi(array(), $e->getMessage(), 'error',500);
+    //     }
+       
+    // }
 
     public function get_trending_products(Request $request)
     {
@@ -238,8 +307,11 @@ class ApiController extends Controller
     {
         try {
             $category = Category::where('main_category',$id)->get();
+           
             
             foreach ($category as $value) {
+                $maincategory = MainCategory::find($value->main_category);
+                $value->maincategory = $maincategory ? $maincategory->title : '';
                 $value->image =  Config::get('DocumentConstant.CATEGORY_VIEW').$value['image'];
             }
             return $this->responseApi($category, 'All category data get successfully', 'scuccess',200);

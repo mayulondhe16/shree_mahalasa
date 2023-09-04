@@ -17,7 +17,8 @@ use App\Http\Controllers\Api\ApiController;
 */
 
 Route::get('get_maincategory', [ApiController::class, 'get_maincategory']);
-Route::get('get_products', [ApiController::class, 'get_products']);
+Route::get('get_products/{id}', [ApiController::class, 'get_products']);
+Route::get('get_products_details/{id}', [ApiController::class, 'get_products_details']);
 Route::get('get_trending_products', [ApiController::class, 'get_trending_products']);
 Route::get('get_topseller_products', [ApiController::class, 'get_topseller_products']);
 Route::get('get_logo', [ApiController::class, 'get_logo']);
