@@ -118,6 +118,9 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/delete_socialmedialinks/{id}',		 		[SocialmedialinksController::class, 'delete']);
 
 	Route::get('/manage_newsletter',		 			[NewsletterController::class, 'index']);
+	Route::get('/manage_contactus',		 			[NewsletterController::class, 'manage_contactus']);
+	Route::get('/delete_contactus/{id}',		 			[NewsletterController::class, 'delete_contactus']);
+
 
 	Route::get('/manage_products',		 			[ProductsController::class, 'index']);
 	Route::get('/add_products',		 				[ProductsController::class, 'add']);

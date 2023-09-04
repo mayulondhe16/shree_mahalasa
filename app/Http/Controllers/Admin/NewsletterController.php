@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\Newsletter;
+use  App\Models\Contactform;
+
 use Validator;
 use Session;
 
@@ -28,6 +30,19 @@ class NewsletterController extends Controller
         $data['title']     = $this->title;
         return view($this->folder_path.'index',$data);
     }
+
+    public function manage_contactus(Request $request)
+    {
+        $newsletter = Contactform::get();
+
+        $data['data']      = $newsletter;
+        $data['page_name'] = "Manage";
+        $data['url_slug']  = $this->url_slug;
+        $data['title']     = $this->title;
+        return view($this->folder_path.'manage_contactus',$data);
+    }
+
+    
     // public function add()
     // {
     //     $data['page_name'] = "Add";
@@ -95,14 +110,14 @@ class NewsletterController extends Controller
     //     }
     // }
 
-    // public function delete($id)
-    // {
-    //     $id = base64_decode($id);
-    //     $all_data=[];
-    //     $certificate = Quicklinks::find($id);
-    //     $certificate->delete();
-    //     return \Redirect::to('manage_quicklinks');
-    // }
+    public function delete_contactus($id)
+    {
+        $id = base64_decode($id);
+        $all_data=[];
+        $certificate = Contactform::find($id);
+        $certificate->delete();
+        return \Redirect::to('manage_contactus');
+    }
 
     // public function view($id)
     // {
