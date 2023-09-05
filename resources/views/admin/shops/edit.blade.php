@@ -77,22 +77,22 @@
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label class="form-label">Latitude</label>
+                    <label class="form-label">Link</label>
                       <div class="input-group input-group-outline mb-3">
-                          <input type="text" class="form-control" name="lat" value={{ $data['lat'] }}>
+                          <input type="text" class="form-control" name="link" value={{ $data['link'] }}>
                         </div>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">Longitude</label>
                       <div class="input-group input-group-outline mb-3">
                           <input type="text" class="form-control" name="long"  value={{ $data['long'] }}>
                         </div>
                   </div>
-                </div>
+                </div> --}}
                 <div class="col-md-4">
                   <div class="form-group">
                     <label class="form-label">City</label>

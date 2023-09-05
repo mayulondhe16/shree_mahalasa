@@ -57,8 +57,7 @@ class LocationController extends Controller
         $contactdetails->mobile_no1 = $request->mobile_no1;
         $contactdetails->mobile_no2 = $request->mobile_no2;
         $contactdetails->address = $request->address;
-        $contactdetails->lat = $request->lat;
-        $contactdetails->long = $request->long;
+        $contactdetails->link = $request->link;
         $status = $contactdetails->save();
         if (!empty($status))
         {
@@ -99,8 +98,7 @@ class LocationController extends Controller
         $contactdetails->mobile_no1 = $request->mobile_no1;
         $contactdetails->mobile_no2 = $request->mobile_no2;
         $contactdetails->address = $request->address;
-        $contactdetails->lat = $request->lat;
-        $contactdetails->long = $request->long;
+        $contactdetails->link = $request->link;
         $status = $contactdetails->update();        
         if (!empty($status))
         {

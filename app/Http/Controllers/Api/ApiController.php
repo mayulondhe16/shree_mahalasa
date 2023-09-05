@@ -294,7 +294,7 @@ class ApiController extends Controller
             $products = Product::where('topSelling','1')->get();
             
             foreach ($products as $value) {
-                $value->image =  Config::get('DocumentConstant.PRODUCT_VIEW').$value['image'];
+                $value->thumbnail_image =  Config::get('DocumentConstant.PRODUCTTHUMB_VIEW').$value['thumbnail_image'];
             }
             return $this->responseApi($products, 'All products data get successfully', 'scuccess',200);
         } catch (\Exception $e) {

@@ -58,8 +58,7 @@ class ShopController extends Controller
         $shops->mobile_no =  $request->mobile_no;
         $shops->contact_person =  $request->contact_person;
         $shops->map_link =  $request->map_link;
-        $shops->lat =  $request->lat;
-        $shops->long =  $request->long;
+        $shops->link =  $request->link;
         $shops->city =  $request->city;
         $shops->description =  $request->description;
         $shopstatus = $shops->save();
@@ -168,8 +167,7 @@ class ShopController extends Controller
         }   
         $shops->name =  $request->name;
         $shops->address =  $request->address;
-        $shops->lat =  $request->lat;
-        $shops->long =  $request->long;
+        $shops->link =  $request->link;
         $shops->city =  $request->city;
         $shops->description =  $request->description;
         $shops->telephone_no =  $request->telephone_no;
