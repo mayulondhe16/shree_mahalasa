@@ -54,7 +54,7 @@ class HomeBannerController extends Controller
         }else{
             $last_id = '1';
         }
-        $path = Config::get('DocumentConstant.LOGO_ADD');
+        $path = Config::get('DocumentConstant.HOME_BANNER_ADD');
 
         if ($request->hasFile('image')) {
             $fileName = $last_id.".". $request->image->extension();
@@ -67,7 +67,7 @@ class HomeBannerController extends Controller
         if (!empty($brand))
         {
             Session::flash('success', 'Success! Record added successfully.');
-            return \Redirect::to('manage_logo');
+            return \Redirect::to('manage_homebanner');
         }
         else
         {
@@ -91,20 +91,27 @@ class HomeBannerController extends Controller
     public function update(Request $request, $id)
     {
         $brands = HomeBanner::find($id);
-        $path = Config::get('DocumentConstant.LOGO_ADD');
+        $path = Config::get('DocumentConstant.HOME_BANNER_ADD');
         if ($request->hasFile('image'))
         {
             if ($brands->image)
             {
-                $delete_file_eng= storage_path(Config::get('DocumentConstant.LOGO_DELETE') . $brands->image);
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.HOME_BANNER_DELETE') . $brands->image);
                 if(file_exists($delete_file_eng))
                 {
                     unlink($delete_file_eng);
                 }
 
             }
-
-            $fileName = $id.".". $request->image->extension();
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $randomString = '';
+        
+            for ($i = 0; $i < 10; $i++) {
+                $index = rand(0, strlen($characters) - 1);
+                $randomString .= $characters[$index];
+            }
+ 
+            $fileName = $randomString.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
         }
         $brands->image = $fileName;
@@ -112,7 +119,7 @@ class HomeBannerController extends Controller
         if (!empty($brands))
         {
             Session::flash('success', 'Success! Record updated successfully.');
-            return \Redirect::to('manage_logo');
+            return \Redirect::to('manage_homebanner');
         }
         else
         {
@@ -127,13 +134,13 @@ class HomeBannerController extends Controller
         try {
             $brands = HomeBanner::find($id);
             if ($brands) {
-                if (file_exists(storage_path(Config::get('DocumentConstant.LOGO_DELETE') . $brands->image))) {
-                    unlink(storage_path(Config::get('DocumentConstant.LOGO_DELETE') . $brands->image));
+                if (file_exists(storage_path(Config::get('DocumentConstant.HOME_BANNER_DELETE') . $brands->image))) {
+                    unlink(storage_path(Config::get('DocumentConstant.HOME_BANNER_DELETE') . $brands->image));
                 }
                
                 $brands->delete();           
                     Session::flash('error', 'Record deleted successfully.');
-                    return \Redirect::to('manage_logo');
+                    return \Redirect::to('manage_homebanner');
             } else {
                 return null;
             }
