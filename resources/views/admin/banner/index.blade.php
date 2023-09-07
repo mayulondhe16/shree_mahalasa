@@ -49,6 +49,7 @@
                     @foreach($data as $key=>$value)
                     <?php 
                     // dd($value);
+                    // dd($value);
                     // $image_details = \DB::table('product_images')->where(['product_id'=>$value->id])->first();
                     // $category = \DB::table('category')->where(['id'=>$value->category_id])->first();
                     $main_category = \DB::table('main_category')->where(['id'=>$value->category_id])->first();
@@ -61,7 +62,7 @@
                           {{$key+1}}
                         </td>
                         <td>
-                          {{ (isset($main_category->title))? $main_category->title: '-'; }}
+                         {{isset($main_category->title)?$main_category->title:'-'}}
                         </td>
                         <td>
                           {{ $value->background_color_left }}

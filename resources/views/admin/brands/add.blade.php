@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="row">
+                   <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                               <label class="form-label">Brand Description</label><span style="color:red;" >*</span>
@@ -59,7 +59,7 @@
                                   </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                   
                     
                     {{-- <div class="text-center">

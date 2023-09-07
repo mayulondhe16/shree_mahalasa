@@ -67,7 +67,7 @@
                         </div> --}}
                     </div>
 
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                                 <div class="input-group input-group-outline mb-3">
@@ -75,7 +75,7 @@
                                   </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div> 
                   
                     
                     {{-- <div class="text-center">

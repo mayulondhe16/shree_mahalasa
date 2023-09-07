@@ -57,9 +57,9 @@
                         <td>
                           {{$value->title}}
                         </td>
-                        {{-- <td>
+                        <td>
                           {{$value->description}}
-                        </td> --}}
+                        </td>
                         <td>
                           @if($value['top_seller']=='1')
                           <a class="btn btn-success btn-sm" href="{{url('/')}}/change_brand_status/{{$value->id}}">Yes</a>
