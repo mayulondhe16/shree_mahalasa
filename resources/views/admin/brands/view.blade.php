@@ -67,16 +67,15 @@
                         </div> --}}
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                                 <div class="input-group input-group-outline mb-3">
-                                    {{-- <label class="form-label">Brand Description</label> --}}
                                     <textarea  class="form-control" readonly name="description">{{$data['description']}}</textarea>
                                   </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                   
                     
                     {{-- <div class="text-center">

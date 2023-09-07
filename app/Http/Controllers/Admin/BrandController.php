@@ -50,7 +50,7 @@ class BrandController extends Controller
         }
         $brands = new Brands();
         $brands->title = $request->title;
-        $brands->description = $request->description;
+        $brands->description ='not needed';
         $return_data = $brands->save();
         $last_id = $brands->id;
         $path = Config::get('DocumentConstant.BRAND_ADD');
@@ -120,10 +120,11 @@ class BrandController extends Controller
                 }
             $fileName = $randomString.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
+            $brands->image = $fileName;
+
         }
         $brands->title = $request->title;
-        $brands->description = $request->description;
-        $brands->image = $fileName;
+        $brands->description = 'not needed';
         $status = $brands->save();
         if (!empty($brands))
         {

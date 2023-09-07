@@ -41,7 +41,6 @@
                       <th>Sr No</th>
                       <th>Brand Logo</th>
                       <th>Title </th>
-                      <th>Description</th>
                       <th>Top Seller</th>
                       <th>Action</th>
                     </tr>
@@ -58,9 +57,9 @@
                         <td>
                           {{$value->title}}
                         </td>
-                        <td>
+                        {{-- <td>
                           {{$value->description}}
-                        </td>
+                        </td> --}}
                         <td>
                           @if($value['top_seller']=='1')
                           <a class="btn btn-success btn-sm" href="{{url('/')}}/change_brand_status/{{$value->id}}">Yes</a>

@@ -38,17 +38,17 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Banner</span>
+            <span class="nav-link-text ms-1">Category Banner</span>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_menu' || Request::segment(1)=='add_menu' || Request::segment(1)=='edit_menu' || Request::segment(1)=='view_menu') active @endif" href="{{url('/')}}/manage_menu">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Menu</span>
           </a>
-        </li>
+        </li> --}}
 
         <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_brands' || Request::segment(1)=='add_brand' || Request::segment(1)=='edit_brand' || Request::segment(1)=='view_brand') active @endif" href="{{url('/')}}/manage_brands">
@@ -58,14 +58,14 @@
             <span class="nav-link-text ms-1">Brands</span>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_size' || Request::segment(1)=='add_size' || Request::segment(1)=='edit_size' || Request::segment(1)=='view_size') active @endif" href="{{url('/')}}/manage_size">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Size</span>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_city' || Request::segment(1)=='add_city' || Request::segment(1)=='edit_city' || Request::segment(1)=='view_city') active @endif" href="{{url('/')}}/manage_city">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -82,14 +82,14 @@
             <span class="nav-link-text ms-1">Location</span>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_shade' || Request::segment(1)=='add_shade' || Request::segment(1)=='edit_shade' || Request::segment(1)=='view_shade') active @endif" href="{{url('/')}}/manage_shade">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Shade</span>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_main_category' || Request::segment(1)=='add_main_category' || Request::segment(1)=='edit_main_category' || Request::segment(1)=='view_main_category') active @endif" href="{{url('/')}}/manage_main_category">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

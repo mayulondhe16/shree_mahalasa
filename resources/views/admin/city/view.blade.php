@@ -30,26 +30,7 @@
             <div class="card-body">
               <form action="{{ url('/')}}/update_{{$url_slug}}/{{$data['id']}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}    
-                <div class="row">
-                      <div class="col-md-8">
-                        <div class="form-group">
-                          <label class="form-label">City Name</label>
-                            <div class="input-group input-group-outline mb-3">
-                                <input type="text" class="form-control" readonly name="city_name" value={{ $data['city_name'] }}>
-                              </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                              <label class="form-label">State Name</label>
-                                <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" readonly name="state_name" value={{ $data['state_name'] }}>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
+                
 
                     <div class="row">
                         <div class="col-md-8">
@@ -63,6 +44,26 @@
                     </div>
                   
                     
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                              <label class="form-label">State Name</label>
+                                <div class="input-group input-group-outline mb-3">
+                                    <input type="text" class="form-control" readonly name="state_name" value={{ $data['state_name'] }}>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          <label class="form-label">City Name</label>
+                            <div class="input-group input-group-outline mb-3">
+                                <input type="text" class="form-control" readonly name="city_name" value={{ $data['city_name'] }}>
+                              </div>
+                        </div>
+                    </div>
+                    </div>
                     {{-- <div class="text-center">
                       <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
                     </div> --}}

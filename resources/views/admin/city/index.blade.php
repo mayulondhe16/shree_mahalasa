@@ -39,9 +39,9 @@
                   <thead>
                     <tr>
                       <th>Sr No</th>
-                      <th>City Name</th>
-                      <th>State Name</th>
                       <th>Country Name </th>
+                      <th>State Name</th>
+                      <th>City Name</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -52,13 +52,14 @@
                           {{$key+1}}
                         </td>
                         <td>
-                          {{$value->city_name}}
+                          {{$value->country_name}}
                         </td>
+                       
                         <td>
                           {{$value->state_name}}
                         </td>
                         <td>
-                          {{$value->country_name}}
+                          {{$value->city_name}}
                         </td>
                         <td>
                           <a class="success" href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">

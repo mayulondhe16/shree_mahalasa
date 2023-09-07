@@ -75,7 +75,7 @@
                           <a href="{{url('/')}}/view_{{$url_slug}}/{{base64_encode($value->id)}}" title="View">
                             <i class="fa fa-eye"></i>
                           </a> --}}
-                          <a href="{{url('/')}}/delete_contactus/{{base64_encode($value->id)}}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
+                          <a class="danger" href="{{url('/')}}/delete_contactus/{{base64_encode($value->id)}}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
                             <i class="fa fa-trash"></i>
                           </a>
                         </td>

@@ -27,26 +27,7 @@
             <div class="card-body">
               <form action="{{ url('/')}}/store_{{$url_slug}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}    
-                <div class="row">
-                      <div class="col-md-8">
-                        <div class="form-group">
-                          <label class="form-label">City Name</label><span style="color:red;" >*</span>
-                            <div class="input-group input-group-outline mb-3">
-                                <input type="text" class="form-control" name="city_name" data-parsley-error-message="Please enter valid city name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
-                              </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                              <label class="form-label">State Name</label><span style="color:red;" >*</span>
-                                <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="state_name" data-parsley-error-message="Please enter valid state name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
+              
 
                     <div class="row">
                         <div class="col-md-8">
@@ -58,7 +39,26 @@
                             </div>
                         </div>
                     </div>
-                  
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                              <label class="form-label">State Name</label><span style="color:red;" >*</span>
+                                <div class="input-group input-group-outline mb-3">
+                                    <input type="text" class="form-control" name="state_name" data-parsley-error-message="Please enter valid state name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="form-group">
+                          <label class="form-label">City Name</label><span style="color:red;" >*</span>
+                            <div class="input-group input-group-outline mb-3">
+                                <input type="text" class="form-control" name="city_name" data-parsley-error-message="Please enter valid city name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
+                              </div>
+                        </div>
+                    </div>
+                    </div>
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
                       </div>
