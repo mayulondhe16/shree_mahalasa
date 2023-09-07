@@ -41,6 +41,7 @@
                       <th>Sr No</th>
                       <th>Brand Logo</th>
                       <th>Title </th>
+                      <th>Description </th>
                       <th>Top Seller</th>
                       <th>Action</th>
                     </tr>
