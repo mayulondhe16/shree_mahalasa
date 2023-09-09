@@ -374,6 +374,31 @@ class ApiController extends Controller
        
     }
 
+    public function get_top_brands(Request $request)
+    {
+        try {
+            $brands = Brands::where('top_seller','1')->get();
+            
+            foreach ($brands as $value) {
+                $value->image =  Config::get('DocumentConstant.BRAND_VIEW').$value['image'];
+            }
+            return $this->responseApi($brands, 'Top brand data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+    public function get_brand_details(Request $request,$id)
+    {
+        try {
+            $brands = Brands::where('id',$id)->get();
+            return $this->responseApi($brands, 'Data get successfully', 'scuccess',200);
+        } catch (\Exception $e) {
+           return $this->responseApi(array(), $e->getMessage(), 'error',500);
+        }
+       
+    }
+
     public function get_company_details(Request $request)
     {
         try {
