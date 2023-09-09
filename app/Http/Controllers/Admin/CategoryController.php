@@ -52,7 +52,7 @@ class CategoryController extends Controller
         }
         $category = new Category();
         $category->title = $request->title;
-        $category->description = $request->description;
+        $category->description = '-';
         $category->main_category = $request->main_category;
         $status = $category->save();
         $last_id = $category->id;
@@ -134,7 +134,7 @@ class CategoryController extends Controller
         } 
         $category->title = $request->title;
         $category->main_category = $request->main_category;
-        $category->description = $request->description;
+        $category->description = '-';
         $status = $category->save();
         if (!empty($status))
         {

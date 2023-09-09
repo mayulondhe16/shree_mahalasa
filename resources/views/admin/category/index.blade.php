@@ -39,27 +39,28 @@
                   <thead>
                     <tr>
                       <th>Sr No</th>
-                      <th>Category Image</th>
-                      <th>Title </th>
-                      <th>Description</th>
+                      <th>Main Category</th>
+                      <th>Sub Category Title </th>
+                      <th>Sub Category Image</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($data as $key=>$value)
+                    <?php
+                      $main_cat = \DB::table('main_category')->where('id',$value->main_category)->first();
+                    ?>
                       <tr>
                         <td>
                           {{$key+1}}
                         </td>
-                        <td>
-                          <img src="{{ Config::get('DocumentConstant.CATEGORY_VIEW') }}{{ $value->image }}" height="50px" width="60px">
-                        </td>
+                        <td>{{ isset($main_cat->title)?$main_cat->title:'-' }}</td>
                         <td>
                           {{$value->title}}
                         </td>
                         <td>
-                          <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid category description." required="true">{{$value->description}}</textarea>
-                        </td>
+                          <img src="{{ Config::get('DocumentConstant.CATEGORY_VIEW') }}{{ $value->image }}" height="50px" width="60px">
+                        </td>                       
                         <td>
                           <a class="success" href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
                             <i class="fa fa-edit"></i>

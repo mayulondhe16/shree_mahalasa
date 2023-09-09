@@ -59,6 +59,26 @@ class LocationController extends Controller
         $contactdetails->address = $request->address;
         $contactdetails->link = $request->link;
         $status = $contactdetails->save();
+        $last_id = $contactdetails->id;
+
+        // $path = Config::get('DocumentConstant.CATEGORY_ADD');
+        // if ($request->hasFile('image')) {
+
+        //     if ($contactdetails->image) {
+        //         $delete_file_eng= storage_path(Config::get('DocumentConstant.MAIN_CATEGORY_DELETE') . $contactdetails->image);
+        //         if(file_exists($delete_file_eng)){
+        //             unlink($delete_file_eng);
+        //         }
+
+        //     }
+
+        //     $fileName = $last_id.".". $request->image->extension();
+        //     uploadImage($request, 'image', $path, $fileName);
+           
+        //     $contactdetails = Location::find($last_id);
+        //     $contactdetails->image = $fileName;
+        //     $status = $contactdetails->save();
+        // }
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record added successfully.');

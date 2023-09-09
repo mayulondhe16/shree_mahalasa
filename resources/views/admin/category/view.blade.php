@@ -33,7 +33,7 @@
                 <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="oldpassword">Image<span style="color:red;" >*</span></label>
+                                <label for="oldpassword">Sub Catrgory Image<span style="color:red;" >*</span></label>
                                    <p>
                                     <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.CATEGORY_VIEW') }}{{ $data['image'] }}"  />
                                    </p>
@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label class="form-label">Title</label>
+                                <label class="form-label">Sub Title</label>
                                 <div class="input-group input-group-outline mb-3">
                                     <input type="text" class="form-control" readonly name="title"  value="{{$data['title']}}">
                                   </div>
@@ -82,7 +82,7 @@
                         </div> --}}
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                             <label class="form-label">Description</label>
@@ -91,7 +91,7 @@
                                   </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                   
                     
                     {{-- <div class="text-center">
