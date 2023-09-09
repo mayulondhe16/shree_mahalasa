@@ -39,8 +39,8 @@ Route::post('add_contactform', [ApiController::class, 'add_contactform']);
 Route::get('get_menu', [ApiController::class, 'get_menu']);
 Route::get('get_size', [ApiController::class, 'get_size']);
 Route::get('get_home_banner', [ApiController::class, 'get_home_banner']);
-
-
+Route::get('get_top_brands', [ApiController::class, 'get_top_brands']);
+Route::get('get_brand_details/{id}', [ApiController::class, 'get_brand_details']);
 
 
 
