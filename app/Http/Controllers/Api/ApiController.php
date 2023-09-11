@@ -392,6 +392,9 @@ class ApiController extends Controller
     {
         try {
             $brands = Brands::where('id',$id)->get();
+            foreach ($brands as $value) {
+                $value->image =  Config::get('DocumentConstant.BRAND_VIEW').$value['image'];
+            }
             return $this->responseApi($brands, 'Data get successfully', 'scuccess',200);
         } catch (\Exception $e) {
            return $this->responseApi(array(), $e->getMessage(), 'error',500);
