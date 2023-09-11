@@ -29,7 +29,20 @@
             </div>
             <div class="card-body">
               <form action="{{ url('/')}}/update_{{$url_slug}}/{{$data->id}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
-                {!! csrf_field() !!}    
+                {!! csrf_field() !!} 
+                          <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="oldpassword">Image<span style="color:red;" >*</span></label>
+                                      <p>
+                                        <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.LOCATION_VIEW') }}{{ $data['image'] }}" />
+                                      </p>
+                                        <div class="input-group input-group-outline mb-3">
+                                        <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)"  @if(empty($data['image'])) required="true" @endif>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
                           <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">

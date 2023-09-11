@@ -33,6 +33,16 @@
                           <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
+                                    <label for="oldpassword">Brand Logo</label>
+                                      <p>
+                                        <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.LOCATION_VIEW') }}{{ $data['image'] }}" />
+                                      </p>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
                                   <label class="form-label">Title<span style="color:red;" >*</span></label>
                                     <div class="input-group input-group-outline mb-3">
                                         <input type="text"  class="form-control" readonly value="{{ $data->title }}"  name="title" required data-parsley-error-message="Please enter valid title." data-parsley-pattern="^[A-Z a-z .]+$">

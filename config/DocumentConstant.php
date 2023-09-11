@@ -7,6 +7,11 @@ return [
     'BRAND_DELETE'	     => '/all_web_data/images/brands/',
     'BRAND_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/brands/',
 
+    
+    'LOCATION_ADD'	         => "/all_web_data/images/location_image/",
+    'LOCATION_DELETE'	     => '/all_web_data/images/location_image/',
+    'LOCATION_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/location_image/',
+
     'PRODUCTTHUMB_ADD'	         => "/all_web_data/images/product_thumbnail/",
     'PRODUCTTHUMB_DELETE'	     => '/all_web_data/images/product_thumbnail/',
     'PRODUCTTHUMB_VIEW'	     => env("DOC_URL").'/storage/all_web_data/images/product_thumbnail/',

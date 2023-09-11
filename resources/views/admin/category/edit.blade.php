@@ -33,7 +33,7 @@
                 <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="oldpassword">Image<span style="color:red;" >*</span></label>
+                                <label for="oldpassword">Sub Category Image<span style="color:red;" >*</span></label>
                                    <p>
                                     <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.CATEGORY_VIEW') }}{{ $data['image'] }}" />
                                    </p>
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                               <label class="form-label">Title</label><span style="color:red;" >*</span>
+                               <label class="form-label">Sub Title</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
                                     <input type="text" class="form-control" name="title"  value="{{$data['title']}}"  data-parsley-error-message="Please enter valid category name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
                                   </div>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                             <label class="form-label">Description</label><span style="color:red;" >*</span>
@@ -79,7 +79,7 @@
                                   </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" style="float: right">Update</button>
                       </div>

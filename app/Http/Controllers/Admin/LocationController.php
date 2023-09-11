@@ -9,7 +9,7 @@ use  App\Models\Location;
 use  App\Models\City;
 use Validator;
 use Session;
-
+use Config;
 class LocationController extends Controller
 {
     public function __construct(Location $Location)
@@ -59,6 +59,26 @@ class LocationController extends Controller
         $contactdetails->address = $request->address;
         $contactdetails->link = $request->link;
         $status = $contactdetails->save();
+        $last_id = $contactdetails->id;
+
+        $path = Config::get('DocumentConstant.LOCATION_ADD');
+        if ($request->hasFile('image')) {
+
+            if ($contactdetails->image) {
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.LOCATION_DELETE') . $contactdetails->image);
+                if(file_exists($delete_file_eng)){
+                    unlink($delete_file_eng);
+                }
+
+            }
+
+            $fileName = $last_id.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+           
+            $contactdetails = Location::find($last_id);
+            $contactdetails->image = $fileName;
+            $status = $contactdetails->save();
+        }
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record added successfully.');
@@ -86,20 +106,40 @@ class LocationController extends Controller
 
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $city_id = $request->city_id;
+        $locationdetails = Location::find($id);
+        $path = Config::get('DocumentConstant.LOCATION_ADD');
+        if ($request->hasFile('image'))
+        {
+            if ($locationdetails->image)
+            {
+                $delete_file_eng= storage_path(Config::get('DocumentConstant.LOCATION_DELETE') . $locationdetails->image);
+                if(file_exists($delete_file_eng))
+                {
+                    unlink($delete_file_eng);
+                }
+
+            }
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randomString = '';
+            
+                for ($i = 0; $i < 10; $i++) {
+                    $index = rand(0, strlen($characters) - 1);
+                    $randomString .= $characters[$index];
+                }
+            $fileName = $randomString.".". $request->image->extension();
+            uploadImage($request, 'image', $path, $fileName);
+            $locationdetails->image = $fileName;
+
+        }
         
-        $arr_data               = [];
-        $contactdetails = Location::find($id);
-        $existingRecord = Location::orderBy('id','DESC')->first();
-        $contactdetails->title = $request->title;
-        $contactdetails->shop_name = $request->shop_name;
-        $contactdetails->city_id = $request->city_id;
-        $contactdetails->mobile_no1 = $request->mobile_no1;
-        $contactdetails->mobile_no2 = $request->mobile_no2;
-        $contactdetails->address = $request->address;
-        $contactdetails->link = $request->link;
-        $status = $contactdetails->update();        
+        $locationdetails->title = $request->title;
+        $locationdetails->shop_name = $request->shop_name;
+        $locationdetails->city_id = $request->city_id;
+        $locationdetails->mobile_no1 = $request->mobile_no1;
+        $locationdetails->mobile_no2 = $request->mobile_no2;
+        $locationdetails->address = $request->address;
+        $locationdetails->link = $request->link;
+        $status = $locationdetails->update();        
         if (!empty($status))
         {
             Session::flash('success', 'Success! Record updated successfully.');

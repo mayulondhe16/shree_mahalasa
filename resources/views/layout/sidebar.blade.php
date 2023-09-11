@@ -26,6 +26,39 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_city' || Request::segment(1)=='add_city' || Request::segment(1)=='edit_city' || Request::segment(1)=='view_city') active @endif" href="{{url('/')}}/manage_city">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">City</span>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_socialmedialinks' || Request::segment(1)=='add_socialmedialinks' || Request::segment(1)=='edit_socialmedialinks' || Request::segment(1)=='view_socialmedialinks') active @endif"  href="{{url('/')}}/manage_socialmedialinks">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Social Media Links</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_main_category' || Request::segment(1)=='add_main_category' || Request::segment(1)=='edit_main_category' || Request::segment(1)=='view_main_category') active @endif" href="{{url('/')}}/manage_main_category">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Product Main-Category</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_category' || Request::segment(1)=='add_category' || Request::segment(1)=='edit_category' || Request::segment(1)=='view_category') active @endif" href="{{url('/')}}/manage_category">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Product Sub-Category</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_homebanner' || Request::segment(1)=='add_homebanner' || Request::segment(1)=='edit_homebanner' || Request::segment(1)=='view_homebanner') active @endif" href="{{url('/')}}/manage_homebanner">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
@@ -49,101 +82,12 @@
             <span class="nav-link-text ms-1">Menu</span>
           </a>
         </li> --}}
-
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_brands' || Request::segment(1)=='add_brand' || Request::segment(1)=='edit_brand' || Request::segment(1)=='view_brand') active @endif" href="{{url('/')}}/manage_brands">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Brands</span>
-          </a>
-        </li>
-        {{-- <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_size' || Request::segment(1)=='add_size' || Request::segment(1)=='edit_size' || Request::segment(1)=='view_size') active @endif" href="{{url('/')}}/manage_size">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Size</span>
-          </a>
-        </li> --}}
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_city' || Request::segment(1)=='add_city' || Request::segment(1)=='edit_city' || Request::segment(1)=='view_city') active @endif" href="{{url('/')}}/manage_city">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">City</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_location' || Request::segment(1)=='add_location' || Request::segment(1)=='edit_location' || Request::segment(1)=='view_location') active @endif" href="{{url('/')}}/manage_location">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Location</span>
-          </a>
-        </li>
-        {{-- <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_shade' || Request::segment(1)=='add_shade' || Request::segment(1)=='edit_shade' || Request::segment(1)=='view_shade') active @endif" href="{{url('/')}}/manage_shade">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Shade</span>
-          </a>
-        </li> --}}
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_main_category' || Request::segment(1)=='add_main_category' || Request::segment(1)=='edit_main_category' || Request::segment(1)=='view_main_category') active @endif" href="{{url('/')}}/manage_main_category">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Product Main-Category</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_category' || Request::segment(1)=='add_category' || Request::segment(1)=='edit_category' || Request::segment(1)=='view_category') active @endif" href="{{url('/')}}/manage_category">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Product Sub-Category</span>
-          </a>
-        </li>
         <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_aboutus' || Request::segment(1)=='add_aboutus' || Request::segment(1)=='edit_aboutus' || Request::segment(1)=='view_aboutus') active @endif" href="{{url('/')}}/manage_aboutus">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">About Us</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_contactdetails' || Request::segment(1)=='add_contactdetails' || Request::segment(1)=='edit_contactdetails' || Request::segment(1)=='view_contactdetails') active @endif" href="{{url('/')}}/manage_contactdetails">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Company Contact Details</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_quicklinks' || Request::segment(1)=='add_quicklinks' || Request::segment(1)=='edit_quicklinks' || Request::segment(1)=='view_quicklinks') active @endif" href="{{url('/')}}/manage_quicklinks">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Quick Links</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_socialmedialinks' || Request::segment(1)=='add_socialmedialinks' || Request::segment(1)=='edit_socialmedialinks' || Request::segment(1)=='view_socialmedialinks') active @endif"  href="{{url('/')}}/manage_socialmedialinks">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Social Media Links</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_newsletter' || Request::segment(1)=='add_newsletter' || Request::segment(1)=='edit_newsletter' || Request::segment(1)=='view_newsletter') active @endif"  href="{{url('/')}}/manage_newsletter">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Newsletter List</span>
           </a>
         </li>
         <li class="nav-item">
@@ -155,19 +99,44 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white @if(Request::segment(1)=='manage_shops' || Request::segment(1)=='add_shops' || Request::segment(1)=='edit_shops' || Request::segment(1)=='view_shops') active @endif" href="{{url('/')}}/manage_shops">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Shops Master</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_manage_top_selling' || Request::segment(1)=='add_manage_top_selling' || Request::segment(1)=='edit_manage_top_selling' || Request::segment(1)=='view_manage_top_selling') active @endif"  href="{{url('/')}}/manage_top_selling">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Top Selling Products</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_brands' || Request::segment(1)=='add_brand' || Request::segment(1)=='edit_brand' || Request::segment(1)=='view_brand') active @endif" href="{{url('/')}}/manage_brands">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Brands</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_location' || Request::segment(1)=='add_location' || Request::segment(1)=='edit_location' || Request::segment(1)=='view_location') active @endif" href="{{url('/')}}/manage_location">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Location</span>
+          </a>
+        </li>
+         
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_contactdetails' || Request::segment(1)=='add_contactdetails' || Request::segment(1)=='edit_contactdetails' || Request::segment(1)=='view_contactdetails') active @endif" href="{{url('/')}}/manage_contactdetails">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Company Contact Details</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_newsletter' || Request::segment(1)=='add_newsletter' || Request::segment(1)=='edit_newsletter' || Request::segment(1)=='view_newsletter') active @endif"  href="{{url('/')}}/manage_newsletter">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Newsletter List</span>
           </a>
         </li>
         <li class="nav-item">
@@ -178,6 +147,46 @@
             <span class="nav-link-text ms-1">Contact Us</span>
           </a>
         </li>
+        {{-- <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_size' || Request::segment(1)=='add_size' || Request::segment(1)=='edit_size' || Request::segment(1)=='view_size') active @endif" href="{{url('/')}}/manage_size">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Size</span>
+          </a>
+        </li> --}}
+      
+   
+        {{-- <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_shade' || Request::segment(1)=='add_shade' || Request::segment(1)=='edit_shade' || Request::segment(1)=='view_shade') active @endif" href="{{url('/')}}/manage_shade">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Shade</span>
+          </a>
+        </li> --}}
+       
+       
+        {{-- <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_quicklinks' || Request::segment(1)=='add_quicklinks' || Request::segment(1)=='edit_quicklinks' || Request::segment(1)=='view_quicklinks') active @endif" href="{{url('/')}}/manage_quicklinks">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Quick Links</span>
+          </a>
+        </li> --}}
+        
+    
+        {{-- <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_shops' || Request::segment(1)=='add_shops' || Request::segment(1)=='edit_shops' || Request::segment(1)=='view_shops') active @endif" href="{{url('/')}}/manage_shops">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Shops Master</span>
+          </a>
+        </li> --}}
+       
+       
       </ul>
     </div>
   </aside>
