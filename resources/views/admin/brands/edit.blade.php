@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <label class="form-label">Brand Title</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}"  data-parsley-error-message="Please enter valid brand name." data-parsley-pattern="^[a-z A-Z .]+$" required="true">
+                                    <input type="text" class="form-control" name="title"  value="{{$data['title']}}"  data-parsley-error-message="Please enter valid brand name." required="true">
                                   </div>
                             </div>
                         </div>

@@ -72,7 +72,7 @@
                           {{ (isset($category->title))? $category->title: '-'; }}
                         </td>
                         <td>
-                          {{ (isset($brand->title))? $brand->title: '-'; }}
+                          {{ (isset($brand->title))? $brand->title:$value->brand_id;}}
                         </td>
                         <td>
                           <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid category description." required="true">{{$value->description}}</textarea>

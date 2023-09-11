@@ -92,7 +92,7 @@
                           <div class="form-group">
                               <label class="form-label">Brand</label>
                               <div class="input-group input-group-outline mb-3">
-                                <input type="text" class="form-control" readonly name="title"  value="{{$brand->title}}">  
+                                <input type="text" class="form-control" readonly name="title"  value="{{ (isset($brand->title))? $brand->title:$data['brand_id']}}">  
                                 </div>
                           </div>
                       </div>

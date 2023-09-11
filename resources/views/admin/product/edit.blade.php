@@ -94,6 +94,7 @@
                                       @foreach($brand as $val)
                                       <option value="{{$val->id}}" @if($data->brand_id==$val->id) selected @endif>{{$val->title}}</option>
                                       @endforeach
+                                      <option value="Other" @if($data->brand_id=='Other') selected @endif>Other</option>
                                     </select>
                                   </div>
                             </div>

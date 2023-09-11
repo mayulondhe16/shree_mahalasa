@@ -13,9 +13,11 @@
           </ol>
           {{-- <h6 class="font-weight-bolder mb-0">Tables</h6> --}}
         </nav>
+        @if($data->count()<1)
         <div class="box-header">
           <a href="{{url('/')}}/add_{{ $url_slug }}" class="btn btn-primary btn-xs" style="float: right;">Add {{ $title }}</a>
         </div>
+        @endif
       </div>
     </nav>
     <!-- End Navbar -->

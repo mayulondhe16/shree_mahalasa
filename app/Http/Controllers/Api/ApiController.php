@@ -254,6 +254,8 @@ class ApiController extends Controller
             foreach ($location as $value) {
                 $city = City::where('id',$value->city_id)->first();
                 $value->city = $city['city_name'];
+                $value->image =  Config::get('DocumentConstant.LOCATION_VIEW').$value['image'];
+
             }
             return $this->responseApi($location, 'Data get successfully', 'scuccess',200);
         } catch (\Exception $e) {

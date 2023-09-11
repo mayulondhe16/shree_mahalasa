@@ -59,7 +59,7 @@
                           {{$value->title}}
                         </td>
                         <td>
-                          {{$value->description}}
+                          <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid category description." required="true">{{$value->description}}</textarea>
                         </td>
                         <td>
                           @if($value['top_seller']=='1')

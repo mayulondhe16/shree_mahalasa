@@ -75,6 +75,7 @@
                                       @foreach($brand as $val)
                                       <option value="{{$val->id}}">{{$val->title}}</option>
                                       @endforeach
+                                      <option value="Other">Other</option>
                                     </select>
                                   </div>
                             </div>
