@@ -50,7 +50,7 @@ class BrandController extends Controller
         }
         $brands = new Brands();
         $brands->title = $request->title;
-        $brands->description ='not needed';
+        $brands->description =$request->description;
         $return_data = $brands->save();
         $last_id = $brands->id;
         $path = Config::get('DocumentConstant.BRAND_ADD');
@@ -124,7 +124,7 @@ class BrandController extends Controller
 
         }
         $brands->title = $request->title;
-        $brands->description = 'not needed';
+        $brands->description =$request->description;
         $status = $brands->save();
         if (!empty($brands))
         {
