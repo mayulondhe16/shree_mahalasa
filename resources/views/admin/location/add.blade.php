@@ -30,6 +30,19 @@
             <div class="card-body">
               <form action="{{ url('/')}}/store_{{$url_slug}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}    
+                        <div class="row">
+                          <div class="col-md-8">
+                              <div class="form-group">
+                                  <label for="oldpassword">Image<span style="color:red;" >*</span></label>
+                                    <p>
+                                      <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
+                                    </p>
+                                      <div class="input-group input-group-outline mb-3">
+                                      <input type="file"  name="image" id="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                           <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
