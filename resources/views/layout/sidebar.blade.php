@@ -157,6 +157,14 @@
             <span class="nav-link-text ms-1">Contact Us</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-white @if(Request::segment(1)=='manage_profile' || Request::segment(1)=='add_profile' || Request::segment(1)=='edit_profile' || Request::segment(1)=='view_profile') active @endif"  href="{{url('/')}}/manage_profile">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
         {{-- <li class="nav-item">
           <a class="nav-link text-white @if(Request::segment(1)=='manage_size' || Request::segment(1)=='add_size' || Request::segment(1)=='edit_size' || Request::segment(1)=='view_size') active @endif" href="{{url('/')}}/manage_size">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

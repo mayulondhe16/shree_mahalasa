@@ -50,6 +50,8 @@ class AboutusController extends Controller
             return $validator->errors()->all();
         }
         $aboutus = Aboutus::orderBy('id','DESC')->get();
+        $aboutus = new Aboutus();
+
         if(isset($brand->id)){
             $last_id = $aboutus->id;
         }else{
@@ -60,13 +62,13 @@ class AboutusController extends Controller
         if ($request->hasFile('image')) {
             $fileName = $last_id.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
+            $aboutus->image = $request->fileName;
+
         }
-        $aboutus = new Aboutus();
         $arr_data               = [];
         $aboutus->title = $request->title;
         $aboutus->short_description = $request->short_description;
         $aboutus->long_description = $request->long_description;
-        $aboutus->image = $request->fileName;
         $status = $aboutus->save();
         if (!empty($status))
         {
