@@ -32,29 +32,34 @@
               <form action="{{ url('/')}}/update_{{$url_slug}}/{{$data['id']}}" method="post" role="form" data-parsley-validate="parsley" enctype="multipart/form-data" autocomplete="off">
                 {!! csrf_field() !!}  
                 <?php 
-                    $product_images = \DB::table('product_images')->where('product_id',$data->id)->get();                
+                    $product_images = \DB::table('product_images')->where('product_id',$data->id)->whereNull('deleted_at')->get();                
                 ?>
                
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="oldpassword">Product Images<span style="color:red;" >*</span></label>
                             <div class="row">
                               @if ($product_images)
                               @foreach ($product_images as $image)
                               <div class="col-md-4">
-                                <p>
+                                 <p>
                                 <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.PRODUCT_VIEW') }}{{ $image->image }}" />
-                                </p>
+                                </p> 
                                 <p><a href="{{url('/')}}/delete_product_image/{{ $image->id }}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
                                     <i class="fa fa-trash"></i></a>
+                                    
                               </div>
                               
                               @endforeach
+                              <input type="file"  name="images[]" accept="image/*" onchange="preview_image(event,1)"   @if (empty($product_images)) required="true" @endif multiple>
+
                               @endif
                             </div>   
                     </div>
                 </div>
+                </div>
+                <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                       <label for="oldpassword">Thumbnail Image<span style="color:red;" >*</span></label>
@@ -62,18 +67,12 @@
                           <img id="output_image1" height="200px" width="300px" src="{{ Config::get('DocumentConstant.PRODUCTTHUMB_VIEW') }}{{ $data['thumbnail_image'] }}" />
                         </p>
                           <div class="input-group input-group-outline mb-3">
-                          <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                          <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" @if (empty($data['thumbnail_image'])) required="true" @endif>
                       </div>
                   </div>
               </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                  <div class="input-group input-group-outline mb-3">
-                    <input type="file"  name="image[]" accept="image/*" onchange="preview_image(event,1)" required="true" multiple>
-                </div>
-                  </div>
-                </div>
+               
                     <div class="row">
                       <div class="col-md-6">
                           <div class="form-group">

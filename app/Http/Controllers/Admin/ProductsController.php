@@ -139,7 +139,7 @@ class ProductsController extends Controller
     public function update(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required',
+            // 'image' => 'required',
         ]);
 
         if ($validator->fails()) 
@@ -152,40 +152,57 @@ class ProductsController extends Controller
         $product->main_category = $request->main_category;
         $product->brand_id = $request->brand_id;
         $product->description = $request->description;
+        $last_id = $product->id;
+        $path = Config::get('DocumentConstant.PRODUCTTHUMB_ADD');
+
         $status = $product->update();
         if (!empty($status))
         {
-            $images = $request->file('image');
+            if ($request->hasFile('image')) {
+          
+                if ($product->image){
+                    $delete_file_eng= storage_path(Config::get('DocumentConstant.PRODUCTTHUMB_DELETE') . $product->thumbnail_image);
+                    if(file_exists($delete_file_eng)){
+                        unlink($delete_file_eng);
+                    }
+    
+                }
+    
+                $fileName = $last_id.".". $request->image->extension();
+                uploadImage($request, 'image', $path, $fileName);
+                    $shop = Product::find($last_id);
+                    $shop->thumbnail_image = $fileName;
+                    $shop->save();
+                
+               
+            }
+            $images = $request->file('images');
             $temp = [];
             if ($images)
             {
-                foreach ($images as $image)
+                $product_images = ProductImages::where('product_id','=',$product->id)->get();
+                foreach ($images as $key => $image)
                 {
+               
+                    $producId = $product->id;
                     $product_images =  new ProductImages();
+                    $last_id = $product_images->id?$product_images->id:'1';
+                    $path = Config::get('DocumentConstant.PRODUCT_ADD');
                     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $charactersLength = strlen($characters);
                     $randomString = '';
-                    for ($i_ = 0; $i_ < 20; $i_++)
-                    {
-                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                
+                    for ($i = 0; $i < 10; $i++) {
+                        $index = rand(0, strlen($characters) - 1);
+                        $randomString .= $characters[$index];
                     }
-
-                    $imageName = $image->getClientOriginalName();
-                    $ext = $image->getClientOriginalExtension();
-                    $random_file_name                  = $randomString.'.'.$ext;
-                    $latest_image                      = '/products/'.$random_file_name;
-                    $filename                          = basename($imageName,'.'.$ext);
-                    $newFileName                       = $filename.time().".".$ext; 
-                   
-                    
-                    if(Storage::put('all_project_data'.$latest_image, File::get($image)))
-                    {
-                        array_push($temp, $random_file_name);
-                        $product_images->product_id = $id;
-                        $product_images->image = $latest_image;
-                        $productstatus = $product_images->save();
-                    }
-                 
+                        $fileName = $randomString.".". $image->extension();
+                        uploadMultiImage($image, 'image', $path, $fileName);
+                       
+                        $product_images = new ProductImages();
+                       
+                        $product_images->product_id =$producId;
+                        $product_images->image = $fileName;
+                        $status = $product_images->save();                 
                 }
             }
             Session::flash('success', 'Success! Record updated successfully.');
@@ -267,7 +284,7 @@ class ProductsController extends Controller
 
     public function manage_top_selling(Request $request)
     {
-        $Product = Product::get();
+        $Product = Product::orderBy('id','DESC')->get();
 
         $data['data']      = $Product;
         $data['page_name'] = "Manage";

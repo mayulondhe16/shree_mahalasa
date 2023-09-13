@@ -112,8 +112,9 @@ class LogoController extends Controller
                 }
             $fileName = $randomString.".". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
+            $brands->image = $fileName;
+
         }
-        $brands->image = $fileName;
         $status = $brands->save();
         if (!empty($brands))
         {

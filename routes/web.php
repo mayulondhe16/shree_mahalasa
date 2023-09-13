@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\HomeBannerController;
+use App\Http\Controllers\Admin\ProfileController;
 
 
 
@@ -191,6 +192,14 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/edit_size/{id}',		 		[SizeController::class, 'edit']);
 	Route::post('/update_size/{id}',		 	[SizeController::class, 'update']);
 	Route::get('/delete_size/{id}',		 		[SizeController::class, 'delete']);
+
+	Route::get('/manage_profile',		 			[ProfileController::class, 'index']);
+	Route::get('/add_profile',		 				[ProfileController::class, 'add']);
+	Route::post('/store_profile',		 			[ProfileController::class, 'store']);
+	Route::get('/view_profile/{id}',	 			[ProfileController::class, 'view']);
+	Route::get('/edit_profile/{id}',		 		[ProfileController::class, 'edit']);
+	Route::post('/update_profile/{id}',		 	[ProfileController::class, 'update']);
+	Route::get('/delete_profile/{id}',		 		[ProfileController::class, 'delete']);
 	
 });
 

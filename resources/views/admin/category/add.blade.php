@@ -38,7 +38,7 @@
                                     <img id="output_image1" height="200px" width="300px" src="{{asset('assets/img/top.jpeg')}}" />
                                    </p>
                                     <div class="input-group input-group-outline mb-3">
-                                    <input type="file"  name="image" accept="image/*" onchange="preview_image(event,1)" required="true">
+                                    <input type="file" id="output_image"  name="image" accept="image/*" onchange="preview_image(event,1)" required="true">
                                 </div>
                             </div>
                         </div>
