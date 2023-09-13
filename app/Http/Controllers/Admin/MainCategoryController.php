@@ -50,7 +50,7 @@ class MainCategoryController extends Controller
         }
         $mainCategory = new MainCategory();
         $mainCategory->title = $request->title;
-        $mainCategory->description = $request->description;
+        // $mainCategory->description = $request->description;
         $status = $mainCategory->save();
         $last_id = $mainCategory->id;
         $path = Config::get('DocumentConstant.MAIN_CATEGORY_ADD');
@@ -125,7 +125,7 @@ class MainCategoryController extends Controller
            
         }
         $mainCategory->title = $request->title;
-        $mainCategory->description = $request->description;
+        // $mainCategory->description = $request->description;
         $status = $mainCategory->save();
         if (!empty($status))
         {
