@@ -44,7 +44,7 @@
                       <th>Brand</th>
                       <th>Top Seller</th>
                       <th>Top Trending</th>
-                      <th>General</th>
+                      {{-- <th>General</th> --}}
                     </tr>
                   </thead>
                   <tbody>
@@ -88,13 +88,13 @@
                               <a class="btn btn-danger btn-sm" href="{{url('/')}}/change_toptrending_status/{{$value->id}}">No</a>
                             @endif
                           </td>
-                          <td>
+                          {{-- <td>
                             @if($value['general']=='1')
                             <a class="btn btn-success btn-sm" href="{{url('/')}}/change_general_status/{{$value->id}}">Yes</a>
                             @else($value['general']=='0')
                               <a class="btn btn-danger btn-sm" href="{{url('/')}}/change_general_status/{{$value->id}}">No</a>
                             @endif
-                          </td>
+                          </td> --}}
                       </tr>
                     @endforeach
                   </tbody>

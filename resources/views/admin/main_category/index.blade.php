@@ -41,7 +41,7 @@
                       <th>Sr No</th>
                       <th>Category Image</th>
                       <th>Title </th>
-                      <th>Description</th>
+                      {{-- <th>Description</th> --}}
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -57,9 +57,9 @@
                         <td>
                           {{$value->title}}
                         </td>
-                        <td>
+                        {{-- <td>
                           <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid category description." required="true">{{$value->description}}</textarea>
-                        </td>
+                        </td> --}}
                         <td>
                           <a class="success" href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
                             <i class="fa fa-edit"></i>

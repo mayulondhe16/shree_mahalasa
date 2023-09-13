@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Short Description</label>
+                              <label class="form-label">Sub Title</label>
                                 <div class="input-group input-group-outline mb-3">
                                     <textarea  class="form-control" readonly name="short_description">{{$data['short_description']}}</textarea>
                                   </div>
@@ -67,7 +67,7 @@
                     <div class="row">
                       <div class="col-md-8">
                           <div class="form-group">
-                            <label class="form-label">Long Description</label>
+                            <label class="form-label">Description</label>
                               <div class="input-group input-group-outline mb-3">
                                   <textarea  class="form-control" readonly name="long_description">{{$data['long_description']}}</textarea>
                                 </div>

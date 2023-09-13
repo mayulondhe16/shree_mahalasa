@@ -31,7 +31,8 @@
                     <tr>
                       <th>Sr No</th>
                       <th>Title </th>
-                      <th>Short Description</th>
+                      <th>Sub Title</th>
+                      <th>Description</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -46,6 +47,9 @@
                         </td>
                         <td>
                           <textarea  class="form-control" name="description" data-parsley-error-message="Please enter valid category description." required="true">{{$value->short_description}}</textarea>
+                        </td>
+                        <td>
+                          <textarea  class="form-control" name="long_description" data-parsley-error-message="Please enter valid category description." required="true">{{$value->long_description}}</textarea>
                         </td>
                         <td>
                           <a class="success" href="{{url('/')}}/edit_{{$url_slug}}/{{base64_encode($value->id)}}" title="Edit">
