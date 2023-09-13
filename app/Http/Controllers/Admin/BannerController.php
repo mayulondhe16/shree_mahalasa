@@ -110,7 +110,7 @@ class BannerController extends Controller
     public function update(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required',
+            'main_category' => 'required',
         ]);
 
         if ($validator->fails()) 
@@ -122,6 +122,7 @@ class BannerController extends Controller
         $banner->background_color_left = $request->background_color_left;
         $banner->background_color_right = $request->background_color_right;
         $status = $banner->update();
+        // dd($status);
         if (!empty($status))
         {
             $last_id = $banner->id;
@@ -150,9 +151,10 @@ class BannerController extends Controller
                 $banner->image = $fileName;
                 $banner->save();
 
+           
+            }
             Session::flash('success', 'Success! Record updated successfully.');
             return \Redirect::to('manage_banner');
-            }
         }
         else
         {
