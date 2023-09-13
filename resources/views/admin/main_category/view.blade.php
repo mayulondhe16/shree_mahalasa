@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                             <label class="form-label">Description</label>
@@ -60,7 +60,7 @@
                                   </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                   
                     <div class="box-footer">
                         <a href="{{url('/')}}/manage_main_category" type="submit" class="btn btn-primary pull-right">Back</a>

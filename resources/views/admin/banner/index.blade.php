@@ -81,9 +81,9 @@
                           <a class="primary" href="{{url('/')}}/view_{{$url_slug}}/{{base64_encode($value->id)}}" title="View">
                             <i class="fa fa-eye"></i>
                           </a>
-                          <a class="danger" href="{{url('/')}}/delete_{{$url_slug}}/{{base64_encode($value->id)}}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
+                          {{-- <a class="danger" href="{{url('/')}}/delete_{{$url_slug}}/{{base64_encode($value->id)}}" title="Delete" onclick="return confirm('Are you sure you want to delete this record?');">
                             <i class="fa fa-trash"></i>
-                          </a>
+                          </a> --}}
                         </td>
                       </tr>
                     @endforeach

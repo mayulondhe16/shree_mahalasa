@@ -44,9 +44,9 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                              <label class="form-label">Short Description</label><span style="color:red;" >*</span>
+                              <label class="form-label">Sub Title</label><span style="color:red;" >*</span>
                                 <div class="input-group input-group-outline mb-3">
-                                    <textarea  class="form-control" name="short_description"  data-parsley-error-message="Please enter valid description." required="true"></textarea>
+                                    <textarea  class="form-control" name="short_description"  data-parsley-error-message="Please enter valid Sub Title." required="true"></textarea>
                                   </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                     <div class="row">
                       <div class="col-md-8">
                           <div class="form-group">
-                            <label class="form-label">Long Description</label><span style="color:red;" >*</span>
+                            <label class="form-label">Description</label><span style="color:red;" >*</span>
                               <div class="input-group input-group-outline mb-3">
                                   <textarea  class="form-control" name="long_description"  data-parsley-error-message="Please enter valid description." required="true"></textarea>
                                 </div>
