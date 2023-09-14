@@ -61,7 +61,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Shop</p>
-                {{-- <h4 class="mb-0">{{ $shades }}</h4> --}}
+                <h4 class="mb-0">{{ $location }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -78,7 +78,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Product</p>
-                {{-- <h4 class="mb-0">{{ $shades }}</h4> --}}
+                <h4 class="mb-0">{{ $products }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -97,7 +97,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Top Seller</p>
-                {{-- <h4 class="mb-0">{{ $shades }}</h4> --}}
+                <h4 class="mb-0">{{ $top_seller }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -114,7 +114,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Trendy Product</p>
-                {{-- <h4 class="mb-0">{{ $shades }}</h4> --}}
+                <h4 class="mb-0">{{ $trndy }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
