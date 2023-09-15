@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Location;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -61,7 +63,10 @@ class AuthController extends Controller
         $data  = [];
         $data['title'] = 'Dashboard';
         $data['brands'] = Brands::count();
-        $data['shades'] = Shade::count();
+        $data['location'] = Location::count();
+        $data['products'] = Product::count();
+        $data['top_seller'] = Product::where('topSelling','1')->count();
+        $data['trndy'] = Product::where('topTrending','1')->count();
         $data['city'] = City::count();
         return view('admin/dashboard',$data);
     }

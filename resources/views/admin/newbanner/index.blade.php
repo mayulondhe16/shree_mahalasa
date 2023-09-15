@@ -42,6 +42,8 @@
                     <tr>
                       <th>Sr No</th>
                       <th>Banner</th>
+                      <th>Background Color Left</th>
+                      <th>Background Color Right</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -53,6 +55,13 @@
                         </td>
                         <td>
                           <img src="{{ Config::get('DocumentConstant.HOME_BANNER_VIEW') }}{{ $value->image }}" height="50px" width="60px">
+                        </td>
+                        <td>
+                          {{ $value->background_color_left }}
+                        </td>
+
+                        <td>
+                          {{ $value->background_color_right }}
                         </td>
                         
                         <td>

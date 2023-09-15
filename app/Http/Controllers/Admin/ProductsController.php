@@ -295,10 +295,12 @@ class ProductsController extends Controller
 
     public function change_topselling_status($id)
     {
+        date_default_timezone_set('Asia/Kolkata');
+        $date = date("Y-m-d H:i:s",time());
         $data =  \DB::table('products')->where(['id'=>$id])->first();
         if($data->topSelling=='1')
         {
-            $category = \DB::table('products')->where(['id'=>$id])->update(['topSelling'=>'0']);
+            $category = \DB::table('products')->where(['id'=>$id])->update(['topSelling'=>'0','topSelling_updated'=>$date]);
             Session::flash('success', 'Success! Record deactivated successfully.');
             
         }
@@ -313,11 +315,13 @@ class ProductsController extends Controller
     public function change_toptrending_status($id)
     {
         // dd($id);
+        date_default_timezone_set('Asia/Kolkata');
+        $date = date("Y-m-d H:i:s",time());
         $data =  \DB::table('products')->where(['id'=>$id])->first();
         //dd($data->is_active);
         if($data->topTrending=='1')
         {
-            $category = \DB::table('products')->where(['id'=>$id])->update(['topTrending'=>'0']);
+            $category = \DB::table('products')->where(['id'=>$id])->update(['topTrending'=>'0','topTrending_updated'=>$date]);
             Session::flash('success', 'Success! Record deactivated successfully.');
             
         }

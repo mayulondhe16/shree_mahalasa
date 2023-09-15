@@ -148,7 +148,7 @@ class ApiController extends Controller
     public function get_trending_products(Request $request)
     {
         try {
-            $products = Product::where('topTrending','1')->get();
+            $products = Product::where('topTrending','1')->orderBy('topTrending_updated','DESC')->get();
             
             $new =[];
             foreach ($products as $value) {
@@ -293,7 +293,7 @@ class ApiController extends Controller
     public function get_topseller_products(Request $request)
     {
         try {
-            $products = Product::where('topSelling','1')->get();
+            $products = Product::where('topSelling','1')->orderBy('topSelling_updated','DESC')->get();
             
             foreach ($products as $value) {
                 $value->thumbnail_image =  Config::get('DocumentConstant.PRODUCTTHUMB_VIEW').$value['thumbnail_image'];

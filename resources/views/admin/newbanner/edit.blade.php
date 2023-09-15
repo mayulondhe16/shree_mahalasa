@@ -43,6 +43,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Background Color Left</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                <input type="color"  class="form-control" name="background_color_left"  data-parsley-error-message="Please enter valid color." required="true">
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Background Color Right</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                <input type="color"  class="form-control" name="background_color_right"  data-parsley-error-message="Please enter valid color." required="true">
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                   
                     
                     {{-- <div class="text-center">
                       <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>

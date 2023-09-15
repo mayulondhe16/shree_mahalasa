@@ -66,17 +66,28 @@
                             </div>
                         </div> --}}
                     </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Background Color Left</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                <input type="color"  class="form-control" readonly name="background_color_left"  data-parsley-error-message="Please enter valid color." required="true">
+                              </div>
+                          </div>
+                      </div>
+                    </div>
 
                     <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <div class="input-group input-group-outline mb-3">
-                                    {{-- <label class="form-label">Brand Description</label> --}}
-                                    <textarea  class="form-control" readonly name="description">{{$data['description']}}</textarea>
-                                  </div>
-                            </div>
-                        </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label">Background Color Right</label><span style="color:red;" >*</span>
+                              <div class="input-group input-group-outline mb-3">
+                                <input type="color"  class="form-control" readonly name="background_color_right"  data-parsley-error-message="Please enter valid color." required="true">
+                              </div>
+                          </div>
+                      </div>
                     </div>
+                   
                   
                     
                     {{-- <div class="text-center">
