@@ -62,6 +62,8 @@ class HomeBannerController extends Controller
            
             $brand = New HomeBanner();
             $brand->image = $fileName;
+            $brand->background_color_left = $request->background_color_left;
+            $brand->background_color_right = $request->background_color_right;
             $brand->save();
         }
         if (!empty($brand))
@@ -116,6 +118,8 @@ class HomeBannerController extends Controller
             $brands->image = $fileName;
 
         }
+        $brands->background_color_left = $request->background_color_left;
+        $brands->background_color_right = $request->background_color_right;
         $status = $brands->save();
         if (!empty($brands))
         {
