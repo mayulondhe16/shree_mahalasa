@@ -351,4 +351,25 @@ class ProductsController extends Controller
         }
         return \Redirect::back();
     }
+
+    public function getsubcategory()
+    {
+        $maincategory = $_POST['id'];
+        if ($maincategory != null) {
+                $cat = \DB::table('category')
+                                ->select('id','title')
+                                ->where(['main_category'=>$maincategory])
+                                ->orderBy('title','ASC')
+                                ->groupBy('title')
+                                ->get();
+                if (count($cat) > 0) {
+                        echo "'<option>Select Subcategory</option>'";
+                    foreach ($cat as $cat_details) {
+                        echo "<option value='" . $cat_details->id . "'>" . $cat_details->title . "</option>";
+                    }
+                } else {
+                    echo "'<option>-</option>'";
+                }
+        }
+    }
 }

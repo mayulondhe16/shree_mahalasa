@@ -200,6 +200,8 @@ Route::group(['middleware' => 'admin'], function ()
 	Route::get('/edit_profile/{id}',		 		[ProfileController::class, 'edit']);
 	Route::post('/update_profile/{id}',		 	[ProfileController::class, 'update']);
 	Route::get('/delete_profile/{id}',		 		[ProfileController::class, 'delete']);
+	Route::post('/getsubcategory',		 				[ProductsController::class, 'getsubcategory']);
+
 	
 });
 
