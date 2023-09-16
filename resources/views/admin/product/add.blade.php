@@ -86,7 +86,7 @@
                           <div class="form-group">
                             <label class="form-label">Main Category</label><span style="color:red;" >*</span>
                               <div class="input-group input-group-outline mb-3">
-                                  <select class="form-control" id="main_category" name="main_category" data-parsley-error-message="Please select main category." required="true">
+                                  <select class="form-control" id="main_category" onchange="change_subcategory()" name="main_category" data-parsley-error-message="Please select main category." required="true">
                                     <option value="">Select Main Category</option>
                                     @foreach($main_category as $value)
                                     <option value="{{$value->id}}">{{$value->title}}</option>
@@ -103,9 +103,6 @@
                                 <div class="input-group input-group-outline mb-3">
                                     <select class="form-control" id="category_id" name="category_id"data-parsley-error-message="Please select sub category." required="true">
                                       <option value="">Select Sub Category</option>
-                                      @foreach($category as $value)
-                                      <option value="{{$value->id}}">{{$value->title}}</option>
-                                      @endforeach
                                     </select>
                                   </div>
                             </div>
@@ -129,4 +126,21 @@
           </div>
         </div>
       </div>
+      <script>
+        function change_subcategory() 
+        {        
+            var selectValue = $("#main_category").val();            
+            //$("#city_id_").empty();
+
+            $.ajax({
+                url: '{{url('/')}}/getsubcategory',
+                type: 'post',
+                data: { "_token": "{{ csrf_token() }}",id: selectValue},
+                success: function (data) 
+                {
+                  $("#category_id").html(data);
+                }
+            });
+        };
+      </script>
 @endsection
