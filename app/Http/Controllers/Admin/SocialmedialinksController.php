@@ -47,6 +47,13 @@ class SocialmedialinksController extends Controller
         {
             return $validator->errors()->all();
         }
+        $is_exist = Socialmedialinks::where(['link'=>$request->input('link')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "This Link already exist!");
+            return \Redirect::back();
+        }
         $socialmedialinks = new Socialmedialinks();
         $socialmedialinks->link = $request->link;
         $socialmedialinks->title = $request->title;
@@ -97,6 +104,13 @@ class SocialmedialinksController extends Controller
 
     public function update(Request $request, $id)
     {
+        $is_exist = Socialmedialinks::where('id','<>',$id)->where(['link'=>$request->input('link')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "This link already exist!");
+            return \Redirect::back();
+        }
         $link = $request->link;
         $address = $request->address;
         $arr_data               = [];

@@ -48,6 +48,14 @@ class CityController extends Controller
         {
             return $validator->errors()->all();
         }
+
+        $is_exist = City::where(['city_name'=>$request->input('city_name')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "City already exist!");
+            return \Redirect::back();
+        }
         $city = new City();
         $arr_data               = [];
         $city->city_name = $request->city_name;
@@ -80,16 +88,13 @@ class CityController extends Controller
 
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $description = $request->description;
-        /*$validator = Validator::make($request->all(), [
-                'banner_image'     => 'required',
-            ]);
+        $is_exist = City::where('id','<>',$id)->where(['city_name'=>$request->input('city_name')])->count();
 
-        if ($validator->fails()) 
+        if($is_exist)
         {
-            return $validator->errors()->all();
-        }*/
+            Session::flash('error', "City already exist!");
+            return \Redirect::back();
+        }
 
         $arr_data               = [];
         $city = City::find($id);

@@ -50,6 +50,14 @@ class LocationController extends Controller
         {
             return $validator->errors()->all();
         }
+
+        $is_exist = Location::where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Location already exist!");
+            return \Redirect::back();
+        }
         $contactdetails = new Location();
         $contactdetails->title = $request->title;
         $contactdetails->shop_name = $request->shop_name;
@@ -106,6 +114,14 @@ class LocationController extends Controller
 
     public function update(Request $request, $id)
     {
+        $is_exist = Location::where('id','<>',$id)->where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Location already exist!");
+            return \Redirect::back();
+        }
+
         $locationdetails = Location::find($id);
         $path = Config::get('DocumentConstant.LOCATION_ADD');
         if ($request->hasFile('image'))

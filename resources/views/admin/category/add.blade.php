@@ -16,6 +16,8 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      @include('admin.flash-message')
+
       <div class="row">
         <div class="col-12">
           <div class="card my-4">

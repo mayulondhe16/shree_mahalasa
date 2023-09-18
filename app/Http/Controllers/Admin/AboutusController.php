@@ -49,6 +49,14 @@ class AboutusController extends Controller
         {
             return $validator->errors()->all();
         }
+        
+        $is_exist = Aboutus::where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Title already exist!");
+            return \Redirect::back();
+        }
         $aboutus = Aboutus::orderBy('id','DESC')->get();
         $aboutus = new Aboutus();
 
@@ -96,6 +104,13 @@ class AboutusController extends Controller
 
     public function update(Request $request, $id)
     {
+        $is_exist = Aboutus::where('id','<>',$id)->where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Record already exist!");
+            return \Redirect::back();
+        }
         $title = $request->title;
         $short_description = $request->short_description;
         $long_description = $request->long_description;
@@ -116,12 +131,13 @@ class AboutusController extends Controller
         if ($request->hasFile('image')) {
             $fileName = $randomString."_updated.". $request->image->extension();
             uploadImage($request, 'image', $path, $fileName);
+            $aboutus->image = $fileName;
+
         }
         $existingRecord = Aboutus::orderBy('id','DESC')->first();
         $aboutus->title = $request->title;
         $aboutus->short_description = $request->short_description;
         $aboutus->long_description = $request->long_description;
-        $aboutus->image = $fileName;
 
         $status = $aboutus->update();        
         if (!empty($status))

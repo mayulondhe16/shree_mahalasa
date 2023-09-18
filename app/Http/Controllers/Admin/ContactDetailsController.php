@@ -47,6 +47,13 @@ class ContactDetailsController extends Controller
         {
             return $validator->errors()->all();
         }
+        $is_exist = ContactDetails::where(['email'=>$request->input('email')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Contact Details already exist!");
+            return \Redirect::back();
+        }
         $contactdetails = new ContactDetails();
         $contactdetails->phone_no = $request->phone_no;
         $contactdetails->email = $request->email;
@@ -78,6 +85,14 @@ class ContactDetailsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $is_exist = ContactDetails::where('id','<>',$id)->where(['email'=>$request->input('email')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Contact details already exist!");
+            return \Redirect::back();
+        }
+
         $phone_no = $request->phone_no;
         $address = $request->address;
         

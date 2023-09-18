@@ -40,6 +40,7 @@ class MainCategoryController extends Controller
     }
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'image' => 'required',
         ]);
@@ -47,6 +48,14 @@ class MainCategoryController extends Controller
         if ($validator->fails()) 
         {
             return $validator->errors()->all();
+        }
+
+        $is_exist = MainCategory::where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Main Category already exist!");
+            return \Redirect::back();
         }
         $mainCategory = new MainCategory();
         $mainCategory->title = $request->title;
@@ -103,6 +112,14 @@ class MainCategoryController extends Controller
 
     public function update(Request $request, $id)
     {    
+        $is_exist = MainCategory::where('id','<>',$id)->where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Main Category already exist!");
+            return \Redirect::back();
+        }
+
        
         $mainCategory = MainCategory::find($id);       
       

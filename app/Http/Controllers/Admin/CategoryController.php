@@ -50,6 +50,13 @@ class CategoryController extends Controller
         {
             return $validator->errors()->all();
         }
+        $is_exist = Category::where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Category already exist!");
+            return \Redirect::back();
+        }
         $category = new Category();
         $category->title = $request->title;
         $category->description = '-';
@@ -101,7 +108,13 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+        $is_exist = Category::where('id','<>',$id)->where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Category already exist!");
+            return \Redirect::back();
+        }
         $category = Category::find($id); 
 
         $path = Config::get('DocumentConstant.CATEGORY_ADD');

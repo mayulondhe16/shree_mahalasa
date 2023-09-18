@@ -57,6 +57,13 @@ class ProductsController extends Controller
         {
             return $validator->errors()->all();
         }
+        $is_exist = Product::where(['name'=>$request->input('name')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Product already exist!");
+            return \Redirect::back();
+        }
         $product = new Product();
         $product->name = $request->name;
         $product->category_id = $request->category_id;
@@ -145,6 +152,13 @@ class ProductsController extends Controller
         if ($validator->fails()) 
         {
             return $validator->errors()->all();
+        }
+        $is_exist = Product::where('id','<>',$id)->where(['name'=>$request->input('name')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Product already exist!");
+            return \Redirect::back();
         }
         $product = Product::find($id);;
         $product->name = $request->name;

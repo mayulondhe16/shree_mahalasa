@@ -48,6 +48,14 @@ class BrandController extends Controller
         {
             return $validator->errors()->all();
         }
+
+        $is_exist = Brands::where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Brand already exist!");
+            return \Redirect::back();
+        }
         $brands = new Brands();
         $brands->title = $request->title;
         $brands->description =$request->description;
@@ -98,6 +106,13 @@ class BrandController extends Controller
 
     public function update(Request $request, $id)
     {
+        $is_exist = Brands::where('id','<>',$id)->where(['title'=>$request->input('title')])->count();
+
+        if($is_exist)
+        {
+            Session::flash('error', "Record already exist!");
+            return \Redirect::back();
+        }
         $brands = Brands::find($id);
         $path = Config::get('DocumentConstant.BRAND_ADD');
         if ($request->hasFile('image'))
