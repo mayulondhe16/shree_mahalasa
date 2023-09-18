@@ -280,7 +280,7 @@ class ApiController extends Controller
     {
         try {
             $products = Product::count();
-            $shops = Shops::count();
+            $shops = Location::count();
             $brands = Brands::count();
             return response()->json(['Total_shops'=>$shops,'Total_products'=>$products,'total_brands'=>$brands,'status' => 'Success', 'message' => 'Fetched All Data Successfully','StatusCode'=>'200']);
 
